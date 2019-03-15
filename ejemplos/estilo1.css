@@ -1,0 +1,26 @@
+*{
+
+	box-sizing: border-box;
+}
+
+
+.btn {  /* Elementos con estilo de boton */
+
+		display: inline-block;
+		border: 2px solid #555;
+		padding: .2em .2em;
+		text-align: center;
+
+		cursor: pointer;  /* Aparece la mano al pasar encima */
+
+}
+
+	.btn:hover {
+
+		box-shadow: 1px 1px 5px #000;			/* Despl horz de la sombra, despl vert, grosor de la sombra, color */
+	}
+
+	.btn:active {
+
+		box-shadow: 0px 0px 5px #000;   /* Efecto para que parezca que estas pulsando */
+	}
