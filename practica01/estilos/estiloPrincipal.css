@@ -1,0 +1,563 @@
+/* Estilo de fuente */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/* Por defecto ocultaremos todo aquello que lleve estas clases */
+.display-great {
+
+	display: none;
+}
+
+.display-medium {
+
+	display: none;
+}
+
+.display-mini{
+
+	display: none;
+}
+
+/* Cuerpo principal de la pagina */
+body {
+	
+	color: #000000;
+	background-color: #fafafa;
+	border-left: solid #ffffff; 
+  	border-right: solid #ffffff;
+  	border-bottom: solid #ffffff; 
+
+	width: 100%;
+  	font-size: 14px; /* Con esto se colocan en 2 por fila */
+  	margin: 0 auto ; /* Margen arriba/abajo 0 y decho/izqd auto */
+  	padding: 0; 
+  	font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+
+}
+
+	body>h3 {
+		text-align: center;
+	}
+
+/* HEADER */
+
+#headerItems{
+      max-width: 1040px;
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: row;
+      padding: .8em 0;
+      height: 55px;
+      max-height: 60px;
+
+      text-align: center;
+    }
+
+    #headerItems>a{      
+      flex: 1 9999 0%;
+      margin-left: 2%;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      
+      font-family: 'Source Serif Pro', serif;
+      text-decoration: none;
+    }
+
+	    #headerItems>a>div>h1 {
+
+	    	font-size: 21px;
+	          font-weight: 700;
+	          margin: 0 .2em;
+
+	    }
+
+	    #headerItems>a>div>h2 {
+
+	    	font-size: 21px;
+          font-weight: 400;
+          margin: 0 .2em;
+
+	    }
+
+	#ckburger{  /* Ocultamos el icono de checkbox */
+            display: none;
+          }
+
+.titulo {
+
+	border-right: 1px solid #2E3436FF;
+}
+
+/* Barra de navegacion */
+body>header{
+
+  color: #000000;
+  background-color: #ffffff;
+
+}
+
+	nav {
+		background-color: #cfcfd1;
+  		border-top: solid 1px #ffffff;
+	}
+
+		nav>ul {
+			max-width: 1040px;
+		    max-height: 100px;
+		    margin: 0 auto;
+		    padding: 0;
+
+		    text-align: center; 
+		      
+		    list-style: none; /*Sin estilos */
+		    overflow: hidden;
+
+		    background-color: #cfcfd1;
+		}
+
+			nav>ul>li{
+
+			    padding: 0 .4em;
+			    margin: .8em 0;
+			    display: inline-block;
+			    border-left: solid 1px #fafafa;   /* Bordes a la izquierda de cada enlace */
+			}
+
+				nav>ul>li>a {
+
+				    text-decoration: none;
+				    padding: .2em .5em;
+				    margin: 0;
+					color: #000000;
+ 					border-bottom: solid 1px #cfcfd1;
+				}
+				nav>ul>li>a:hover { /* Efecto al pasar el raton por los elem de la barra de nav */
+
+  					border-bottom: solid 1px  #0078d7;
+				}
+
+
+/* Fotos mejor valoradas de la pagina principal/Fotos favoritas */
+.preview {
+
+	max-width: 1040px;  /* Ancho maximo para todos los elementos (no pueden sobrepasarlo) */
+	margin: 0 auto;
+
+	display: flex; 	/* Diseño flexible para todos los elementos dentro de la seccion que se adaptan al tam disponible */
+	justify-content: space-around; /* Todos los items de la linea son distribuidos con el mismo espacio entre ellos */
+
+    flex-direction: row;  /* Todos los items se despliegan sobre una fila */
+    flex-wrap: wrap;     /* Todos los elementos flex son colocados en varias lineas */
+
+
+}
+
+.contenedor { /* Contenedor de las imagenes */
+
+	position: relative;
+}
+
+	.preview>article {
+	  width: 45.9%;	
+	  display: flex;
+	  flex-direction: column;
+      overflow: hidden;  	/* No se dibujan las barras de desplazamiento y se recorta el contenido */
+      margin: 0 1.4em;      /* Margen superior e inferior 0, izqd y derecho 1.4 */
+      margin-top: 2.8em;
+	}
+
+	.preview>article:hover {  /* Efecto al pasar el ratón por encima de las fotos */
+			 
+		border: solid 0.5px #0078d7;
+	}
+
+		.preview>article>figure { /* Figura donde se encuentra la imagen */
+
+			flex: 1; 	/* Hacemos la imagen flexible */
+			width: 100%;
+			margin: 0;
+			height: auto;  /* La altura es proporcional al ancho */
+			position: relative;  /* Position --> Para posicionar un elemento dentro de la pagina. Relative --> Lo posicionamos respecto a la pos por defecto (static) */
+			/* padding-bottom: 70%; /* Espacio entre la imagen y el borde */
+
+		}
+
+		.preview>article>div { /* Figura donde se encuentra la imagen */
+
+			flex: 1; 	/* Hacemos la imagen flexible */
+			width: 100%;
+			margin: 0;
+			height: auto;  /* La altura es proporcional al ancho */
+			position: relative;  /* Position --> Para posicionar un elemento dentro de la pagina. Relative --> Lo posicionamos respecto a la pos por defecto (static) */
+			/* padding-bottom: 70%; /* Espacio entre la imagen y el borde */
+
+		}
+
+		.autorBox {
+			padding-left: 10px;
+			bottom: 0;
+			border: 1px solid  #000000;
+
+		}
+
+			.imagIndex {  /* Fotos de la pagina principal */
+
+				width: 100%; /* Ancho maximo de la pagina */
+				margin: auto auto;  /* Margen superior e inferior auto, izqd y derecho auto. El margen es calculado por el navegador automaticamente*/
+				/*position: absolute; /* Toma como referencia la ventana del navegador o un elemento que tenga position que sea ! static */
+			}
+
+			.textoImg {  /* Texto asociado a la imagen colocado dentro */
+
+				  position: absolute;  /* Se posicionara respecto a la imagen que es relativa */
+				  bottom: 3px;
+				  color: #f1f1f1; /* Color gris */
+				  width: 100%; /* Que ocupe toda la imagen */
+				  padding: 0px 10px 0px 10px; /* Espacio entre el texto y el borde */
+				  background-color: rgba(0, 0, 0, 0.6); /* Fondo transparente */
+			}
+
+
+
+/* FORMULARIO LOGIN*/
+.LoginRegistroForm {
+
+	text-align: center;
+    font-size: 15px;
+    padding: 5% 0 10% 0;  /* arriba, derecha, abajo, izqd */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+	.marcoForms {  /* Marco que rodea al formulario */
+
+		border-width: 2px;
+	    border-color: grey;
+	    background-color: white;
+	    box-shadow: 2px 2px 5px #999;
+	    display: inline-block; /* Hace que se centre cuando le cambiamos el ancho del marco */
+
+	}
+
+
+		.boxesForm {  /* Cajas de los formularios */
+			
+			width: 80%;
+		    margin: 5px 0;  /* Espacios alrededor de la caja */
+		    padding: 12px 0 12px 5px;  /* Espacios dentro de la caja. Arriba, Derech, Abaj y Izqd */
+		    background-color: white;
+      		color: black;
+      		border: none;
+      		border-bottom: 1px solid black;
+		
+		}
+
+		.botonForm { /* Boton del formulario */
+
+			font-size: 16px;
+		    margin:25px 0;
+		    padding: 12px 28px; /* Define el tamaño del boton */
+		    border-radius: 8px;
+		    transition-duration: 0.4s; 
+		    cursor: pointer;
+		}
+
+		.botonForm:hover {  /* Cuando pasamos el raton por encima del boton */
+
+			background-color: #ffffff; 
+			color: #000000;
+			border: 2px solid  #000000;
+		}
+
+		input:focus, textarea:focus {  /* inputs al tener el focus */
+
+			border: 2px solid #0078d7;
+
+		}
+
+		input:hover, textarea:hover {  /* inputs al tener el focus */
+
+			border: 1px solid #0078d7;
+
+		}
+
+		/* Para que las cajas y demas de los Formularios se muestren uno encima de otro y no a los lados */
+		.boxesForm, .enlaceBoton, label, .boxesBusq, textarea{
+
+			width: 100%;
+		}
+
+
+/* PAGINA FOTO */
+#foto, #comentarios {
+
+	padding: 0;
+}
+
+	#foto>article{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+    #foto>article>figure{
+      margin: 0;
+      margin-top: 2.8em;
+      display: flex;
+      flex-direction: row;
+    }
+      #foto>article>figure>figcaption{
+        margin: 2% .5em;
+        display: flex;
+        flex-direction: column;
+      }
+        #foto>article>figure>figcaption>h2{
+          margin: .2em .3em;
+          padding: .2em;
+        }
+        #foto>article>figure>figcaption>p{  /* Info relacionada con la foto */
+          font-size: 14px;
+          margin: 0 .6em;
+          padding: .2em;
+        }
+        #foto>article>figure>figcaption>div{
+          margin-top: 65%;
+        }
+        #foto>article>figure>figcaption>div>p{
+          margin: 0 .6em;
+          padding: .2em;
+        }
+        #foto>article>figure>figcaption>div>p>a{
+          font-weight: 500;
+          text-decoration: none;
+        }
+
+    .info{  /* Info relacionada con la foto */
+
+      margin-left: 1.4em;
+      font-size: 12px;
+    }
+	
+    .autor{
+      margin-top: 8em;
+    }
+
+    .imagen2{  /* Tamaño de la imagen en foto.html */
+  		max-width: 100%;
+  		height: auto;
+	}
+	
+	.LineaFoto {
+
+		width: 100%;
+	}
+
+.favorHR{
+	border-color: #7C82F6;
+	width: 50%;
+}
+
+hr {
+  border-color: #7C82F6;
+}
+	
+ /* Seccion de comentarios */
+
+#comentarios {
+
+ 	text-align: center;
+ 	margin-top: 25px;
+ }
+
+ 	#lista-coment {
+
+ 		margin-top: 20px;
+ 		position: relative;
+ 	}
+
+ 		#lista-coment>li {
+
+ 			margin-bottom: 15px;
+ 			display: block;  /* Con esto quitamos los puntos de la lista */
+ 			position: relative;
+ 			margin-left: auto;
+ 			margin-right: auto;
+
+ 		}
+
+ 		#lista-coment .coment-box{
+
+ 			float: left;
+ 			width: 90%;
+ 			/* Sombras de la caja de comentarios */
+ 			-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15); 
+ 			-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+ 			box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+
+ 		}
+
+	 		.coment-head {
+
+	 			background: #BABDB6;
+	 			padding: 10px 12px;
+	 			border-bottom: 1px solid #E5E5E5;
+	 			overflow: hidden;
+	 			/* Borde redondeado */
+	 			-webkit-border-radius: 4px 4px 0 0;
+	 			-moz-border-radius: 4px 4px 0 0;
+	 			border-radius: 4px 4px 0 0;
+	 		}
+
+			.coment-head>h5 {
+
+				color: black;
+			}
+
+			.coment-content {
+
+				background: #FFF;
+				padding: 12px;
+
+			}
+		
+
+
+/* BUSCAR FOTOS */
+#busqueda {
+
+    font-size: 18px;
+    max-width: 500px;
+    text-align: center;  /* Todo esta centrado hasta la caja que contiene el formulario */
+    display: block;
+  	margin-top: 20px;
+
+}
+
+	#marcoBusqueda{
+
+	    border-width: 2px;
+	    border-color: grey;
+	    background-color: white;
+	    box-shadow: 2px 2px 5px #999;
+	    display: inline-block;
+	    padding-left: 2%;
+
+	}
+
+		#buscador{ /* Formulario de busqueda */
+
+   			padding: 10px 10px 10px 10px;
+
+
+		}
+
+			/* Boton Enviar Formulario de busqueda */
+			#buscarFotos{
+
+			      font-size: 16px;
+			      padding: 12px 28px;
+			      border-radius: 8px;
+			      transition-duration: 0.4s;
+			      cursor: pointer;  /* Para que cambie el cursor del raton */
+			   }
+
+
+			#buscarFotos:hover {
+				
+			      background-color: white; /* Green */
+			      color: black;
+			      border: 2px solid black;
+
+			  }
+
+
+
+/* TODOS LOS ENLACES DE LA PAGINA*/
+.enlaces {  
+
+	color: #0078d7;
+  	text-decoration: none;  /* Le quitamos el subrayado */
+}
+
+	.enlaces:hover {
+
+		border-bottom: solid 1px  #0078d7;
+	}
+
+.favorita {
+
+	color: #f1f1f1;
+}
+
+	.favorita:hover, .enlacesFoto:hover {
+		
+		color: #0078d7;
+
+	}
+
+.enlacesFoto {
+
+	color: #2E3436;
+}
+
+.none {
+	
+	color: #000000FF;
+}
+
+/* PAGINACION DE FOTOS */
+
+.paginacion {
+    display: inline-block;
+    padding: 0;
+}
+
+	.paginacion>li {  
+		display: inline;  /* Los elementos de la lista se ven en una fila */
+	}
+
+		.paginacion>li>a {
+
+		    float: left;
+		    padding: 8px 16px;
+		    text-decoration: none;
+		    transition: background-color .3s;
+		    border: 1px solid #ddd;
+		    color: black;
+		}
+
+		.active {  /* Pagina en la que nos encontramos */
+			
+			background-color: #0078d7;
+		    color: white;
+		    border: 1px solid #0078d7;
+		}	
+
+	   ul.paginacion li a:hover:not(.active) { /* Si pasamos el raton por encima de la pagina que no estamos actualmente */
+
+	    	background-color: #ddd;
+	    }
+
+/* Pagina acerca */
+
+.acerca {
+	
+	text-align: left;
+	margin-top: 50px;
+}
+
+.acerca>p {
+
+	padding-top:5px;
+}
+/* PIE DE PAGINA con copyright */
+footer {
+
+	text-align: center;
+}

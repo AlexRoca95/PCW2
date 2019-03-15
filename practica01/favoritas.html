@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" /> <!-- Para que se pueda aplicar un diseño adaptable y la correcta visualizacion en dispo móviles -->
+	<link rel="stylesheet" type="text/css" href="estilos/estiloPrincipal.css">
+	<link rel="stylesheet" type="text/css" href="recursos/css/fontello.css">
+
+	<link rel="stylesheet" type="text/css" href="estilos/great.css" media="screen and (min-width: 981px)" />  <!-- Pantallas Grandes -->
+	<link rel="stylesheet" type="text/css" href="estilos/medium.css" media="screen and (min-width: 481px) and (max-width: 980px)" /> <!-- Pantallas Medianas -->
+	<link rel="stylesheet" type="text/css" href="estilos/mini.css" media="screen and (max-width: 480px)" /> <!-- Pantallas Pequeñas (Móviles) -->
+	<title>favoritas</title>
+</head>
+<body>
+	<header> <!-- Titulo pagina y descripcion -->
+		<div id="headerItems">
+			<a class="none" href="index.html">
+				<div class="titulo"><h1>Instagrom</h1></div>
+				<div><h2>Las mejores fotos</h2></div>
+			</a>
+		
+			<span>
+				<label for="ckburger" id="burger"></label> <!-- Icono menu hamburgesa que al pulsar visualiza/no visualiza el menu de nav -->
+			</span>
+		</div>
+		<input type="checkbox" id="ckburger" checked>  <!-- Boton para visualizar/no visualizar el menu hamburguesa -->
+			<nav class="menu display-mini display-great"> <!-- Barra de navegacion tamaño grande y pequeño-->
+				<ul> <!-- Lista no ordenada -->
+					<li><a href="index.html"><span class="icon-home"></span>Inicio</a></li> 
+					<li><a href="buscar.html"><span class="icon-search"></span>Busqueda</a></li> <!-- Buscar una foto -->
+					<li><a href="nueva.html"><span class="icon-camera"></span>Nueva Foto</a></li>
+					<li><a href="favoritas.html"><span class="icon-heart"></span>Favoritas</a></li> <!-- Fotos favoritas -->
+					<li><a href="index.html"><span class="icon-logout"></span>Logout</a></li>
+					<li><a href="login.html"><span class="icon-user"></span>Login</a></li>
+					<li><a href="registro.html"><span class="icon-user-add"></span>Registro</a></li>
+				</ul>
+			</nav>
+
+			<nav class="display-medium"> <!-- Barra de navegacion tamaño mediano-->
+				<ul> 
+					<li><a href="index.html"><span class="icon-home"></span></a></li> 
+					<li><a href="buscar.html"><span class="icon-search"></span></a></li> 
+					<li><a href="nueva.html"><span class="icon-camera"></span></a></li>
+					<li><a href="favoritas.html"><span class="icon-heart"></span></a></li> 
+					<li><a href="index.html"><span class="icon-logout"></span></a></li>
+					<li><a href="login.html"><span class="icon-user"></span></a></li>
+					<li><a href="registro.html"><span class="icon-user-add"></span></a></li>
+				</ul>
+			</nav>
+	</header>
+	<br>
+	<h3>Tus fotos favoritas </h3>
+	<hr class="favorHR">
+	<div class="preview" > <!-- Fotos favoritas-->
+		<article>
+			<div class="contenedor">
+				<a href="foto.html">
+					<img src="recursos/Screenshot_20171128_183907.png" alt="Foto random de muestra" class="imagIndex" > 
+				</a>
+				<div class="textoImg">
+					<h4>Hackaton 2018</h4>
+					<p><span class="icon-thumbs-up"></span>15 <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>5 <span class="icon-comment-empty"></span>3</p>
+				</div>
+			</div>
+		</article>
+
+		<article>
+			<div class="contenedor">
+				<a href="foto.html">
+					<img src="recursos/gat2.jpg"  alt="Foto random de muestra" class="imagIndex" > 
+				</a>
+				<div class="textoImg">
+					<h4>Mi gato durmiendo</h4>
+					<p><span class="icon-thumbs-up"></span>5 <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>2 <span class="icon-comment-empty"></span>10</p>
+				</div>
+			</div>
+		</article>
+		
+		<article>
+			<div class="contenedor">
+				<a href="foto.html">
+					<img src="recursos/Screenshot_20171128_183907.png" alt="Foto random de muestra" class="imagIndex" > 
+				</a>
+				<div class="textoImg">
+					<h4>Hackaton 2018</h4>
+					<p><span class="icon-thumbs-up"></span>15 <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>5 <span class="icon-comment-empty"></span>3</p>
+				</div>
+			</div>
+		</article>
+
+		<article>
+			<div class="contenedor">
+				<a href="foto.html">
+					<img src="recursos/gat2.jpg"  alt="Foto random de muestra" class="imagIndex" > 
+				</a>
+				<div class="textoImg">
+					<h4>Mi gato durmiendo</h4>
+					<p><span class="icon-thumbs-up"></span>5 <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>2 <span class="icon-comment-empty"></span>10</p>
+				</div>
+			</div>
+		</article>
+
+		<article>
+			<div class="contenedor">
+				<a href="foto.html">
+					<img src="recursos/Screenshot_20171128_183907.png" alt="Foto random de muestra" class="imagIndex" > 
+				</a>
+				<div class="textoImg">
+					<h4>Hackaton 2018</h4>
+					<p><span class="icon-thumbs-up"></span>15 <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>5 <span class="icon-comment-empty"></span>3</p>
+				</div>
+			</div>
+		</article>
+
+		<article>
+			<div class="contenedor">
+				<a href="foto.html">
+					<img src="recursos/gat2.jpg"  alt="Foto random de muestra" class="imagIndex" > 
+				</a>
+				<div class="textoImg">
+					<h4>Mi gato durmiendo</h4>
+					<p><span class="icon-thumbs-up"></span>5 <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>2 <span class="icon-comment-empty"></span>10</p>
+				</div>
+			</div>
+		</article>
+
+		<article>
+			<div class="contenedor">
+				<a href="foto.html">
+					<img src="recursos/Screenshot_20171128_183907.png" alt="Foto random de muestra" class="imagIndex" > 
+				</a>
+				<div class="textoImg">
+					<h4>Hackaton 2018</h4>
+					<p><span class="icon-thumbs-up"></span>15 <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>5 <span class="icon-comment-empty"></span>3</p>
+				</div>
+			</div>
+		</article>
+
+		<article>
+			<div class="contenedor">
+				<a href="foto.html">
+					<img src="recursos/gat2.jpg"  alt="Foto random de muestra" class="imagIndex" > 
+				</a>
+				<div class="textoImg">
+					<h4>Mi gato durmiendo</h4>
+					<p><span class="icon-thumbs-up"></span>5 <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>2 <span class="icon-comment-empty"></span>10</p>
+				</div>
+			</div>
+		</article>
+		
+
+		<article>
+			<div class="contenedor">
+				<div class="autorBox">
+					<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Vayne</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#juegos</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#cyberpunk</a><a class="enlaces" href="buscar.html"> #2077</a></p>
+				</div>
+				<a title="Ver foto" href="foto.html">
+					<img src="recursos/cyberpunk.jpg"  alt="Foto random de muestra" class="imagIndex" > 
+				</a>
+				<div class="textoImg">
+					<h4>Juegazo</h4>
+					<p><span class="icon-thumbs-up"></span>100 <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>50 <span class="icon-comment-empty"></span>20</p>
+				</div>
+			</div>
+		</article>
+
+		</div>
+
+	<div  class="preview">
+
+		<ul class="paginacion">
+			<li><a href="#">«</a></li>
+			<li><a href="#">1</a></li>
+			<li><a class="active" href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">6</a></li>
+			<li><a href="#">7</a></li>
+			<li><a href="#">»</a></li>
+		</ul>
+
+	</div>
+	
+
+
+
+	<footer>
+		<!-- Copyright e informacion de contacto-->
+		<p><a class="enlaces" href="acerca.html"><strong>Alejandro Roca Vande Sype</strong></a> | &copy; Febrero 2019<a href="#headerItems" class="enlaces"><span class="icon-up-big"></span></a></p>
+	</footer>
+</body>
+</html>

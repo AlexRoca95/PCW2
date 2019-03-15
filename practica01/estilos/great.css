@@ -1,0 +1,46 @@
+/* Activamos esta clase para que todo aquello que lo lleve se pueda mostrar */
+.display-great {
+	display: inherit !important;
+}
+
+
+hr {
+  width: 50%;
+}
+
+/* BUSQUEDA AVANZADA */
+#busqueda {
+  
+ margin-right: auto;
+ margin-left: auto;
+
+}
+
+	.boxesBusq{
+
+    padding: 5px 0 5px 5px;
+    display: inline-block;
+
+ }
+
+
+/* Formulario de registro y login */
+
+.marcoForms { 
+	width:35%;
+}
+
+/* DETALLE FOTO */
+#foto>article>figure>div{
+  max-width: 600px;
+}
+#foto>article>figure>img{
+  max-width: 600px;
+}
+
+
+
+#comentarios {
+
+  width: 90%;
+ }

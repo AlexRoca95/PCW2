@@ -1,0 +1,140 @@
+/* Activamos esta clase para que todo aquello que lo lleve se pueda mostrar */
+.display-mini {
+	display: inherit !important;
+}
+
+.favorHR {
+
+	width: 50%;
+}
+
+/* HEADER */
+nav { /* Solo en tamaño pequeño queremos que desaparezca */
+
+	/*position: fixed;  /* Tamaño relativo a la ventana del navegador*/
+	max-height: 0;
+    overflow: hidden;
+	/*overflow-y: auto; /* si el menu es alto se puede hacer scroll para ver todos los enlaces */
+	/*padding: 90px 30px 30px; */
+	transition: all 0.75s ease; /* Tiempo de la transicion */
+}
+
+  nav>ul{  
+
+  max-height: 500px; /* Altura maxima de la lista de elementos de navegacion */
+  }
+    nav>ul>li{
+      /* Modo columna */
+      margin: 1.8em 0;
+      display: block;
+      border: none;
+    }
+
+#headerItems>span{  /* Colocación del icono de hamburguesa */
+      flex: 0 1 auto;
+      width: 5em;
+      min-width: 20px;
+      margin: 0;
+      padding: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+     #burger{ /*Icono menu hamburguesa: tam, foto ....*/
+
+        margin: auto;
+        padding: 0;
+        height: 15px;
+        width: 15px;
+
+        cursor: pointer;
+        background-size: 15px 15px;
+        background-image: url(../recursos/burger.png);
+    }
+
+      /* Boton menu hamburguesa pulsado */
+      #ckburger:checked + nav{
+          max-height: 500px;  /* altura a mostrar al pulsar */
+
+       }
+
+/* Fotos mejor valoradas de la pagina principal */
+.preview {
+
+
+
+}
+	.preview > article {
+
+		width: 100%;
+	  	margin-top: 2em; /* Margen superior entre los articulos de las fotos */
+
+	}
+
+
+
+/* FORMULARIO LOGIN Y REGISTRO */
+/* Para que las cajas y demas de los Formularios se muestren uno encima de otro y no a los lados */
+
+	.marcoForms {  /* Marco que rodea al formulario */
+
+		width: 80%;
+
+	}
+
+  .boxesForm, .enlaceBoton, label, .boxesBusq, textarea{
+
+      width: 100%;
+        margin-top: 0;
+    }
+
+
+
+/* PAGINA FOTO */
+
+#foto>article>figure{
+  flex-direction: column;
+  width: auto;
+  max-width: 600px;
+}
+#foto>article>figure>figcaption>div{
+  margin-top: 5%;
+}
+
+  .imagFoto {
+
+    max-width: 100%;
+  }
+
+/* Seccion de comentarios */
+
+
+
+
+/* FORMULARIO DE BUSQUEDA */
+.boxesBusq{
+
+   padding: 5px 0 5px 5px;/* Tam de las boxes */
+}
+
+#buscarFotos{
+      display: block;
+      margin-left: auto;
+      margin-right:auto;
+      margin-top: 5%;
+      width: 100%;
+   }
+
+input[type=radio] {
+	margin-top: 0;
+}
+
+
+/* Nueva Foto */
+textarea{
+
+    padding: 5px 0 30px 5px;
+    
+   }
