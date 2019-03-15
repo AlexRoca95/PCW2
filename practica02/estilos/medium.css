@@ -1,0 +1,49 @@
+/* Activamos esta clase para que todo aquello que lo lleve se pueda mostrar */
+.display-medium {
+	display: inherit !important;
+}
+
+
+/* Formulario de registro y login */
+.marcoForms { 
+	width:50%;
+}
+
+hr {
+  width: 50%;
+
+}
+
+/* Fotos mejor valoradas de la pagina principal */
+.preview>article{
+
+  width: 100%;
+  max-width: 476px;
+
+} 
+
+#foto>article>figure{
+  flex-direction: column;
+  width: auto;
+  max-width: 600px;
+  
+}
+
+/* Nueva foto */
+.boxesBusq{
+
+    padding: 5px 0 5px 5px;
+    display: inline-block;
+
+ }
+/* PAGINA FOTO */
+
+.imagFoto {
+
+    max-width: 50%;
+ }
+
+ #comentarios {
+
+ 	width: 80%;
+ }
