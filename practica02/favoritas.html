@@ -6,10 +6,24 @@
 	<link rel="stylesheet" type="text/css" href="estilos/estiloPrincipal.css">
 	<link rel="stylesheet" type="text/css" href="recursos/css/fontello.css">
 
+	<script src="javascript.js"></script>
+	
+	<script>
+	
+		// Comprobamos si la variable login existe o no
+		// Si no se ha iniciado sesion no se puede acceder a la pagina
+		if(!sessionStorage.getItem("login")) 
+		{
+			window.location.replace('index.html');
+		} 
+		
+	</script>
+
 	<link rel="stylesheet" type="text/css" href="estilos/great.css" media="screen and (min-width: 981px)" />  <!-- Pantallas Grandes -->
 	<link rel="stylesheet" type="text/css" href="estilos/medium.css" media="screen and (min-width: 481px) and (max-width: 980px)" /> <!-- Pantallas Medianas -->
 	<link rel="stylesheet" type="text/css" href="estilos/mini.css" media="screen and (max-width: 480px)" /> <!-- Pantallas Pequeñas (Móviles) -->
 	<title>favoritas</title>
+
 </head>
 <body>
 	<header> <!-- Titulo pagina y descripcion -->

@@ -15,12 +15,12 @@ function loginUsuario(formulario)
 		xhr.onload=function()  // La funcion se lanzara cuando finaliza la peticion y se ha recibido una respuesta.
 		{
 
-			if(xhr.status==200)  // Si el valor devuelto es 200 quiere decir que esta todo correcto.
+			let r = JSON.parse(xhr.responseText);
+
+			if(r.RESULTADO == 'OK')  // Solo si la peticion ha tenido exito
 			{
 
-				console.log('login Correcto');
-
-				sessionStorage.setItem("login", formulario.login.value);  // Asiganmos el valor del campo de login del formulario al campo de login del sessionStorage
+				sessionStorage.setItem("login", formulario.login.value);  // Asiganmos el valor del campo de login del formulario al campo de usuario del sessionStorage
 				sessionStorage.setItem("pwd", formulario.pwd.value);
 
 				// Redireccion cuando se ha hecho el login bien
