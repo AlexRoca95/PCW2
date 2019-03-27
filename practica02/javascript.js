@@ -42,3 +42,60 @@ function loginUsuario(formulario)
 	}
 
 }
+
+// Muestra las fotos mejor valoradas en index
+function fotosMejorValoradas()
+{
+	// Peticion GET
+	let xhr = new XMLHttpRequest();
+		url = 'api/fotos';
+
+	xhr.open('GET', url, true);
+
+	xhr.onload= function(){
+
+		let r = JSON.parse(xhr.responseText);
+
+		html = '';
+
+		/* Recorremos hasta 6 fotos para mostar en la primera pagina de index*/
+		for (let i = 0; i < 6; i++)  
+		{
+			html += '<article>';
+
+				html += '<div class="contenedor">';
+
+					html += '<div class="autorBox">';
+
+						html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Roxo95</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>';
+
+					html += '</div>';
+
+					html += '<a title="Ver foto" href="foto.html">';
+
+						html += '<img src="fotos/' + r.FILAS[i].fichero + '" alt="Foto random de muestra" class="imagIndex" >'; 
+
+					html += '</a>';
+
+					html += '<div class="textoImg">';
+
+						html += '<h4>' + r.FILAS[i].titulo + '</h4>';
+						html += '<p><span class="icon-thumbs-up"></span>15 <span class="icon-heart-empty"></span>5 <span class="icon-comment-empty"></span>3</p>';
+
+					html += '</div>';
+				html += '</div>';
+				
+			html += '</article>';
+			
+		}
+
+		document.querySelector('.preview').innerHTML=html;
+
+
+	};
+
+	xhr.send();  // Envia la petición que hemos hecho al servidor
+
+
+
+}

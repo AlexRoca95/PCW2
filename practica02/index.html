@@ -6,6 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="estilos/estiloPrincipal.css">
 	<link rel="stylesheet" type="text/css" href="recursos/css/fontello.css">
 
+	<script src="javascript.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="estilos/great.css" media="screen and (min-width: 981px)" />  <!-- Pantallas Grandes -->
 	<link rel="stylesheet" type="text/css" href="estilos/medium.css" media="screen and (min-width: 481px) and (max-width: 980px)" /> <!-- Pantallas Medianas -->
 	<link rel="stylesheet" type="text/css" href="estilos/mini.css" media="screen and (max-width: 480px)" /> <!-- Pantallas Pequeñas (Móviles) -->
@@ -49,145 +51,15 @@
 			</nav>
 	</header>
 	
-	<div class="preview" > <!-- 9 fotos mejor valoradas -->
+	<div class="preview" > 
+		<script>
+			
+			fotosMejorValoradas(); // Mostramos todas las fotos mejor valoradas
+
+		</script>
 		
-		<article>
-			<div class="contenedor">
-				<div class="autorBox">
-					<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Roxo95</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>
-				</div>
-				<a title="Ver foto" href="foto.html">
-					<img src="recursos/Screenshot_20171128_183907.png" alt="Foto random de muestra" class="imagIndex" > 
-				</a>
-				<div class="textoImg">
-					<h4>Hackaton 2018</h4>
-					<p><span class="icon-thumbs-up"></span>15 <span class="icon-heart-empty"></span>5 <span class="icon-comment-empty"></span>3</p>
-				</div>
-			</div>
-		</article>
 
-		<article>
-			<div class="contenedor">
-				<div class="autorBox">
-					<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Murlock</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#gatos</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#animales</a></p>
-				</div>
-				<a title="Ver foto" href="foto.html">
-					<img src="recursos/gat2.jpg"  alt="Foto random de muestra" class="imagIndex" > 
-				</a>
-				<div class="textoImg">
-					<h4>Mi gato durmiendo</h4>
-					<p><span class="icon-thumbs-up"></span>5 <span class="icon-heart-empty"></span>2 <span class="icon-comment-empty"></span>10</p>
-				</div>
-			</div>
-		</article>
-
-		<article>
-			<div class="contenedor">
-				<div class="autorBox">
-					<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Roxo95</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>
-				</div>
-				<a title="Ver foto" href="foto.html">
-					<img src="recursos/Screenshot_20171128_183907.png" alt="Foto random de muestra" class="imagIndex" > 
-				</a>
-				<div class="textoImg">
-					<h4>Hackaton 2018</h4>
-					<p><span class="icon-thumbs-up"></span>15 <span class="icon-heart-empty"></span>5 <span class="icon-comment-empty"></span>3</p>
-				</div>
-			</div>
-		</article>
-
-		<article>
-			<div class="contenedor">
-				<div class="autorBox">
-					<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Murlock</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#gatos</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#animales</a></p>
-				</div>
-				<a title="Ver foto" href="foto.html">
-					<img src="recursos/gat2.jpg"  alt="Foto random de muestra" class="imagIndex" > 
-				</a>
-				<div class="textoImg">
-					<h4>Mi gato durmiendo</h4>
-					<p><span class="icon-thumbs-up"></span>5 <span class="icon-heart-empty"></span>2 <span class="icon-comment-empty"></span>10</p>
-				</div>
-			</div>
-		</article>
-
-		<article>
-			<div class="contenedor">
-				<div class="autorBox">
-					<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Roxo95</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>
-				</div>
-				<a title="Ver foto" href="foto.html">
-					<img src="recursos/Screenshot_20171128_183907.png" alt="Foto random de muestra" class="imagIndex" > 
-				</a>
-				<div class="textoImg">
-					<h4>Hackaton 2018</h4>
-					<p><span class="icon-thumbs-up"></span>15 <span class="icon-heart-empty"></span>5 <span class="icon-comment-empty"></span>3</p>
-				</div>
-			</div>
-		</article>
-
-		<article>
-			<div class="contenedor">
-				<div class="autorBox">
-					<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Murlock</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#gatos</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#animales</a></p>
-				</div>
-				<a title="Ver foto" href="foto.html">
-					<img src="recursos/gat2.jpg"  alt="Foto random de muestra" class="imagIndex" > 
-				</a>
-				<div class="textoImg">
-					<h4>Mi gato durmiendo</h4>
-					<p><span class="icon-thumbs-up"></span>5 <span class="icon-heart-empty"></span>2 <span class="icon-comment-empty"></span>10</p>
-				</div>
-			</div>
-		</article>
-
-		<article>
-			<div class="contenedor">
-				<div class="autorBox">
-					<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Roxo95</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>
-				</div>
-				<a title="Ver foto" href="foto.html">
-					<img src="recursos/Screenshot_20171128_183907.png" alt="Foto random de muestra" class="imagIndex" > 
-				</a>
-				<div class="textoImg">
-					<h4>Hackaton 2018</h4>
-					<p><span class="icon-thumbs-up"></span>15 <span class="icon-heart-empty"></span>5 <span class="icon-comment-empty"></span>3</p>
-				</div>
-			</div>
-		</article>
-
-		<article>
-			<div class="contenedor">
-				<div class="autorBox">
-					<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Murlock</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#gatos</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#animales</a></p>
-				</div>
-				<a title="Ver foto" href="foto.html">
-					<img src="recursos/gat2.jpg"  alt="Foto random de muestra" class="imagIndex" > 
-				</a>
-				<div class="textoImg">
-					<h4>Mi gato durmiendo</h4>
-					<p><span class="icon-thumbs-up"></span>5 <span class="icon-heart-empty"></span>2 <span class="icon-comment-empty"></span>10</p>
-				</div>
-			</div>
-		</article>
-
-		
-		<article>
-			<div class="contenedor">
-				<div class="autorBox">
-					<p><a class="enlaces" title="Buscar por autor" href="buscar.html">Vayne</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#juegos</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#cyberpunk</a><a class="enlaces" href="buscar.html"> #2077</a></p>
-				</div>
-				<a title="Ver foto" href="foto.html">
-					<img src="recursos/cyberpunk.jpg"  alt="Foto random de muestra" class="imagIndex" > 
-				</a>
-				<div class="textoImg">
-					<h4>Juegazo</h4>
-					<p><span class="icon-thumbs-up"></span>100 <span class="icon-heart-empty"></span>50 <span class="icon-comment-empty"></span>20</p>
-				</div>
-			</div>
-		</article>
-
-		</div>
+	</div>
 
 	<div  class="preview">
 
@@ -204,7 +76,7 @@
 		</ul>
 
 	</div>
-	
+
 
 	<footer>
 		<!-- Copyright e informacion de contacto-->
