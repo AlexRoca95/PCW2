@@ -115,7 +115,7 @@ function fotosFavoritas()
 	let xhr = new XMLHttpRequest();
 		url = 'api/usuarios/'; 
 
-	let usu = JSON.parse(sessionStorage['usuario']);
+	let usu = JSON.parse(sessionStorage['usuario']);  // Parseamos toda la info que hay en la
 
 	// Completamos la url con la info que falta
 	url += usu.login + '/favoritas';  // Favoritas del usuario
@@ -131,18 +131,36 @@ function fotosFavoritas()
 		{
 			let html = '';
 
-			console.log(r.FILAS);
-
-			for (i=0; i<r.FILAS[i]; i++)
-			{
+			r.FILAS.forEach(function(e, idx, v) {// Para cada fila
 
 				html += '<article>';
 
-					html += '<p>HOla cars</p>';
+					html += '<div class="contenedor">';
+
+						html += '<div class="autorBox">';
+
+							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html">' + e.login + '</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>';
+
+						html += '</div>';
+
+						html += '<a title="Ver foto" href="foto.html">';
+
+							html += '<img src="fotos/' + e.fichero + '" alt="'+ e.descripcion +'" class="imagIndex" >'; 
+
+						html += '</a>';
+
+						html += '<div class="textoImg">';
+
+							html += '<h4>' + e.titulo + '</h4>';
+							html += '<p><span class="icon-thumbs-up"></span>' + e.nmegusta + ' <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>' + e.nfavorita + ' <span class="icon-comment-empty"></span>' + e.ncomentarios + '</p>';
+
+						html += '</div>';
+					html += '</div>';
 					
 				html += '</article>';
 
-			}
+				
+			});
 
 			document.querySelector('.preview').innerHTML=html;
 
@@ -153,7 +171,5 @@ function fotosFavoritas()
 	xhr.setRequestHeader('Authorization', usu.login + ':' + usu.token);  // Autorizacion necesaria para acceder a las fotos favoritas
 
 	xhr.send();  // Envia la petición que hemos hecho al servidor
-
-
 
 }
