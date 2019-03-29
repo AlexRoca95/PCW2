@@ -173,3 +173,43 @@ function fotosFavoritas()
 	xhr.send();  // Envia la petición que hemos hecho al servidor
 
 }
+
+
+// Funcion para mostrar todas las etiquetas disponibles en la base de datos cuando estamos haciendo focus 
+// en el campo de etiquetas de nueva foto.
+function pedirEtiquetas()
+{
+
+	let xhr = new XMLHttpRequest();
+		url = 'api/etiquetas';
+
+	xhr.open('GET', url, true); 
+
+	xhr.onload = function() 
+	{
+
+		let html = '';
+		r = JSON.parse(xhr.responseText);
+
+		if(r.RESULTADO == 'OK')
+		{
+			r.FILAS.forEach( function(e) {
+				
+				html += '<option>';
+
+					html += e.nombre;   // Nombre de la etiqueta
+
+				html += '</option>';
+
+
+			});
+
+			document.querySelector('#etiquetas').innerHTML = html;
+
+		}
+
+	};
+
+	xhr.send();
+
+}

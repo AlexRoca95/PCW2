@@ -69,7 +69,8 @@
 			<form>
 				<p><label>Título Foto </label><input class="boxesBusq" type="text" name="titulo" placeholder=" Amanecer..." maxlength="100" autofocus required></p>
 				<label>Descripción </label><textarea rows="5" cols="20" name="descripcion" maxlength="300" placeholder=" Ayer por la noche..." required></textarea>
-				<p><label>Etiquetas </label><input class="boxesBusq" type="text" name="etiquetas" placeholder=" 2019, paellas..." required ></p>
+				<p><label>Etiquetas </label><input class="boxesBusq" type="text" name="etiquetas" placeholder=" 2019, paellas..." list="etiquetas" onfocus="pedirEtiquetas();"></p>
+				<datalist id="etiquetas"></datalist>  <!-- Lista de etiquetas disponibles -->
 				<p><input type="file" required></p>
 				<p><input id="buscarFotos" type="submit" value="Subir Foto"></p>
 			</form>
