@@ -61,13 +61,23 @@
 				</ul>
 			</nav>
 	</header>
-	
+
+	<!-- Ventana Modal para mostrar el mensaje de error de login o login correcto-->
+	<div id="myModal" class="modal">
+
+		<div class="modal-content">
+		    <span class="close" onclick="cerrarVentana();">&times;</span>
+		    <p class="error" >¡<span>ERROR</span>! Login o contraseña incorrectos.</p>
+		</div>
+
+	</div>
+
 	<section class="LoginRegistroForm" > 
 		
 		<fieldset class="marcoForms">
 			<form method="post" onsubmit="return loginUsuario(this);"> <!-- Fourmulario de login. Pasamos el formulario como parametro -->
 				<h2>Inicio de Sesión</h2>
-				<p><input class="boxesForm" type="text" name="login" placeholder="Introduce tu login" required autofocus> </p> 
+				<p><input class="boxesForm" id="campoLogin" type="text" name="login" placeholder="Introduce tu login" required autofocus> </p> 
 				<p><input class="boxesForm" type="password" name="pwd" placeholder="Introduce tu contraseña" required> </p>
 				<input class="botonForm" type="submit" value="Iniciar Sesión">
 				<br>

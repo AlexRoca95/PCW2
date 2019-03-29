@@ -20,6 +20,9 @@ function loginUsuario(formulario)
 			if(r.RESULTADO == 'OK')  // Solo si la peticion ha tenido exito
 			{
 
+
+
+
 				sessionStorage.setItem("login", formulario.login.value);  // Asiganmos el valor del campo de login del formulario al campo de usuario del sessionStorage
 				sessionStorage.setItem("pwd", formulario.pwd.value);
 
@@ -33,6 +36,15 @@ function loginUsuario(formulario)
 				//window.location.href='index.html'; 				// HREF --> Si que se puede ir a la pagina anterior.
 
 			}
+			else
+			{
+				// Si se ha producido un error de autentificacion
+				if(r.RESULTADO == 'ERROR')
+				{
+					var modal = document.getElementById('myModal');  // Obtenemos el elemento
+					modal.style.display = "block";  				// Mostramos la ventana con info del error.
+				}
+			}
 
 
 		};
@@ -44,6 +56,17 @@ function loginUsuario(formulario)
 
 	}
 
+}
+
+// Funcion para cerrar la ventana emergente cuando se pulsa "X" en ella y hacer focus al campo login
+function cerrarVentana()
+{
+	var modal = document.getElementById('myModal');  // Obtenemos el elemento
+	modal.style.display = "none";  	// Dejamos de mostrar la ventana
+
+	var login = document.getElementById('campoLogin');
+
+	login.focus(); 		// Focus en el campo de login al cerrar ventana						
 }
 
 // Muestra las fotos mejor valoradas en index
@@ -200,7 +223,6 @@ function pedirEtiquetas()
 					html += e.nombre;   // Nombre de la etiqueta
 
 				html += '</option>';
-
 
 			});
 
