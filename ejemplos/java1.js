@@ -49,7 +49,7 @@ function pedirFotos()
 
 
 
-// Ejemplo de POST:
+// Ejemplo de POST: Siempre para hacer una peticion post necesitamos url, objeto XMLHTTP y un elemento formulario
 function hacerLogin(frm)
 {
 
@@ -64,27 +64,131 @@ function hacerLogin(frm)
 		// SessionStorage es un sistema de almacenamiento que guarda los datos de forma temporal durante la sesion 
 		// de nav en una ventana del navegador.
 
-		sessionStorage.setItem("login", frm.login.value);  // Asiganmos el valor del campo de login del formulario al campo de login del sessionStorage
-		sessionStorage.setItem("pwd", frm.pwd.value);
+		//sessionStorage.setItem("login", frm.login.value);  // Asiganmos el valor del campo de login del formulario al campo de login del sessionStorage
+		//sessionStorage.setItem("pwd", frm.pwd.value);
 
-		if((sessionStorage.getItem("login")) && (sessionStorage.getItem("pwd")))  // Solo si hay un valor en el campo de login y pwd del sessionStorage
+		console.log(xhr.responseText);
+
+		let r = JSON.parse(xhr.responseText);
+
+		if(r.RESULTADO == 'OK')  // Solo si la peticion ha tenido exito
 		{
-			console.log("Login correcto");
+			// Con localstore se almacena la sesion hasta que nosotros no la borremos explicitamente.
+			sessionStorage['usuario'] = xhr.responseText; // Almacenamos en la variable usuario toda la respuesta
+
+			// Si ponemos location.search devuelve todo lo que hay despues del interrogante en la url
+			//location.search.substr(1)
+			//location.seacrh.substr(1).split('&'); Corta la cadena empezando desde la posiocion 1 desde el interrogante(el interrogante es 0) donde los ampersans.
+			//location.href = 'http://localhost/pcw/practica02/index.html'; // Redirigimos a otra pagina.
+
 		}
-		else
+		
+	};
+
+
+	xhr.send(fd);  // Como aqui la peticion es un post, tenemos que pasar los datos (aqui es cuando se hace la peticion)
+
+	//console.log(frm.login.value); // Valor por consola de lo que hay en login 
+
+	return false;  // Evita que recarge la pagina cada vez que pulsamos el boton de enviar el formulario y que se haga la peticion correctamente
+}
+
+
+
+
+
+function pedirFavoritas()
+{
+
+	let url = 'api/usuarios/';  // Base para la url
+		xhr = new XMLHttpRequest();
+		//usu;
+
+	if(!sessionStorage['usuario'])  // Si no estamos logeados no se hace nada
+	{
+		return false;
+	}
+
+	usu = JSON.parse(sessionStorage['usuario']);
+
+
+	// Completamos la url con la info que falta
+	url += usu.login + '/favoritas';  // Favoritas del usuario
+
+
+
+	xhr.open('GET', url, true);
+
+	xhr.onload = function(){
+
+		let r = JSON.parse(xhr.responseText);
+
+		if(r.RESULTADO == 'OK')
 		{
-			console.log("Rellena los campos");
+			console.log(r);
+
+			let html = '';
+
+			r.FILAS.forEach(function(e, idx, v) {// Para cada fila
+				html += '<article>';
+
+				html += '<h3>' + e.titulo + '</h3>';
+				html += '<img src="fotos/' + e.fichero + '"alt="' + e.descripcion + '">';
+				
+				html += '</article>';
+			});
+
+			document.querySelector('#ff>div').innerHTML = html;
 		}
 
-		//sessionStorage('usuario')=xhr;  
-		//console.log(xhr.responseText);
+
 
 	};
 
 
-	xhr.send(fd);  // Como aqui la peticion es un post, tenemos que pasar los datos 
+	xhr.setRequestHeader('Authorization', usu.login + ':' + usu.token);  // CABECERA Y VALOR DE LA CABECERA
 
-	//console.log(frm.login.value); // Valor por consola de lo que hay en login 
+	xhr.send();
 
-	return false;  // Evita que recarge la pagina cada vez que pulsamos el boton de enviar el formulario
+
+
+
+}
+
+
+
+// Peticion GET de etiquetas
+function pedirEtiquetas()
+{
+	let url = 'api/etiquetas';
+		xhr = new XMLHttpRequest();
+
+	xhr.open('GET', url, true);
+	xhr.onload = function()
+	{
+		let html = '';
+		r = JSON.parse(xhr.responseText);
+
+		r.FILAS.forEach(function(e){
+
+			html += '<option>';
+
+				html += 'hola';
+
+			html += '</option>';
+		});
+
+		document.querySelector('#etiquetas').innerHTML=html;
+	};
+
+	xhr.send();
+}
+
+function mostrarValor(inp)
+{
+
+	console.log(inp.value);
+
+
+
 }
