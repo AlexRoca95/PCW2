@@ -141,7 +141,7 @@ function fotosMejorValoradas()
 
 					html += '</div>';
 
-					html += '<a title="Ver foto" href="foto.html">';
+					html += '<a title="Ver foto" href="foto.html?' + r.FILAS[i].id + '">';
 
 						html += '<img src="fotos/' + r.FILAS[i].fichero + '" alt="'+ r.FILAS[i].descripcion +'" class="imagIndex" >'; 
 
@@ -272,6 +272,63 @@ function pedirEtiquetas()
 		}
 
 	};
+
+	xhr.send();
+
+}
+
+// Para mostrar la foto correspondiente en foto.html en funcion del ID de foto que se pasa por la url
+function mostrarFoto()
+{
+
+	//console.log(location.search.substr(1));  // Obtenemos el valor que hay justo despues de '?' en la url
+
+	let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
+		url = 'api/fotos/';
+		id = location.search.substr(1); // Obtenemos el id de la foto desde la url
+
+	url += id;  // URL con el id de la foto.
+
+	xhr.open('GET', url, true); 
+
+	xhr.onload = function() 
+	{	
+
+		let r = JSON.parse(xhr.responseText);
+
+		if(id=='' || r.FILAS.length==0)  // Si no se le pasa ninguna ID o no es una ID valida
+		{
+			window.location.replace('index.html');
+		}
+		else  // Hay una id
+		{
+				html = '';
+				//console.log(r.FILAS[0].login);
+
+
+				html+= '<figure>';
+					html += '<div>';
+						html += '<img src="fotos/' + r.FILAS[0].fichero + '" alt="'+ r.FILAS[0].descripcion +'" class="imagen2">';
+					html += '</div>';
+					html += '<figcaption>';
+						html += '<h2>' + r.FILAS[0].titulo + '</h2>';
+						html += '<hr class="LineaFoto">';
+						html += '<p class="info"><a class="enlacesFoto" title="Me gusta la foto" href=""><span class="icon-thumbs-up"></span></a>' + r.FILAS[0].nmegusta + ' <a class="enlacesFoto" title="Añadir a favoritas" href=""><span class="icon-heart-empty"></span></a>' + r.FILAS[0].nfavorita + ' <a class="enlacesFoto" title="Seccion comentarios de la Foto" href="#comentarios"><span class="icon-comment-empty"></span></a>' + r.FILAS[0].ncomentarios + '</p>';
+						html += '<p class="info">Dimensiones: ' + r.FILAS[0].alto + 'x' + r.FILAS[0].ancho + ' pixeles</p>';
+						html += '<p class="info">Peso: ' + r.FILAS[0].peso + ' bytes</p>';
+						html += '<div>';
+							html += '<p class="autor"> <a class="enlaces" title="Buscar fotos por etiqueta" href="buscar.html">#gatos</a> <a class="enlaces" title="Buscar fotos por etiqueta" href="buscar.html">#animales</a></p>';
+							html += '<p>Por <a href="buscar.html" title="Buscar fotos por usuario" class="enlaces" >' + r.FILAS[0].login + '</a></p>';
+						html += '</div>'
+					html += '</figcaption>';
+				html+= '</figure>';
+
+
+			document.querySelector('#fotoID').innerHTML = html;
+		}
+
+	};
+
 
 	xhr.send();
 
