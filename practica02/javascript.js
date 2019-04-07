@@ -20,9 +20,6 @@ function loginUsuario(formulario)
 			if(r.RESULTADO == 'OK')  // Solo si la peticion ha tenido exito
 			{
 
-
-
-
 				sessionStorage.setItem("login", formulario.login.value);  // Asiganmos el valor del campo de login del formulario al campo de usuario del sessionStorage
 				sessionStorage.setItem("pwd", formulario.pwd.value);
 
@@ -55,6 +52,50 @@ function loginUsuario(formulario)
 		return false;    		// Evita que recarge la pagina cada vez que pulsamos el boton de enviar el formulario
 
 	}
+
+}
+
+// Hay que borrar toda la info del usuario.
+function hacerLogout()
+{
+	// Borramos toda la info sobre el usuario.
+	sessionStorage.clear();
+	localStorage.clear();
+
+}
+
+// En funcion de si el usuario esta logeado o no, se mostrara un menu o otro (version grande/mini de pantalla)
+function mostrarMenu()
+{
+
+
+	let menu = document.querySelector('#menu');
+		html = '';
+
+
+	// Comprobamos si el usuario esta logeado o no
+	if(sessionStorage['usuario'])
+	{
+
+		usu = JSON.parse(sessionStorage['usuario']);  // Parseamos la info que hay en usuario
+
+
+		//Logeado
+		html += '<li><a href="nueva.html"><span class="icon-camera"></span>Nueva Foto</a></li>';
+		html += '<li><a href="favoritas.html"><span class="icon-heart"></span>Favoritas</a></li>';
+		html += '<li><a href="index.html" onclick="hacerLogout();"><span class="icon-logout"></span>Logout (' + usu.login + ')</a></li>';
+
+	}
+	else
+	{
+		// No logeado
+		html += '<li><a href="login.html"><span class="icon-user"></span>Login</a></li>';
+		html += '<li><a href="registro.html"><span class="icon-user-add"></span>Registro</a></li>';
+
+	}
+
+
+	menu.innerHTML += html;
 
 }
 

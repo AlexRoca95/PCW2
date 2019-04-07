@@ -26,7 +26,7 @@
 <body>
 	<header> <!-- Titulo pagina y descripcion -->
 		<div id="headerItems">
-			<a class="none" href="index.html">
+			<a class="none" title="Volver a la pagina principal" href="index.html">
 				<div class="titulo"><h1>Instagrom</h1></div>
 				<div><h2>Las mejores fotos</h2></div>
 			</a>
@@ -37,26 +37,28 @@
 		</div>
 		<input type="checkbox" id="ckburger" checked>  <!-- Boton para visualizar/no visualizar el menu hamburguesa -->
 			<nav class="menu display-mini display-great"> <!-- Barra de navegacion tamaño grande y pequeño-->
-				<ul> <!-- Lista no ordenada -->
+				<ul id="menu"> <!-- Lista no ordenada -->
 					<li><a href="index.html"><span class="icon-home"></span>Inicio</a></li> 
 					<li><a href="buscar.html"><span class="icon-search"></span>Busqueda</a></li> <!-- Buscar una foto -->
-					<li><a href="nueva.html"><span class="icon-camera"></span>Nueva Foto</a></li>
-					<li><a href="favoritas.html"><span class="icon-heart"></span>Favoritas</a></li> <!-- Fotos favoritas -->
-					<li><a href="index.html"><span class="icon-logout"></span>Logout</a></li>
-					<li><a href="login.html"><span class="icon-user"></span>Login</a></li>
-					<li><a href="registro.html"><span class="icon-user-add"></span>Registro</a></li>
 				</ul>
 			</nav>
 
 			<nav class="display-medium"> <!-- Barra de navegacion tamaño mediano-->
-				<ul> 
+				
+				<script>
+
+					//mostrarMenu2(); 			// Para mostrar el menu determinado en funcion de si el usuario esta logeado o no (version mediana)
+
+				</script>
+
+				<ul id="menu2"> 
 					<li><a href="index.html"><span class="icon-home"></span></a></li> 
 					<li><a href="buscar.html"><span class="icon-search"></span></a></li> 
-					<li><a href="nueva.html"><span class="icon-camera"></span></a></li>
+				<!--	<li><a href="nueva.html"><span class="icon-camera"></span></a></li>
 					<li><a href="favoritas.html"><span class="icon-heart"></span></a></li> 
 					<li><a href="index.html"><span class="icon-logout"></span></a></li>
 					<li><a href="login.html"><span class="icon-user"></span></a></li>
-					<li><a href="registro.html"><span class="icon-user-add"></span></a></li>
+					<li><a href="registro.html"><span class="icon-user-add"></span></a></li> -->
 				</ul>
 			</nav>
 	</header>
@@ -83,5 +85,11 @@
 		<!-- Copyright e informacion de contacto-->
 		<p><a class="enlaces" href="acerca.html"><strong>Alejandro Roca Vande Sype</strong></a> | &copy; Febrero 2019<a href="#headerItems" class="enlaces"><span class="icon-up-big"></span></a></p>
 	</footer>
+
+	<script>
+
+		mostrarMenu(); 			// Para mostrar el menu determinado en funcion de si el usuario esta logeado o no (version mini/grande)
+
+	</script>
 </body>
 </html>

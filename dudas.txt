@@ -1,0 +1,4 @@
+ - Como hacer para mostrar los menus correctamente con javascript teniendo 
+un menu distinto para cada tamaño de pantalla.
+
+- Mostrar mensaje informativo al hacer login/logout/ intentar acceder una pagina que no se puede
