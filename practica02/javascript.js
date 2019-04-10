@@ -296,6 +296,8 @@ function mostrarFoto()
 
 		let r = JSON.parse(xhr.responseText);
 
+		//console.log(r.FILAS[0].login);
+
 		if(id=='' || r.FILAS.length==0)  // Si no se le pasa ninguna ID o no es una ID valida
 		{
 			window.location.replace('index.html');
@@ -325,8 +327,66 @@ function mostrarFoto()
 
 
 			document.querySelector('#fotoID').innerHTML = html;
+
+
+			//html = '';
+
+			//html+= '<article>';
+				//html+= '<ul id="lista-coment">';
+				//html += '<li>';
+					//html += '<div class="coment-box">';
+						//html += '<div class="coment-head">';
+
+
 		}
 
+	};
+
+
+	xhr.send();
+
+}
+
+
+function registroUsuario(formulario)
+{
+
+	let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
+		fd = new FormData(formulario);
+		url = 'api/usuarios';
+
+	xhr.open('POST', url, true);
+
+	xhr.onload = function()
+	{
+
+	};
+
+
+	xhr.send(fd);
+
+	return false;
+}
+
+// Funcion para comprobar si el login ya existe
+function checkLogin(log)
+{
+	let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
+		url = 'api/usuarios/';
+
+	url += log.value;
+
+	xhr.open('GET', url, true);
+
+	xhr.onload = function()
+	{
+		let r = JSON.parse(xhr.responseText);
+
+		if(r.DISPONIBLE == false) // Si el login no esta disponible
+		{
+
+
+		}
 	};
 
 
