@@ -27,7 +27,7 @@ function loginUsuario(formulario)
 
 
 				// Redireccion cuando se ha hecho el login bien
-				window.location.replace('index.html');   		 	// REPLACE --> Borra la url actual de tal manera que no se puede volver atras al pulsar el boton de ir 
+				window.location.replace('index.html?1');   		 	// REPLACE --> Borra la url actual de tal manera que no se puede volver atras al pulsar el boton de ir 
 																	// a la pagina anterior.
 
 				//window.location.href='index.html'; 				// HREF --> Si que se puede ir a la pagina anterior.
@@ -83,7 +83,7 @@ function mostrarMenu()
 		//Logeado
 		html += '<li><a href="nueva.html"><span class="icon-camera"></span>Nueva Foto</a></li>';
 		html += '<li><a href="favoritas.html"><span class="icon-heart"></span>Favoritas</a></li>';
-		html += '<li><a href="index.html" onclick="hacerLogout();"><span class="icon-logout"></span>Logout (' + usu.login + ')</a></li>';
+		html += '<li><a href="index.html?1" onclick="hacerLogout();"><span class="icon-logout"></span>Logout (' + usu.login + ')</a></li>';
 
 	}
 	else
@@ -125,7 +125,8 @@ function fotosMejorValoradas()
 
 		let r = JSON.parse(xhr.responseText);
 
-		//console.log(pagActiva);
+		//console.log(r);
+		//console.log(r.FILAS[0].etiquetas[0].nombre);
 
 
 		totalPag = calcularTotalPagFotos(r, xhr);
@@ -155,7 +156,13 @@ function fotosMejorValoradas()
 
 						html += '<div class="autorBox">';
 
-							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html">' + r.FILAS[i].login + '</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>';
+							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html?'+ r.FILAS[i].login + '">' + r.FILAS[i].login + '</a> <b>|</b> ';
+							for(let i3=0; i3<r.FILAS[i].etiquetas.length; i3++)
+							{
+
+								html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?'+ r.FILAS[i].etiquetas[i3].nombre + '">#'+ r.FILAS[i].etiquetas[i3].nombre +' </a>';
+								
+							}
 
 						html += '</div>';
 
@@ -192,8 +199,14 @@ function fotosMejorValoradas()
 
 						html += '<div class="autorBox">';
 
-							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html">' + r.FILAS[i2].login + '</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>';
+							
+							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html?'+ r.FILAS[i2].login+ '">' + r.FILAS[i2].login + '</a> <b>|</b> ';
+							for(let i3=0; i3<r.FILAS[i2].etiquetas.length; i3++)
+							{
 
+								html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?'+ r.FILAS[i2].etiquetas[i3].nombre + '">#'+ r.FILAS[i2].etiquetas[i3].nombre +' </a>';
+
+							}
 						html += '</div>';
 
 						html += '<a title="Ver foto" href="foto.html?' + r.FILAS[i2].id + '">';
@@ -280,21 +293,23 @@ function pasarPagina(valor, paginas)
 {
 	let pagActiva = location.search.substr(1);
 
-	if(valor==1)
+	if(valor==1)  // Si valor == 1 quiere decir que queremos ir a la anterior
 	{
 		if(pagActiva!=1)
 		{
 			pagActiva = pagActiva - 1;
 		}
 	}
-	else
+	else // Si no es 1, quiere decir que queremos ir a la siguiente pagina
 	{
-		//if(pagActiva+1 (paginas))
-		pagActiva = pagActiva + 1;
+		//if(pagActiva<numPag)
+		//{
+			pagActiva = +pagActiva + +1;
+		//}
 	}
 
 
-	window.location.replace('index.html?'+ pagActiva +'');
+	window.location.replace('index.html?1'+ pagActiva +'');
 
 }
 
@@ -427,7 +442,7 @@ function mostrarFoto()
 
 		if(id=='' || r.FILAS.length==0)  // Si no se le pasa ninguna ID o no es una ID valida
 		{
-			window.location.replace('index.html');
+			window.location.replace('index.html?1');
 		}
 		else  // Hay una id
 		{
