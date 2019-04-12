@@ -116,47 +116,102 @@ function fotosMejorValoradas()
 	// Peticion GET
 	let xhr = new XMLHttpRequest();
 
-	url = 'api/fotos/megusta';
+		url = 'api/fotos/megusta';
+		pagActiva = location.search.substr(1);
+
 	xhr.open('GET', url, true);
 
 	xhr.onload= function(){
 
 		let r = JSON.parse(xhr.responseText);
 
-		//console.log(r);
+		//console.log(pagActiva);
+
+
+		totalPag = calcularTotalPagFotos(r, xhr);
+
+		totalFotosServidor = r.FILAS.length; 			// Numero total de fotos que tenemos en nuestro servidor
+
+		let total = 0; 									// 
+			inicio = 0; 								// Variables para los bucles for (inicio del bucle y final)
 
 		html = '';
+		totalFotosPag = pagActiva * 6; 					// Para saber cuantas fotos se deberian mostrar en funcion de la pag en la que estemos
 
-		/* Recorremos hasta 6 fotos para mostar en la primera pagina de index*/
-		for (let i = 0; i < 6; i++)  
+
+		// Si el total de fotos a mostrar es igual al numero de fotos que hay en el servidor o es menor, entonces quiere decir que se muestran todas las
+		// fotos en la pagina que estamos
+		if(totalFotosPag==totalFotosServidor || totalFotosPag<totalFotosServidor)
+		{	
+				total = totalFotosPag;
+				inicio = totalFotosPag - 6;
+
+			for (let i=inicio; i<total; i++)
+			{
+
+				html += '<article>';
+
+					html += '<div class="contenedor">';
+
+						html += '<div class="autorBox">';
+
+							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html">' + r.FILAS[i].login + '</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>';
+
+						html += '</div>';
+
+						html += '<a title="Ver foto" href="foto.html?' + r.FILAS[i].id + '">';
+
+							html += '<img src="fotos/' + r.FILAS[i].fichero + '" alt="'+ r.FILAS[i].descripcion +'" class="imagIndex" >'; 
+
+						html += '</a>';
+
+						html += '<div class="textoImg">';
+
+							html += '<h4>' + r.FILAS[i].titulo + '</h4>';
+							html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i].nmegusta + ' <span class="icon-heart-empty"></span>' + r.FILAS[i].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i].ncomentarios + '</p>';
+
+						html += '</div>';
+					html += '</div>';
+					
+				html += '</article>';
+			}
+
+		}
+		else // Si el total de fotos de pagina a mostrar es mayor que el del servidor quiere decir que en esta pagina se muestran menos fotos que el maximo (que son 6)
 		{
 
-			html += '<article>';
+			inicio = 6 * (pagActiva-1);   					
+			total = (totalFotosPag - totalFotosServidor) + inicio;
 
-				html += '<div class="contenedor">';
+			for (let i2=inicio; i2<total; i2++)
+			{
 
-					html += '<div class="autorBox">';
+				html += '<article>';
 
-						html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html">' + r.FILAS[i].login + '</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>';
+					html += '<div class="contenedor">';
 
+						html += '<div class="autorBox">';
+
+							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html">' + r.FILAS[i2].login + '</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>';
+
+						html += '</div>';
+
+						html += '<a title="Ver foto" href="foto.html?' + r.FILAS[i2].id + '">';
+
+							html += '<img src="fotos/' + r.FILAS[i2].fichero + '" alt="'+ r.FILAS[i2].descripcion +'" class="imagIndex" >'; 
+
+						html += '</a>';
+
+						html += '<div class="textoImg">';
+
+							html += '<h4>' + r.FILAS[i2].titulo + '</h4>';
+							html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i2].nmegusta + ' <span class="icon-heart-empty"></span>' + r.FILAS[i2].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i2].ncomentarios + '</p>';
+
+						html += '</div>';
 					html += '</div>';
-
-					html += '<a title="Ver foto" href="foto.html?' + r.FILAS[i].id + '">';
-
-						html += '<img src="fotos/' + r.FILAS[i].fichero + '" alt="'+ r.FILAS[i].descripcion +'" class="imagIndex" >'; 
-
-					html += '</a>';
-
-					html += '<div class="textoImg">';
-
-						html += '<h4>' + r.FILAS[i].titulo + '</h4>';
-						html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i].nmegusta + ' <span class="icon-heart-empty"></span>' + r.FILAS[i].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i].ncomentarios + '</p>';
-
-					html += '</div>';
-				html += '</div>';
-				
-			html += '</article>';
-			
+					
+				html += '</article>';
+			}
 		}
 
 		document.querySelector('.preview').innerHTML=html;
@@ -166,10 +221,82 @@ function fotosMejorValoradas()
 
 	xhr.send();  // Envia la petición que hemos hecho al servidor
 
+}
 
+// Funcion para calculara el numero total de paginas de fotos que hay en index
+function calcularTotalPagFotos(result, xhr)
+{
+
+	let numPag = result.FILAS.length/6;  		// Numero de paginas
+		decimal = numPag - Math.floor(numPag) 	// Parte decimal (paginas que no estan completas de fotos)
+		i = 0;
+		pagActiva = location.search.substr(1);  // Obtenemos de la url la pagina actual en la que estamos
+
+
+	
+	html2 = '';
+
+	html2 += '<li><a href="#" onclick="pasarPagina(1,'+ numPag +');">«</a></li>';
+
+	for (i=1; i<numPag; i++)
+	{
+		if(pagActiva==i) 	// SI la pagActiva coincide con la i, entonces estamos en esta pagina
+		{
+			html2+= '<li><a class="active" href="?'+ i +'">'+ i +'</a></li>';
+		}
+		else
+		{
+			html2+= '<li><a href="?'+ i +'">'+ i +'</a></li>';
+		}
+
+	}
+
+	// Por si hay paginas que no se han completado de fotos (es decir no han llegado a 6 fotos)
+	if(decimal!=0)
+	{
+		if(pagActiva==i)
+		{
+			html2 += '<li><a class="active" href="?'+ i +'">'+ i +'</a></li>';
+		}
+		else
+		{
+			html2 += '<li><a href="?'+ i +'">'+ i +'</a></li>';
+		}
+	}
+
+
+	html2 += '<li><a href="#" onclick="pasarPagina(2,'+ numPag +');" >»</a></li>';
+
+
+
+	document.querySelector('.paginacion').innerHTML=html2;
+
+	return numPag;
 
 }
 
+
+function pasarPagina(valor, paginas)
+{
+	let pagActiva = location.search.substr(1);
+
+	if(valor==1)
+	{
+		if(pagActiva!=1)
+		{
+			pagActiva = pagActiva - 1;
+		}
+	}
+	else
+	{
+		//if(pagActiva+1 (paginas))
+		pagActiva = pagActiva + 1;
+	}
+
+
+	window.location.replace('index.html?'+ pagActiva +'');
+
+}
 
 
 // Muestra las fotos favoritas del usuario
