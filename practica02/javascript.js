@@ -419,7 +419,8 @@ function pedirEtiquetas()
 
 }
 
-// Para mostrar la foto correspondiente en foto.html en funcion del ID de foto que se pasa por la url
+// Para mostrar la foto correspondiente en foto.html en funcion del ID de foto que se pasa por la url.
+// Tambien se comprueba si el usuario ha dado me gusta o fav a la foto
 function mostrarFoto()
 {
 
@@ -447,8 +448,6 @@ function mostrarFoto()
 		else  // Hay una id
 		{
 				html = '';
-				//console.log(r.FILAS[0].login);
-
 
 				html+= '<figure>';
 					html += '<div>';
@@ -457,12 +456,56 @@ function mostrarFoto()
 					html += '<figcaption>';
 						html += '<h2>' + r.FILAS[0].titulo + '</h2>';
 						html += '<hr class="LineaFoto">';
-						html += '<p class="info"><a class="enlacesFoto" title="Me gusta la foto" href=""><span class="icon-thumbs-up"></span></a>' + r.FILAS[0].nmegusta + ' <a class="enlacesFoto" title="Añadir a favoritas" href=""><span class="icon-heart-empty"></span></a>' + r.FILAS[0].nfavorita + ' <a class="enlacesFoto" title="Seccion comentarios de la Foto" href="#comentarios"><span class="icon-comment-empty"></span></a>' + r.FILAS[0].ncomentarios + '</p>';
+						if(sessionStorage.getItem("login")) // Usuario logeado
+						{
+							// Valores de fav y like del usuario
+							let usuFav = r.FILAS[0].usu_favorita;
+								usuLike = r.FILAS[0].usu_megusta;
+
+							html += '<p class="info">';
+							
+							// Comprobamos si le ha dado a me gusta a la foto
+							if(usuLike!=0)
+							{
+								html += '<a class="enlaces" title="Me gusta la foto" href="" onclick="meGustaFoto(1);"><span class="icon-thumbs-up-alt"';
+							}
+							else
+							{
+								html += '<a class="enlacesFoto" title="Me gusta la foto" href="" onclick="meGustaFoto(0);"><span class="icon-thumbs-up"';
+							}
+
+
+							html += '></span></a>' + r.FILAS[0].nmegusta +' ';
+
+							// Comprobamos si le ha dado a fav a la foto
+							if(usuFav!=0)
+							{
+								html+= '<a class="enlaces" title="Añadir a favoritas" href="" onclick="favoritaFoto(1);"><span class="icon-heart">';
+							}
+							else
+							{
+								html+= '<a class="enlacesFoto" title="Añadir a favoritas" href="" onclick="favoritaFoto(0);"><span class="icon-heart-empty">';
+							}
+
+							html += '</span></a>' + r.FILAS[0].nfavorita + ' <a class="enlacesFoto" title="Seccion comentarios de la Foto" href="#comentarios"><span class="icon-comment-empty"></span></a>' + r.FILAS[0].ncomentarios + '</p>';
+						
+						}
+						else
+						{
+							// Usuario no logeado
+							html += '<p class="info"><a class="enlacesFoto" title="Me gusta la foto" href="login.html";"><span class="icon-thumbs-up"></span></a>' + r.FILAS[0].nmegusta + ' <a class="enlacesFoto" title="Añadir a favoritas" href="login.html"><span class="icon-heart-empty"></span></a>' + r.FILAS[0].nfavorita + ' <a class="enlacesFoto" title="Seccion comentarios de la Foto" href="#comentarios"><span class="icon-comment-empty"></span></a>' + r.FILAS[0].ncomentarios + '</p>';
+						}
+
 						html += '<p class="info">Dimensiones: ' + r.FILAS[0].alto + 'x' + r.FILAS[0].ancho + ' pixeles</p>';
 						html += '<p class="info">Peso: ' + r.FILAS[0].peso + ' bytes</p>';
 						html += '<div>';
-							html += '<p class="autor"> <a class="enlaces" title="Buscar fotos por etiqueta" href="buscar.html">#gatos</a> <a class="enlaces" title="Buscar fotos por etiqueta" href="buscar.html">#animales</a></p>';
-							html += '<p>Por <a href="buscar.html" title="Buscar fotos por usuario" class="enlaces" >' + r.FILAS[0].login + '</a></p>';
+							for(let i3=0; i3<r.FILAS[0].etiquetas.length; i3++)
+							{
+
+								html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?'+ r.FILAS[0].etiquetas[i3].nombre + '">#'+ r.FILAS[0].etiquetas[i3].nombre +' </a>';
+							}
+
+							html += '<p>Por <a href="buscar.html?' + r.FILAS[0].login + '" title="Buscar fotos por usuario" class="enlaces" >' + r.FILAS[0].login + '</a></p>';
 						html += '</div>'
 					html += '</figcaption>';
 				html+= '</figure>';
@@ -470,22 +513,29 @@ function mostrarFoto()
 
 			document.querySelector('#fotoID').innerHTML = html;
 
-
-			//html = '';
-
-			//html+= '<article>';
-				//html+= '<ul id="lista-coment">';
-				//html += '<li>';
-					//html += '<div class="coment-box">';
-						//html += '<div class="coment-head">';
-
-
 		}
 
 	};
 
 
+	if(sessionStorage.getItem("login"))
+	{
+		// Si el usuario esta logeado pedimos info extra sobre si le ha dado me gusta o fav
+		let usu = JSON.parse(sessionStorage['usuario']);
+
+		xhr.setRequestHeader('Authorization', usu.login + ':' + usu.token);
+	}
+
+
 	xhr.send();
+
+}
+
+//Funcion para comprobar si el usuario ha dado me gusta o favorito a la foto
+function checkLikeFavR()
+{
+
+
 
 }
 
@@ -531,6 +581,103 @@ function checkLogin(log)
 		}
 	};
 
+
+	xhr.send();
+
+}
+
+// Funcion para realizar una busqueda de fotos en buscar.html
+function realizarBusqueda(formulario)
+{
+	let xhr = new XMLHttpRequest();
+		fd = new FormData(formulario)
+		url = 'api/fotos';
+
+
+	xhr.open('GET', url, true);
+
+	//console.log(formulario.value);
+
+	xhr.onload = function()
+	{
+
+
+	};
+
+
+	xhr.send();
+
+	return false;
+
+}
+
+// Funcion para dar/ quitar me gusta la foto en funcion del valor pasado por parametro
+function meGustaFoto(like)
+{
+	let xhr = new XMLHttpRequest();
+		url = 'api/fotos/';
+		id = location.search.substr(1);
+		usu = JSON.parse(sessionStorage['usuario']); 
+
+	url += id + '/megusta';
+
+	//console.log(url);
+
+	if(like==0)  // Si se quiere dar me gusta
+	{
+		xhr.open('POST', url, true);
+	}
+	else  // Si se quiere eliminar el me gusta
+	{
+		xhr.open('DELETE', url, true);
+	}
+	//console.log(formulario.value);
+
+	xhr.onload = function()
+	{
+		//let r = JSON.parse(xhr.responseText);
+
+		//console.log(r);
+	};
+
+	xhr.setRequestHeader('Authorization', usu.login + ':' + usu.token);
+
+	xhr.send();
+
+	//return false;
+}
+
+
+// Funcion dar/quitar fav a la foto en funcion del valor pasado por parametro.
+function favoritaFoto(fav)
+{
+	let xhr = new XMLHttpRequest();
+		url = 'api/fotos/';
+		id = location.search.substr(1);
+		usu = JSON.parse(sessionStorage['usuario']); 
+
+
+	url += id + '/favorita';
+
+
+	if(fav==0)  // Si se quiere dar favorito
+	{
+		xhr.open('POST', url, true);
+	}
+	else  // Si se quiere eliminar el favorito
+	{
+		xhr.open('DELETE', url, true);
+	}
+
+	//console.log(formulario.value);
+
+	xhr.onload = function()
+	{
+
+
+	};
+
+	xhr.setRequestHeader('Authorization', usu.login + ':' + usu.token);
 
 	xhr.send();
 

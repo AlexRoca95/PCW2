@@ -57,7 +57,7 @@
 		<fieldset id="marcoBusqueda">
 
 			<h3>Buscador de fotos</h3>
-			<form id="buscador">
+			<form id="buscador" method="get" onsubmit="return realizarBusqueda(this);" >
 				<p><label>Título </label><input class="boxesBusq" type="text" name="titulo" placeholder=" Amanecer..." autofocus=""></p>
 				<p><label>Descripción </label><input class="boxesBusq" type="text" name="descripcion" placeholder=" ayer por la noche...."></p>
 				<p><label>Etiquetas </label><input class="boxesBusq" type="text" name="etiquetas" placeholder=" 2019, paellas..."></p>
