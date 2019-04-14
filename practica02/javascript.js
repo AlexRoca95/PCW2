@@ -129,7 +129,7 @@ function fotosMejorValoradas()
 		//console.log(r.FILAS[0].etiquetas[0].nombre);
 
 
-		totalPag = calcularTotalPagFotos(r, xhr);
+		totalPag = calcularTotalPagFotos(r, xhr); 		// Calculamos el total de paginas que hay
 
 		totalFotosServidor = r.FILAS.length; 			// Numero total de fotos que tenemos en nuestro servidor
 
@@ -147,7 +147,7 @@ function fotosMejorValoradas()
 				total = totalFotosPag;
 				inicio = totalFotosPag - 6;
 
-			for (let i=inicio; i<total; i++)
+			for (let i=inicio; i<total; i++)  // Bucle para recorrer todas las fotos que haya en la pagina que nos encontremos
 			{
 
 				html += '<article>';
@@ -175,7 +175,42 @@ function fotosMejorValoradas()
 						html += '<div class="textoImg">';
 
 							html += '<h4>' + r.FILAS[i].titulo + '</h4>';
-							html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i].nmegusta + ' <span class="icon-heart-empty"></span>' + r.FILAS[i].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i].ncomentarios + '</p>';
+
+							if(sessionStorage.getItem("login")) // Usuario logeado
+							{
+								let usuFav = r.FILAS[i].usu_favorita;
+									usuLike = r.FILAS[i].usu_megusta;
+								
+								// Comprobamos si le ha dado a me gusta a la foto
+								if(usuLike!=0)
+								{
+									html += '<p><span class="icon-thumbs-up-alt"></span>';
+								}
+								else
+								{
+									html += '<p><span class="icon-thumbs-up"></span>';
+								}
+
+
+								html += r.FILAS[i].nmegusta;
+
+								// Comprobamos si le ha dado a fav a la foto
+								if(usuFav!=0)
+								{
+									html+= ' <span class="icon-heart"></span>';
+								}
+								else
+								{
+									html+= ' <span class="icon-heart-empty"></span>';
+								}
+
+								html += r.FILAS[i].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i].ncomentarios + '</p>';
+
+							}
+							else
+							{
+								html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i].nmegusta + ' <span class="icon-heart-empty"></span>' + r.FILAS[i].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i].ncomentarios + '</p>';
+							}
 
 						html += '</div>';
 					html += '</div>';
@@ -218,8 +253,42 @@ function fotosMejorValoradas()
 						html += '<div class="textoImg">';
 
 							html += '<h4>' + r.FILAS[i2].titulo + '</h4>';
-							html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i2].nmegusta + ' <span class="icon-heart-empty"></span>' + r.FILAS[i2].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i2].ncomentarios + '</p>';
 
+							if(sessionStorage.getItem("login")) // Usuario logeado
+							{
+								let usuFav = r.FILAS[i2].usu_favorita;
+									usuLike = r.FILAS[i2].usu_megusta;
+								
+								// Comprobamos si le ha dado a me gusta a la foto
+								if(usuLike!=0)
+								{
+									html += '<p><span class="icon-thumbs-up-alt"></span>';
+								}
+								else
+								{
+									html += '<p><span class="icon-thumbs-up"></span>';
+								}
+
+
+								html += r.FILAS[i2].nmegusta;
+
+								// Comprobamos si le ha dado a fav a la foto
+								if(usuFav!=0)
+								{
+									html+= ' <span class="icon-heart"></span>';
+								}
+								else
+								{
+									html+= ' <span class="icon-heart-empty"></span>';
+								}
+
+								html += r.FILAS[i2].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i2].ncomentarios + '</p>';
+
+							}
+							else  // Usuario no logeado
+							{
+								html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i2].nmegusta + ' <span class="icon-heart-empty"></span>' + r.FILAS[i2].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i2].ncomentarios + '</p>';
+							}
 						html += '</div>';
 					html += '</div>';
 					
@@ -231,6 +300,16 @@ function fotosMejorValoradas()
 
 
 	};
+
+
+	if(sessionStorage.getItem("login"))
+	{
+		// Si el usuario esta logeado pedimos info extra sobre si le ha dado me gusta o fav
+		let usu = JSON.parse(sessionStorage['usuario']);
+
+		xhr.setRequestHeader('Authorization', usu.login + ':' + usu.token);
+	}
+
 
 	xhr.send();  // Envia la petición que hemos hecho al servidor
 
@@ -456,6 +535,7 @@ function mostrarFoto()
 					html += '<figcaption>';
 						html += '<h2>' + r.FILAS[0].titulo + '</h2>';
 						html += '<hr class="LineaFoto">';
+
 						if(sessionStorage.getItem("login")) // Usuario logeado
 						{
 							// Valores de fav y like del usuario
@@ -499,7 +579,8 @@ function mostrarFoto()
 						html += '<p class="info">Dimensiones: ' + r.FILAS[0].alto + 'x' + r.FILAS[0].ancho + ' pixeles</p>';
 						html += '<p class="info">Peso: ' + r.FILAS[0].peso + ' bytes</p>';
 						html += '<div>';
-							for(let i3=0; i3<r.FILAS[0].etiquetas.length; i3++)
+
+							for(let i3=0; i3<r.FILAS[0].etiquetas.length; i3++) // Bucle para recorrer todas las etiquetas de la foto
 							{
 
 								html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?'+ r.FILAS[0].etiquetas[i3].nombre + '">#'+ r.FILAS[0].etiquetas[i3].nombre +' </a>';
@@ -531,15 +612,52 @@ function mostrarFoto()
 
 }
 
-//Funcion para comprobar si el usuario ha dado me gusta o favorito a la foto
-function checkLikeFavR()
-{
+// FUncion para mostrar los comentarios de una foto en foto.html.
+function mostrarComentarios()
+{	
+	let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
+		url = 'api/fotos/';
+		id = location.search.substr(1); // Obtenemos el id de la foto desde la url
+
+	url += id + '/comentarios';  
+
+	xhr.open('GET', url, true); 
+
+	xhr.onload = function() 
+	{
+
+		let r = JSON.parse(xhr.responseText);
+			html = '';
+		console.log(r);
+
+		for (let i=0; i<r.FILAS.legth; i++)
+		{
+
+			html += '<li>';
+				html += '<div class="coment-box">';
+					html += '<div class="coment-head">';
+						html += '<h5>'+ r.FILAS[i].titulo +'</h5>';
+						html += '<span>'+ r.FILAS[i].fechahora +'</span>';
+					html += '</div>';
+					html += '<div class="coment-content">';
+						html += '<p>'+ r.FILAS[i].texto +'</p>';
+						html += '<p><a href="buscar.html" title="Buscar fotos por usuario" class="enlaces" >'+ r.FILAS[i].login +'</a></p>';
+					html += '</div>';
+				html += '</div>';
+
+			html += '</li>';
+
+		}
+
+		document.querySelector('#lista-coment').innerHTML = html;
+	};
 
 
+	xhr.send();
 
 }
 
-
+// Funcion para hacer el registro de un usuario
 function registroUsuario(formulario)
 {
 
