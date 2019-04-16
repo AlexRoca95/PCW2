@@ -39,7 +39,11 @@
 			<nav class="menu display-mini display-great"> <!-- Barra de navegacion tamaño grande y pequeño-->
 				<ul id="menu"> <!-- Lista no ordenada -->
 					<li><a href="index.html?1"><span class="icon-home"></span>Inicio</a></li> 
-					<li><a href="buscar.html"><span class="icon-search"></span>Busqueda</a></li> <!-- Buscar una foto -->
+					<li><form action="buscar.html" method="post" onsubmit="return barraBusqueda();">  <!-- Buscador -->
+						<input type="search" id="brbar" name="buscador" placeholder='Buscar... '>
+						<input type="submit" id="brbutton" name="buscador" value="🔍" >
+					</form>
+					</li>
 				</ul>
 			</nav>
 
@@ -52,13 +56,13 @@
 				</script>
 
 				<ul id="menu2"> 
-					<li><a href="index.html?1"><span class="icon-home"></span></a></li> 
+					<li><a href="index.html"><span class="icon-home"></span></a></li> 
 					<li><a href="buscar.html"><span class="icon-search"></span></a></li> 
-				<!--	<li><a href="nueva.html"><span class="icon-camera"></span></a></li>
-					<li><a href="favoritas.html"><span class="icon-heart"></span></a></li> 
-					<li><a href="index.html"><span class="icon-logout"></span></a></li>
-					<li><a href="login.html"><span class="icon-user"></span></a></li>
-					<li><a href="registro.html"><span class="icon-user-add"></span></a></li> -->
+					<li><form action="buscar.html" method="post" onsubmit="return barraBusqueda();">  <!-- Buscador -->
+						<input type="search" id="brbar" name="buscador" placeholder='Buscar... '>
+						<input type="submit" id="brbutton" name="buscador" value="🔍" >
+					</form>
+					</li>
 				</ul>
 			</nav>
 	</header>

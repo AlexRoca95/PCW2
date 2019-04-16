@@ -138,6 +138,18 @@ body>header{
 
   					border-bottom: solid 1px  #0078d7;
 				}
+		#brbar{
+	      padding: 3px 3px 3px 8px;
+	      border: none;
+	      font-family: 'Roboto', sans-serif;
+	    }
+	    #brbutton{
+	      cursor: pointer;
+	      padding-bottom: 3px;
+	      padding-left: 5px;
+	      border-radius: 5px;
+	      border-bottom-left-radius: 0;
+	    }
 
 
 /* Fotos mejor valoradas de la pagina principal/Fotos favoritas */

@@ -800,3 +800,17 @@ function favoritaFoto(fav)
 	xhr.send();
 
 }
+
+// Funcion para enviar los valores del buscador de la barra de navegacion a la url de buscar.html
+function barraBusqueda()
+{
+
+	let url = 'buscar.html?';
+		valorBusqueda = document.getElementById('brbar');
+
+
+	window.location.replace('buscar.html?' + valorBusqueda.value); 	// Rederigimos a buscar pasando los valores del buscador por la url
+
+
+	return false;
+}
