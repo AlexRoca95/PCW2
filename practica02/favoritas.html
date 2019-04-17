@@ -38,29 +38,10 @@
 			</span>
 		</div>
 		<input type="checkbox" id="ckburger" checked>  <!-- Boton para visualizar/no visualizar el menu hamburguesa -->
-			<nav class="menu display-mini display-great"> <!-- Barra de navegacion tamaño grande y pequeño-->
+			<nav>
 				<ul id="menu"> <!-- Lista no ordenada -->
-					<li><a href="index.html?1"><span class="icon-home"></span>Inicio</a></li> 
-					<li><form action="buscar.html" method="post" onsubmit="return barraBusqueda();">  <!-- Buscador -->
-						<input type="search" id="brbar" name="buscador" placeholder='Buscar... '>
-						<input type="submit" id="brbutton" name="buscador" value="🔍" >
-					</form>
-					</li>
-				</ul>
-			</nav>
-
-			<nav class="display-medium"> <!-- Barra de navegacion tamaño mediano-->
-				
-				<script>
-
-					//mostrarMenu2(); 			// Para mostrar el menu determinado en funcion de si el usuario esta logeado o no (version mediana)
-
-				</script>
-
-				<ul id="menu2"> 
-					<li><a href="index.html"><span class="icon-home"></span></a></li> 
-					<li><a href="buscar.html"><span class="icon-search"></span></a></li> 
-					<li><form action="buscar.html" method="post" onsubmit="return barraBusqueda();">  <!-- Buscador -->
+					<li><a href="index.html?1"><span class="icon-home"></span><span class="menu display-mini display-great">Inicio</span></a></li> <!-- solo en mediano tenemos que 																																		mostrar solo el icono -->
+					<li><form action="buscar.html?1" method="post" onsubmit="return barraBusqueda();">  <!-- Buscador -->
 						<input type="search" id="brbar" name="buscador" placeholder='Buscar... '>
 						<input type="submit" id="brbutton" name="buscador" value="🔍" >
 					</form>

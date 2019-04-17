@@ -81,16 +81,16 @@ function mostrarMenu()
 
 
 		//Logeado
-		html += '<li><a href="nueva.html"><span class="icon-camera"></span>Nueva Foto</a></li>';
-		html += '<li><a href="favoritas.html?1"><span class="icon-heart"></span>Favoritas</a></li>';
+		html += '<li><a href="nueva.html"><span class="icon-camera"></span><span class="menu display-mini display-great">Nueva Foto</span></a></li>';
+		html += '<li><a href="favoritas.html?1"><span class="icon-heart"></span><span class="menu display-mini display-great">Favoritas</span></a></li>';
 		html += '<li><a href="index.html?1" onclick="hacerLogout();"><span class="icon-logout"></span>Logout (' + usu.login + ')</a></li>';
 
 	}
 	else
 	{
 		// No logeado
-		html += '<li><a href="login.html"><span class="icon-user"></span>Login</a></li>';
-		html += '<li><a href="registro.html"><span class="icon-user-add"></span>Registro</a></li>';
+		html += '<li><a href="login.html"><span class="icon-user"></span><span class="menu display-mini display-great">Login</span></a></li>';
+		html += '<li><a href="registro.html"><span class="icon-user-add"></span><span class="menu display-mini display-great">Registro</span></a></li>';
 
 	}
 
@@ -678,16 +678,160 @@ function realizarBusqueda(formulario)
 {
 	let xhr = new XMLHttpRequest();
 		fd = new FormData(formulario)
-		url = 'api/fotos';
+		url = 'api/fotos?';
+		pagActiva = location.search.substr(1);
 
+	if(formulario.titulo.value!="")
+	{
+		url+= 't=' + formulario.titulo.value;
+	}
+
+	if(formulario.descripcion.value!="")
+	{
+		url+= '&d=' + formulario.descripcion.value;
+	}
+
+	if(formulario.etiquetas.value!="")
+	{
+		url+= '&e=' + formulario.etiquetas.value;
+	}
+
+	if(formulario.autor.value!="")
+	{
+		url+= '&l=' + formulario.autor.value;
+	}
+
+	if(formulario.numeroDe.value!="")
+	{
+		url+= '&op=' + formulario.numeroDe.value;
+
+		if(formulario.orden.value!="")
+		{
+			url+= '-' + formulario.orden.value;
+		}
+		else
+		{
+			url+= '-asc';
+		}
+	}
+
+	console.log(url);
 
 	xhr.open('GET', url, true);
 
-	//console.log(formulario.value);
+	//console.log(formulario.numeroDe.value);
 
 	xhr.onload = function()
 	{
+		let r = JSON.parse(xhr.responseText);
+		console.log(r);
 
+		totalPag = calcularTotalPagFotos(r, xhr); 		// Calculamos el total de paginas que hay
+
+		console.log(totalPag);
+
+		totalFotosServidor = r.FILAS.length; 			// Numero total de fotos que tenemos en nuestro servidor
+
+		console.log(totalFotosServidor);
+
+		let total = 0; 									// 
+			inicio = 0; 								// Variables para los bucles for (inicio del bucle y final)
+
+		html = '';
+		totalFotosPag = pagActiva * 6; 					// Para saber cuantas fotos se deberian mostrar en funcion de la pag en la que estemos
+
+		console.log(totalFotosPag);
+
+		// Si el total de fotos a mostrar es igual al numero de fotos que hay en el servidor o es menor, entonces quiere decir que se muestran todas las
+		// fotos en la pagina que estamos
+		if(totalFotosPag==totalFotosServidor || totalFotosPag<totalFotosServidor)
+		{	
+					total = totalFotosPag;
+					inicio = totalFotosPag - 6;
+
+		}
+		else  // Si el total de fotos de pagina a mostrar es mayor que el del servidor quiere decir que en esta pagina se muestran menos fotos que el maximo (que son 6)
+		{
+				
+			inicio = 6 * (pagActiva-1);   					
+			total = totalFotosServidor;
+		}
+
+		console.log(inicio);
+		console.log(total);
+
+		for (let i=inicio; i<total; i++)  // Bucle para recorrer todas las fotos que haya en la pagina que nos encontremos
+		{
+
+				html += '<article>';
+
+					html += '<div class="contenedor">';
+
+						html += '<div class="autorBox">';
+
+							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html?'+ r.FILAS[i].login + '">' + r.FILAS[i].login + '</a> <b>|</b> ';
+							for(let i3=0; i3<r.FILAS[i].etiquetas.length; i3++)
+							{
+
+								html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?'+ r.FILAS[i].etiquetas[i3].nombre + '">#'+ r.FILAS[i].etiquetas[i3].nombre +' </a>';
+								
+							}
+
+						html += '</div>';
+
+						html += '<a title="Ver foto" href="foto.html?' + r.FILAS[i].id + '">';
+
+							html += '<img src="fotos/' + r.FILAS[i].fichero + '" alt="'+ r.FILAS[i].descripcion +'" class="imagIndex" >'; 
+
+						html += '</a>';
+
+						html += '<div class="textoImg">';
+
+							html += '<h4>' + r.FILAS[i].titulo + '</h4>';
+
+							if(sessionStorage.getItem("login")) // Usuario logeado
+							{
+								let usuFav = r.FILAS[i].usu_favorita;
+									usuLike = r.FILAS[i].usu_megusta;
+								
+								// Comprobamos si le ha dado a me gusta a la foto
+								if(usuLike!=0)
+								{
+									html += '<p><span class="icon-thumbs-up-alt"></span>';
+								}
+								else
+								{
+									html += '<p><span class="icon-thumbs-up"></span>';
+								}
+
+
+								html += r.FILAS[i].nmegusta;
+
+								// Comprobamos si le ha dado a fav a la foto
+								if(usuFav!=0)
+								{
+									html+= ' <span class="icon-heart"></span>';
+								}
+								else
+								{
+									html+= ' <span class="icon-heart-empty"></span>';
+								}
+
+								html += r.FILAS[i].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i].ncomentarios + '</p>';
+
+							}
+							else
+							{
+								html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i].nmegusta + ' <span class="icon-heart-empty"></span>' + r.FILAS[i].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i].ncomentarios + '</p>';
+							}
+
+						html += '</div>';
+					html += '</div>';
+					
+				html += '</article>';
+			}
+
+		document.querySelector('.preview').innerHTML=html;
 
 	};
 
@@ -778,7 +922,7 @@ function barraBusqueda()
 		valorBusqueda = document.getElementById('brbar');
 
 
-	window.location.replace('buscar.html?' + valorBusqueda.value); 	// Rederigimos a buscar pasando los valores del buscador por la url
+	window.location.replace('buscar.html?1' + valorBusqueda.value); 	// Rederigimos a buscar pasando los valores del buscador por la url
 
 
 	return false;

@@ -26,29 +26,10 @@
 			</span>
 		</div>
 		<input type="checkbox" id="ckburger" checked>  <!-- Boton para visualizar/no visualizar el menu hamburguesa -->
-			<nav class="menu display-mini display-great"> <!-- Barra de navegacion tamaño grande y pequeño-->
+			<nav>
 				<ul id="menu"> <!-- Lista no ordenada -->
-					<li><a href="index.html?1"><span class="icon-home"></span>Inicio</a></li> 
-					<li><form action="buscar.html" method="post" onsubmit="return barraBusqueda();">  <!-- Buscador -->
-						<input type="search" id="brbar" name="buscador" placeholder='Buscar... '>
-						<input type="submit" id="brbutton" name="buscador" value="🔍" >
-					</form>
-					</li>
-				</ul>
-			</nav>
-
-			<nav class="display-medium"> <!-- Barra de navegacion tamaño mediano-->
-				
-				<script>
-
-					//mostrarMenu2(); 			// Para mostrar el menu determinado en funcion de si el usuario esta logeado o no (version mediana)
-
-				</script>
-
-				<ul id="menu2"> 
-					<li><a href="index.html"><span class="icon-home"></span></a></li> 
-					<li><a href="buscar.html"><span class="icon-search"></span></a></li> 
-					<li><form action="buscar.html" method="post" onsubmit="return barraBusqueda();">  <!-- Buscador -->
+					<li><a href="index.html?1"><span class="icon-home"></span><span class="menu display-mini display-great">Inicio</span></a></li> <!-- solo en mediano tenemos que 																																		mostrar solo el icono -->
+					<li><form action="buscar.html?1" method="post" onsubmit="return barraBusqueda();">  <!-- Buscador -->
 						<input type="search" id="brbar" name="buscador" placeholder='Buscar... '>
 						<input type="submit" id="brbutton" name="buscador" value="🔍" >
 					</form>
@@ -61,12 +42,12 @@
 		<fieldset id="marcoBusqueda">
 
 			<h3>Buscador de fotos</h3>
-			<form id="buscador" method="get" onsubmit="return realizarBusqueda(this);" >
+			<form href="#preview" id="buscador" method="get" onsubmit="return realizarBusqueda(this);" >
 				<p><label>Título </label><input class="boxesBusq" type="text" name="titulo" placeholder=" Amanecer..." autofocus=""></p>
 				<p><label>Descripción </label><input class="boxesBusq" type="text" name="descripcion" placeholder=" ayer por la noche...."></p>
 				<p><label>Etiquetas </label><input class="boxesBusq" type="text" name="etiquetas" placeholder=" 2019, paellas..."></p>
 				<p><label>Autor </label><input class="boxesBusq" type="text" name="autor" placeholder=" roxo95..."></p>
-				<p><label><b>Ordenar por numero de </b></label><br><input type="radio" name="numeroDe" value="likes">Me gusta <input type="radio" name="numeroDe" value="favoritos">Favoritos <input type="radio" name="numeroDe" value="comentarios">Comentarios </p>
+				<p><label><b>Ordenar por numero de </b></label><br><input type="radio" name="numeroDe" value="megusta">Me gusta <input type="radio" name="numeroDe" value="favorita">Favoritos <input type="radio" name="numeroDe" value="comentarios">Comentarios </p>
 				<p><label><b>Orden</b></label><br><input type="radio" name="orden" value="asc">Ascendente <input type="radio" name="orden" value="desc">Descendente </p>
 				<p><input id="buscarFotos" type="submit" value="Buscar Fotos"></p>
 			</form>
@@ -75,12 +56,17 @@
 	</section>
 
 	<div class="preview" > <!-- 9 fotos mejor valoradas -->
-		<h2>Resultados búsqueda</h2>
+		<!--<h2>Resultados búsqueda</h2>-->
 
 	</div>
 
 	<div  class="preview">
-	
+
+		<ul class="paginacion">
+
+			
+		</ul>
+
 	</div>
 
 	<footer>
