@@ -82,7 +82,7 @@ function mostrarMenu()
 
 		//Logeado
 		html += '<li><a href="nueva.html"><span class="icon-camera"></span>Nueva Foto</a></li>';
-		html += '<li><a href="favoritas.html"><span class="icon-heart"></span>Favoritas</a></li>';
+		html += '<li><a href="favoritas.html?1"><span class="icon-heart"></span>Favoritas</a></li>';
 		html += '<li><a href="index.html?1" onclick="hacerLogout();"><span class="icon-logout"></span>Logout (' + usu.login + ')</a></li>';
 
 	}
@@ -144,11 +144,20 @@ function fotosMejorValoradas()
 		// fotos en la pagina que estamos
 		if(totalFotosPag==totalFotosServidor || totalFotosPag<totalFotosServidor)
 		{	
-				total = totalFotosPag;
-				inicio = totalFotosPag - 6;
+					total = totalFotosPag;
+					inicio = totalFotosPag - 6;
 
-			for (let i=inicio; i<total; i++)  // Bucle para recorrer todas las fotos que haya en la pagina que nos encontremos
-			{
+		}
+		else  // Si el total de fotos de pagina a mostrar es mayor que el del servidor quiere decir que en esta pagina se muestran menos fotos que el maximo (que son 6)
+		{
+				
+			inicio = 6 * (pagActiva-1);   					
+			total = totalFotosServidor;
+		}
+
+
+		for (let i=inicio; i<total; i++)  // Bucle para recorrer todas las fotos que haya en la pagina que nos encontremos
+		{
 
 				html += '<article>';
 
@@ -217,84 +226,6 @@ function fotosMejorValoradas()
 					
 				html += '</article>';
 			}
-
-		}
-		else // Si el total de fotos de pagina a mostrar es mayor que el del servidor quiere decir que en esta pagina se muestran menos fotos que el maximo (que son 6)
-		{
-
-			inicio = 6 * (pagActiva-1);   					
-			total = (totalFotosPag - totalFotosServidor) + inicio;
-
-			for (let i2=inicio; i2<total; i2++)
-			{
-
-				html += '<article>';
-
-					html += '<div class="contenedor">';
-
-						html += '<div class="autorBox">';
-
-							
-							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html?'+ r.FILAS[i2].login+ '">' + r.FILAS[i2].login + '</a> <b>|</b> ';
-							for(let i3=0; i3<r.FILAS[i2].etiquetas.length; i3++)
-							{
-
-								html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?'+ r.FILAS[i2].etiquetas[i3].nombre + '">#'+ r.FILAS[i2].etiquetas[i3].nombre +' </a>';
-
-							}
-						html += '</div>';
-
-						html += '<a title="Ver foto" href="foto.html?' + r.FILAS[i2].id + '">';
-
-							html += '<img src="fotos/' + r.FILAS[i2].fichero + '" alt="'+ r.FILAS[i2].descripcion +'" class="imagIndex" >'; 
-
-						html += '</a>';
-
-						html += '<div class="textoImg">';
-
-							html += '<h4>' + r.FILAS[i2].titulo + '</h4>';
-
-							if(sessionStorage.getItem("login")) // Usuario logeado
-							{
-								let usuFav = r.FILAS[i2].usu_favorita;
-									usuLike = r.FILAS[i2].usu_megusta;
-								
-								// Comprobamos si le ha dado a me gusta a la foto
-								if(usuLike!=0)
-								{
-									html += '<p><span class="icon-thumbs-up-alt"></span>';
-								}
-								else
-								{
-									html += '<p><span class="icon-thumbs-up"></span>';
-								}
-
-
-								html += r.FILAS[i2].nmegusta;
-
-								// Comprobamos si le ha dado a fav a la foto
-								if(usuFav!=0)
-								{
-									html+= ' <span class="icon-heart"></span>';
-								}
-								else
-								{
-									html+= ' <span class="icon-heart-empty"></span>';
-								}
-
-								html += r.FILAS[i2].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i2].ncomentarios + '</p>';
-
-							}
-							else  // Usuario no logeado
-							{
-								html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i2].nmegusta + ' <span class="icon-heart-empty"></span>' + r.FILAS[i2].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i2].ncomentarios + '</p>';
-							}
-						html += '</div>';
-					html += '</div>';
-					
-				html += '</article>';
-			}
-		}
 
 		document.querySelector('.preview').innerHTML=html;
 
@@ -371,6 +302,9 @@ function calcularTotalPagFotos(result, xhr)
 function pasarPagina(valor, paginas)
 {
 	let pagActiva = location.search.substr(1);
+		url = window.location.href; 			// Url actual completa
+		url2 = url.split('/')[5]; 				// cojemos el final de la url despues del ultimo '/'
+		url3 = url2.split('?')[0]; 	 			// Cojemos la primera parte del final de la url antes del '?'			
 
 	if(valor==1)  // Si valor == 1 quiere decir que queremos ir a la anterior
 	{
@@ -381,14 +315,14 @@ function pasarPagina(valor, paginas)
 	}
 	else // Si no es 1, quiere decir que queremos ir a la siguiente pagina
 	{
-		//if(pagActiva<numPag)
-		//{
+		if(pagActiva<paginas)
+		{
 			pagActiva = +pagActiva + +1;
-		//}
+		}
 	}
 
 
-	window.location.replace('index.html?1'+ pagActiva +'');
+	window.location.replace(url3 + '?' + pagActiva + ''); 		// Cambiamos a la pagina correspondiente
 
 }
 
@@ -399,6 +333,7 @@ function fotosFavoritas()
 	// Peticion GET
 	let xhr = new XMLHttpRequest();
 		url = 'api/usuarios/'; 
+		pagActiva = location.search.substr(1);
 
 	let usu = JSON.parse(sessionStorage['usuario']);  // Parseamos toda la info que hay en la
 
@@ -414,38 +349,73 @@ function fotosFavoritas()
 		// Si todo ha ido bien
 		if(r.RESULTADO == 'OK')
 		{
-			let html = '';
+			totalPag = calcularTotalPagFotos(r, xhr); 		// Calculamos el total de paginas que hay
 
-			r.FILAS.forEach(function(e, idx, v) {// Para cada fila
+			//console.log(totalPag);
 
+			totalFotosServidor = r.FILAS.length; 			// Numero total de fotos favoritas en el servidor
+
+			//console.log(totalFotosServidor);
+
+			let total = 0; 									// 
+				inicio = 0; 								// Variables para los bucles for (inicio del bucle y final)
+
+			html = '';
+			totalFotosPag = pagActiva * 6; 					// Para saber cuantas fotos se deberian mostrar en funcion de la pag en la que estemos
+
+			//console.log(totalFotosPag);
+
+			// Si el total de fotos a mostrar es igual al numero de fotos que hay en el servidor o es menor, entonces quiere decir que se muestran todas las
+			// fotos en la pagina que estamos
+			if(totalFotosPag==totalFotosServidor || totalFotosPag<totalFotosServidor)
+			{	
+					total = totalFotosPag;
+					inicio = totalFotosPag - 6;
+
+			}
+			else  // Si el total de fotos de pagina a mostrar es mayor que el del servidor quiere decir que en esta pagina se muestran menos fotos que el maximo (que son 6)
+			{
+				
+				inicio = 6 * (pagActiva-1);   					
+				total = totalFotosServidor;
+			}
+
+			//console.log(inicio);
+			//console.log(total);
+
+			for (let i=inicio; i<total; i++)  // Bucle para recorrer todas las fotos que haya en la pagina que nos encontremos
+			{
 				html += '<article>';
 
-					html += '<div class="contenedor">';
+						html += '<div class="contenedor">';
 
-						html += '<div class="autorBox">';
+							html += '<div class="autorBox">';
 
-							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html">' + e.login + '</a> <b>|</b> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#hackaton</a> <a class="enlaces" title="Buscar por etiquetas" href="buscar.html">#2018</a></p>';
+								html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html?'+ r.FILAS[i].login + '">' + r.FILAS[i].login + '</a> <b>|</b> ';
+								for(let i3=0; i3<r.FILAS[i].etiquetas.length; i3++)
+								{
 
+									html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?'+ r.FILAS[i].etiquetas[i3].nombre + '">#'+ r.FILAS[i].etiquetas[i3].nombre +' </a>';
+									
+								}
+							html += '</div>';
+
+							html += '<a title="Ver foto" href="foto.html?' + r.FILAS[i].id + '">';
+
+								html += '<img src="fotos/' + r.FILAS[i].fichero + '" alt="'+ r.FILAS[i].descripcion +'" class="imagIndex" >'; 
+
+							html += '</a>';
+
+							html += '<div class="textoImg">';
+
+								html += '<h4>' + r.FILAS[i].titulo + '</h4>';
+								html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i].nmegusta + ' <a title="Eliminar de favoritas" class="favorita" href="favoritas.html?1"><span class="icon-heart"></span></a>' + r.FILAS[i].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i].ncomentarios + '</p>';
+
+							html += '</div>';
 						html += '</div>';
-
-						html += '<a title="Ver foto" href="foto.html">';
-
-							html += '<img src="fotos/' + e.fichero + '" alt="'+ e.descripcion +'" class="imagIndex" >'; 
-
-						html += '</a>';
-
-						html += '<div class="textoImg">';
-
-							html += '<h4>' + e.titulo + '</h4>';
-							html += '<p><span class="icon-thumbs-up"></span>' + e.nmegusta + ' <a title="Eliminar de favoritas" class="favorita" href="favoritas.html"><span class="icon-heart"></span></a>' + e.nfavorita + ' <span class="icon-comment-empty"></span>' + e.ncomentarios + '</p>';
-
-						html += '</div>';
-					html += '</div>';
-					
-				html += '</article>';
-
-				
-			});
+						
+					html += '</article>';
+			}
 
 			document.querySelector('.preview').innerHTML=html;
 
