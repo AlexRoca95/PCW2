@@ -6,3 +6,6 @@ un menu distinto para cada tamaño de pantalla.
 - Borrar favoritas al pinchar al enlace de fav?
 
 - Como obtener todos los datos que se pasan al formulario de busqueda?
+
+- En buscar se tiene que ver en la pagina el campo correspondiente del formulario 
+rellenado cuando hacemos la busqueda desde el valor pasado por url?

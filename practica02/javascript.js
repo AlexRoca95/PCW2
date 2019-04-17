@@ -585,6 +585,7 @@ function mostrarFoto()
 // FUncion para mostrar los comentarios de una foto en foto.html.
 function mostrarComentarios()
 {	
+	console.log('hellou there1');
 	let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
 		url = 'api/fotos/';
 		id = location.search.substr(1); // Obtenemos el id de la foto desde la url
@@ -598,11 +599,9 @@ function mostrarComentarios()
 
 		let r = JSON.parse(xhr.responseText);
 			html = '';
-		console.log(r);
 
-		for (let i=0; i<r.FILAS.legth; i++)
+		for (let i=0; i<r.FILAS.length; i++)
 		{
-
 			html += '<li>';
 				html += '<div class="coment-box">';
 					html += '<div class="coment-head">';
@@ -611,7 +610,7 @@ function mostrarComentarios()
 					html += '</div>';
 					html += '<div class="coment-content">';
 						html += '<p>'+ r.FILAS[i].texto +'</p>';
-						html += '<p><a href="buscar.html" title="Buscar fotos por usuario" class="enlaces" >'+ r.FILAS[i].login +'</a></p>';
+						html += '<p><a href="buscar.html?' + r.FILAS[0].login + '" title="Buscar fotos por usuario" class="enlaces" >' + r.FILAS[0].login + '</a></p>';
 					html += '</div>';
 				html += '</div>';
 
@@ -783,4 +782,33 @@ function barraBusqueda()
 
 
 	return false;
+}
+
+// Funcion para comprobar lo que se pasa por url en buscar.html y realizar la busqueda correspondiente
+function checkBusqueda()
+{
+
+	let id = location.search.substr(1);
+
+	//console.log(id);
+
+	if(id!="")  // Solo si pasamos algun valor por parametro
+	{
+		let xhr = new XMLHttpRequest();
+			url = 'api/fotos';
+
+		xhr.open('GET', url, true);
+
+		//console.log(formulario.value);
+
+		xhr.onload = function()
+		{
+
+
+		};
+
+
+		xhr.send();
+	}
+
 }
