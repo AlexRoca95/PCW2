@@ -165,11 +165,11 @@ function fotosMejorValoradas()
 
 						html += '<div class="autorBox">';
 
-							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html?'+ r.FILAS[i].login + '">' + r.FILAS[i].login + '</a> <b>|</b> ';
+							html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html?1?l='+ r.FILAS[i].login + '">' + r.FILAS[i].login + '</a> <b>|</b> ';
 							for(let i3=0; i3<r.FILAS[i].etiquetas.length; i3++)
 							{
 
-								html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?'+ r.FILAS[i].etiquetas[i3].nombre + '">#'+ r.FILAS[i].etiquetas[i3].nombre +' </a>';
+								html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?1?e='+ r.FILAS[i].etiquetas[i3].nombre + '">#'+ r.FILAS[i].etiquetas[i3].nombre +' </a>';
 								
 							}
 
@@ -253,8 +253,8 @@ function calcularTotalPagFotos(result, xhr)
 	let numPag = result.FILAS.length/6;  		// Numero de paginas
 		decimal = numPag - Math.floor(numPag) 	// Parte decimal (paginas que no estan completas de fotos)
 		i = 0;
-		pagActiva = location.search.substr(1);  // Obtenemos de la url la pagina actual en la que estamos
-
+		pagActiva = location.search.substr(1);  // 
+		pagActiva = pagActiva.split('?')[0]; 	// Obtenemos de la url la pagina actual en la que estamos
 
 	
 	html2 = '';
@@ -391,11 +391,11 @@ function fotosFavoritas()
 
 							html += '<div class="autorBox">';
 
-								html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html?'+ r.FILAS[i].login + '">' + r.FILAS[i].login + '</a> <b>|</b> ';
+								html += '<p><a class="enlaces" title="Buscar por autor" href="buscar.html?1?l='+ r.FILAS[i].login + '">' + r.FILAS[i].login + '</a> <b>|</b> ';
 								for(let i3=0; i3<r.FILAS[i].etiquetas.length; i3++)
 								{
 
-									html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?'+ r.FILAS[i].etiquetas[i3].nombre + '">#'+ r.FILAS[i].etiquetas[i3].nombre +' </a>';
+									html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?1?e='+ r.FILAS[i].etiquetas[i3].nombre + '">#'+ r.FILAS[i].etiquetas[i3].nombre +' </a>';
 									
 								}
 							html += '</div>';
@@ -553,10 +553,10 @@ function mostrarFoto()
 							for(let i3=0; i3<r.FILAS[0].etiquetas.length; i3++) // Bucle para recorrer todas las etiquetas de la foto
 							{
 
-								html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?'+ r.FILAS[0].etiquetas[i3].nombre + '">#'+ r.FILAS[0].etiquetas[i3].nombre +' </a>';
+								html += '<a class="enlaces" title="Buscar por etiquetas" href="buscar.html?1?e='+ r.FILAS[0].etiquetas[i3].nombre + '">#'+ r.FILAS[0].etiquetas[i3].nombre +' </a>';
 							}
 
-							html += '<p>Por <a href="buscar.html?' + r.FILAS[0].login + '" title="Buscar fotos por usuario" class="enlaces" >' + r.FILAS[0].login + '</a></p>';
+							html += '<p>Por <a href="buscar.html?1?l=' + r.FILAS[0].login + '" title="Buscar fotos por usuario" class="enlaces" >' + r.FILAS[0].login + '</a></p>';
 						html += '</div>'
 					html += '</figcaption>';
 				html+= '</figure>';
@@ -922,37 +922,49 @@ function barraBusqueda()
 		valorBusqueda = document.getElementById('brbar');
 
 
-	window.location.replace('buscar.html?1' + valorBusqueda.value); 	// Rederigimos a buscar pasando los valores del buscador por la url
+	window.location.replace('buscar.html?1?d=' + valorBusqueda.value); 	// Rederigimos a buscar pasando los valores del buscador por la url
 
 
 	return false;
 }
 
 // Funcion para comprobar lo que se pasa por url en buscar.html y realizar la busqueda correspondiente
-function checkBusqueda()
+function checkBusqueda(formulario)
 {
 
-	let id = location.search.substr(1);
+	let valor = location.search.substr(1);
 
-	//console.log(id);
-
-	if(id!="")  // Solo si pasamos algun valor por parametro
+	if(valor!="")  // Solo si hay un valor podemos acceder al buscador
 	{
-		let xhr = new XMLHttpRequest();
-			url = 'api/fotos';
 
-		xhr.open('GET', url, true);
+		let parametro = valor.split('?')[1]; 
 
-		//console.log(formulario.value);
-
-		xhr.onload = function()
+		if(parametro!=undefined)  // Solo si hay un parametro por la url podemos hacer la busqueda automatica
 		{
 
+				valor2 = parametro.split('=')[1];
+				ident = parametro.split('=')[0];
 
-		};
+			switch (ident) {
+				case 'l':
+					formulario.autor.value = valor2;
+					break;
+				case 'd':
+					formulario.descripcion.value = valor2;
+					break;
+				case 'e':
+					formulario.etiquetas.value = valor2;
+					break;
+			}
 
 
-		xhr.send();
+			realizarBusqueda(formulario); 		// Realizamos la busqueda con los valores del fomulario
+		}
+
+	}
+	else
+	{
+		window.location.replace('index.html?1'); 
 	}
 
 }
