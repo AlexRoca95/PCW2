@@ -100,14 +100,32 @@ function mostrarMenu()
 }
 
 // Funcion para cerrar la ventana emergente cuando se pulsa "X" en ella y hacer focus al campo login
-function cerrarVentana()
+function cerrarVentana(valor)
 {
 	var modal = document.getElementById('myModal');  // Obtenemos el elemento
 	modal.style.display = "none";  	// Dejamos de mostrar la ventana
 
-	var login = document.getElementById('campoLogin');
+	var campo = '';
+	if(valor == 1)
+	{
+		campo = document.getElementById('campoLogin');
 
-	login.focus(); 		// Focus en el campo de login al cerrar ventana						
+		campo.focus(); 		// Focus en el campo de login al cerrar ventana		
+	}
+	else
+	{
+		if(valor==2)
+		{
+			campo = document.getElementById('campoFoto');
+
+			campo.focus();
+
+		}
+		else
+		{
+			window.location.replace('index.html?1');
+		}
+	}	
 }
 
 // Muestra las fotos mejor valoradas en index
@@ -967,4 +985,69 @@ function checkBusqueda(formulario)
 		window.location.replace('index.html?1'); 
 	}
 
+}
+
+
+
+// Funcion para realizar la subida de una foto a la base de datos
+function subirFoto(formulario)
+{	
+	if(formulario.fichero.files[0].size>300000)
+	{
+		var modal = document.getElementById('myModal');  // Obtenemos el elemento
+		modal.style.display = "block";  				// Mostramos la ventana con info del error.
+
+		return false
+	}
+	else // Foto tam correcto
+	{
+		let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
+			url = 'api/fotos';
+			usu = JSON.parse(sessionStorage['usuario']); 
+			fd = new FormData(formulario);
+
+		xhr.open('POST', url, true);
+
+		xhr.onload = function()
+		{
+			console.log(xhr.responseText);
+			let r = JSON.parse(xhr.responseText);
+
+			console.log(r);
+
+			if(r.RESULTADO == 'OK')
+			{
+				var modal = document.getElementById('myModal2');  // Obtenemos el elemento
+				modal.style.display = "block";  				// Mostramos la ventana con info del error.
+			}
+
+			//console.log(r);
+
+		};
+
+		xhr.setRequestHeader('Authorization', usu.login + ':' + usu.token);
+
+		xhr.send(fd);
+
+		return false;
+
+	}
+
+}
+
+// Funcion para comprobar si la imagen subida tiene un tamaño valido
+function cargaImagen(imag)
+{
+	//console.log(imag.files[0].size);
+
+	if(imag!="")  // Si se ha seleccionado una imagen
+	{
+		let tam = imag.files[0].size; 	// Tamaño de la imagen subida
+
+		if(tam>300000) // Tan nayor de 300kb
+		{
+			var modal = document.getElementById('myModal');  // Obtenemos el elemento
+			modal.style.display = "block";  				// Mostramos la ventana con info del error.
+		}
+	}
 }

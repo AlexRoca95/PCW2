@@ -48,17 +48,36 @@
 				</ul>
 			</nav>
 	</header>
+
+	<!-- Ventana Modal para mostrar el mensaje de error de login o login correcto-->
+	<div id="myModal" class="modal">
+
+		<div class="modal-content">
+		    <span class="close" onclick="cerrarVentana(2);">&times;</span>
+		    <p class="error" >¡<span>ERROR</span>! El fichero subido es demasiado pesado (>300kb).</p>
+		</div>
+
+	</div>
+
+	<div id="myModal2" class="modal">
+
+		<div class="modal-content">
+		    <span class="close" onclick="cerrarVentana(3);">&times;</span>
+		    <p class="error" > Se ha subido correctamente la foto.</p>
+		</div>
+
+	</div>
 	
 	<section id="busqueda" > <!-- Formulario de búsqueda de fotos -->
 		<fieldset id="marcoBusqueda">
 
 			<h3>Nueva Foto</h3>
-			<form>
+			<form method="post" onsubmit="return subirFoto(this);">
 				<p><label>Título Foto </label><input class="boxesBusq" type="text" name="titulo" placeholder=" Amanecer..." maxlength="100" autofocus required></p>
 				<label>Descripción </label><textarea rows="5" cols="20" name="descripcion" maxlength="300" placeholder=" Ayer por la noche..." required></textarea>
 				<p><label>Etiquetas </label><input class="boxesBusq" type="text" name="etiquetas" placeholder=" 2019, paellas..." list="etiquetas" onfocus="pedirEtiquetas();"></p>
 				<datalist id="etiquetas"></datalist>  <!-- Lista de etiquetas disponibles -->
-				<p><input type="file" required></p>
+				<p><input id="campoFoto" type="file" onchange="cargaImagen(this)" name="fichero" required></p>
 				<p><input id="buscarFotos" type="submit" value="Subir Foto"></p>
 			</form>
 
