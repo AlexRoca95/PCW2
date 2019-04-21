@@ -418,7 +418,7 @@ hr {
  		#lista-coment .coment-box{
 
  			float: left;
- 			width: 90%;
+ 			width: 60%;
  			/* Sombras de la caja de comentarios */
  			-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15); 
  			-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
@@ -503,6 +503,9 @@ hr {
 
 
 /* TODOS LOS ENLACES DE LA PAGINA*/
+ a {
+ 	cursor: pointer;  /* Para que cambie el cursor del raton */
+ }
 .enlaces {  
 
 	color: #0078d7;

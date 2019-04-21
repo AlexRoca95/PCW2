@@ -81,16 +81,16 @@ function mostrarMenu()
 
 
 		//Logeado
-		html += '<li><a href="nueva.html"><span class="icon-camera"></span><span class="menu display-mini display-great">Nueva Foto</span></a></li>';
-		html += '<li><a href="favoritas.html?1"><span class="icon-heart"></span><span class="menu display-mini display-great">Favoritas</span></a></li>';
-		html += '<li><a href="index.html?1" onclick="hacerLogout();"><span class="icon-logout"></span>Logout (' + usu.login + ')</a></li>';
+		html += '<li><a href="nueva.html"><span class="icon-camera"></span><span class="menu display-mini display-great"> Nueva Foto</span></a></li>';
+		html += '<li><a href="favoritas.html?1"><span class="icon-heart"></span><span class="menu display-mini display-great"> Favoritas</span></a></li>';
+		html += '<li><a href="index.html?1" onclick="hacerLogout();"><span class="icon-logout"></span> Logout (' + usu.login + ')</a></li>';
 
 	}
 	else
 	{
 		// No logeado
-		html += '<li><a href="login.html"><span class="icon-user"></span><span class="menu display-mini display-great">Login</span></a></li>';
-		html += '<li><a href="registro.html"><span class="icon-user-add"></span><span class="menu display-mini display-great">Registro</span></a></li>';
+		html += '<li><a href="login.html"><span class="icon-user"></span><span class="menu display-mini display-great"> Login</span></a></li>';
+		html += '<li><a href="registro.html"><span class="icon-user-add"></span><span class="menu display-mini display-great"> Registro</span></a></li>';
 
 	}
 
@@ -284,36 +284,40 @@ function calcularTotalPagFotos(result, xhr)
 	
 	html2 = '';
 
-	html2 += '<li><a href="#" onclick="pasarPagina(1,'+ numPag +');">«</a></li>';
-
-	for (i=1; i<numPag; i++)
+	if(numPag!=0)  // Si no hay paginas no se muestra nada
 	{
-		if(pagActiva==i) 	// SI la pagActiva coincide con la i, entonces estamos en esta pagina
+		html2 += '<li><a onclick="pasarPagina(1,'+ numPag +');">«</a></li>'; // Pagina anterior
+
+		for (i=1; i<=numPag; i++)
 		{
-			html2+= '<li><a class="active" href="?'+ i +'">'+ i +'</a></li>';
+			if(pagActiva==i) 	// SI la pagActiva coincide con la i, entonces estamos en esta pagina
+			{
+				html2+= '<li><a class="active" href="?'+ i +'">'+ i +'</a></li>';
+			}
+			else
+			{
+				html2+= '<li><a href="?'+ i +'">'+ i +'</a></li>';
+			}
+
 		}
-		else
+
+		// Por si hay paginas que no se han completado de fotos (es decir no han llegado a 6 fotos)
+		if(decimal!=0)
 		{
-			html2+= '<li><a href="?'+ i +'">'+ i +'</a></li>';
+			if(pagActiva==i)
+			{
+				html2 += '<li><a class="active" href="?'+ i +'">'+ i +'</a></li>';
+			}
+			else
+			{
+				html2 += '<li><a href="?'+ i +'">'+ i +'</a></li>';
+			}
 		}
+
+
+		html2 += '<li><a onclick="pasarPagina(2,'+ numPag +');" >»</a></li>';  // Pagina siguiente
 
 	}
-
-	// Por si hay paginas que no se han completado de fotos (es decir no han llegado a 6 fotos)
-	if(decimal!=0)
-	{
-		if(pagActiva==i)
-		{
-			html2 += '<li><a class="active" href="?'+ i +'">'+ i +'</a></li>';
-		}
-		else
-		{
-			html2 += '<li><a href="?'+ i +'">'+ i +'</a></li>';
-		}
-	}
-
-
-	html2 += '<li><a href="#" onclick="pasarPagina(2,'+ numPag +');" >»</a></li>';
 
 
 
@@ -336,6 +340,8 @@ function pasarPagina(valor, paginas)
 		if(pagActiva!=1)
 		{
 			pagActiva = pagActiva - 1;
+
+			window.location.replace(url3 + '?' + pagActiva + ''); 		// Cambiamos a la pagina correspondiente
 		}
 	}
 	else // Si no es 1, quiere decir que queremos ir a la siguiente pagina
@@ -343,11 +349,11 @@ function pasarPagina(valor, paginas)
 		if(pagActiva<paginas)
 		{
 			pagActiva = +pagActiva + +1;
+
+			window.location.replace(url3 + '?' + pagActiva + ''); 		// Cambiamos a la pagina correspondiente
 		}
 	}
 
-
-	window.location.replace(url3 + '?' + pagActiva + ''); 		// Cambiamos a la pagina correspondiente
 
 }
 
@@ -782,8 +788,6 @@ function realizarBusqueda(formulario)
 		}
 	}
 
-	console.log(url);
-
 	xhr.open('GET', url, true);
 
 	//console.log(formulario.numeroDe.value);
@@ -791,15 +795,10 @@ function realizarBusqueda(formulario)
 	xhr.onload = function()
 	{
 		let r = JSON.parse(xhr.responseText);
-		console.log(r);
 
 		totalPag = calcularTotalPagFotos(r, xhr); 		// Calculamos el total de paginas que hay
 
-		console.log(totalPag);
-
 		totalFotosServidor = r.FILAS.length; 			// Numero total de fotos que tenemos en nuestro servidor
-
-		console.log(totalFotosServidor);
 
 		let total = 0; 									// 
 			inicio = 0; 								// Variables para los bucles for (inicio del bucle y final)
@@ -807,7 +806,6 @@ function realizarBusqueda(formulario)
 		html = '';
 		totalFotosPag = pagActiva * 6; 					// Para saber cuantas fotos se deberian mostrar en funcion de la pag en la que estemos
 
-		console.log(totalFotosPag);
 
 		// Si el total de fotos a mostrar es igual al numero de fotos que hay en el servidor o es menor, entonces quiere decir que se muestran todas las
 		// fotos en la pagina que estamos
@@ -823,9 +821,6 @@ function realizarBusqueda(formulario)
 			inicio = 6 * (pagActiva-1);   					
 			total = totalFotosServidor;
 		}
-
-		console.log(inicio);
-		console.log(total);
 
 		for (let i=inicio; i<total; i++)  // Bucle para recorrer todas las fotos que haya en la pagina que nos encontremos
 		{
