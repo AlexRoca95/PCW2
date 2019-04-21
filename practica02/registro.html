@@ -47,6 +47,16 @@
 				</ul>
 			</nav>
 	</header>
+
+	<!-- Ventana Modal para mostrar el mensaje de confimarcion de registro-->
+	<div id="myModal" class="modal">
+
+		<div class="modal-content">
+		    <span class="close" onclick="cerrarVentana(3);">&times;</span>
+		    <p class="error" >Registro de usuario realizado</p>
+		</div>
+
+	</div>
 	
 	<section class="LoginRegistroForm" > 
 		
@@ -54,10 +64,12 @@
 			<form action="login.html" method="post" onsubmit="return registroUsuario(this);"> <!-- Fourmulario de login -->
 				<h2>Registro</h2>
 				<p><input class="boxesForm" type="text" name="login" onblur="checkLogin(this)"; placeholder="Login" pattern="[a-zA-Z0-9]{4,20}" title="Debe estar enre 4 y 20 caracteres, solo puede contener números y letras, y no puede empezar por un número" required autofocus> </p>
-				<p><input class="boxesForm" type="password" name="contra" placeholder="Contraseña" pattern="[a-zA-Z0-9_]{6,20}" title="Debe estar enre 6 y 20 caracteres" required> </p>
-				<p><input class="boxesForm" type="password" name="contra2" placeholder="Confirmar contraseña" > </p>
+				<div class="loginCheck"></div>
+				<p><input class="boxesForm" type="password" name="pwd" placeholder="Contraseña" pattern="[a-zA-Z0-9_]{6,20}" title="Debe estar enre 6 y 20 caracteres" required> </p>
+				<p><input class="boxesForm" type="password" name="pwd2" placeholder="Confirmar contraseña" > </p>
+				<div class="checkPwd"></div>
 				<p><input class="boxesForm" type="text" name="nombre" placeholder="Nombre completo" required> </p>
-				<p><input class="boxesForm" type="email" name="correo" placeholder="Email" required> </p>
+				<p><input class="boxesForm" type="email" name="email" placeholder="Email" required> </p>
 				<input class="botonForm" type="submit" value="Registrarse">
 				<br>
 				<p>¿Ya tienes una cuenta? <a title="Acceso al login de Instagrom" href="login.html" class="enlaces"> Iniciar Sesión</a></p>

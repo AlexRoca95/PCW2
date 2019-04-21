@@ -270,6 +270,18 @@ body>header{
 		
 		}
 
+		#loginIncorrecto{  /* Mensaje informativo sobre si el login esta disponible o no */
+
+			text-align: left;
+			color: red;
+		}
+
+		#loginCorrecto{  /* Mensaje informativo sobre si el login esta disponible o no */
+
+			text-align: left;
+			color: green;
+		}
+
 		.botonForm { /* Boton del formulario */
 
 			font-size: 16px;

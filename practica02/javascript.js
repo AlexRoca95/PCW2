@@ -106,7 +106,7 @@ function cerrarVentana(valor)
 	modal.style.display = "none";  	// Dejamos de mostrar la ventana
 
 	var campo = '';
-	if(valor == 1)
+	if(valor == 1) // Login o contraseña incorrectos (login.html)
 	{
 		campo = document.getElementById('campoLogin');
 
@@ -114,7 +114,7 @@ function cerrarVentana(valor)
 	}
 	else
 	{
-		if(valor==2)
+		if(valor==2) // Tamaño fichero demasiado grande (nueva.html)
 		{
 			campo = document.getElementById('campoFoto');
 
@@ -123,7 +123,14 @@ function cerrarVentana(valor)
 		}
 		else
 		{
-			window.location.replace('index.html?1');
+			if(valor==3) // Registro realizado correctamente (registro.html)
+			{
+				window.location.replace('login.html');
+			}
+			else
+			{
+				window.location.replace('index.html?1');
+			}
 		}
 	}	
 }
@@ -646,48 +653,90 @@ function mostrarComentarios()
 
 // Funcion para hacer el registro de un usuario
 function registroUsuario(formulario)
-{
+{	
+	// Guardamos los valores introducidos en las contraseñas
+	let pass1 = formulario.pwd.value;
+		pass2 = formulario.pwd2.value;
 
-	let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
-		fd = new FormData(formulario);
-		url = 'api/usuarios';
-
-	xhr.open('POST', url, true);
-
-	xhr.onload = function()
+	if(pass1 == pass2)  // Solo si las son contraseñas iguales podemos hacer la peticion de registro
 	{
 
-	};
+		let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
+			fd = new FormData(formulario);
+			url = 'api/usuarios';
+
+		xhr.open('POST', url, true);
+
+		xhr.onload = function()
+		{
+			let r = JSON.parse(xhr.responseText);
+
+			if(r.RESULTADO == 'OK') // Registro realizado correctamente
+			{
+				formulario.reset();  // Limpiamos el formulario
+
+				var modal = document.getElementById('myModal'); 
+				modal.style.display = "block";  				
+
+			}
+		};
 
 
-	xhr.send(fd);
+		xhr.send(fd);
+	}
+	else // Contraseñas distintas
+	{
+		html = '';
+
+		html += '<p id="loginIncorrecto">Las contraseñas no coinciden</p>';
+
+		document.querySelector('.checkPwd').innerHTML=html;
+	}
+
 
 	return false;
 }
 
-// Funcion para comprobar si el login ya existe
+// Funcion para comprobar cuando se deja el foco del campo del login si este esta disponible o no
 function checkLogin(log)
-{
-	let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
-		url = 'api/usuarios/';
+{	
+	let html = '';
 
-	url += log.value;
-
-	xhr.open('GET', url, true);
-
-	xhr.onload = function()
+	if(log.value!="")  // Solo si hay escrito algo en el campo login hacemos la peticion al servidor
 	{
-		let r = JSON.parse(xhr.responseText);
+		let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
+			url = 'api/usuarios/';
 
-		if(r.DISPONIBLE == false) // Si el login no esta disponible
+		url += log.value;
+
+		xhr.open('GET', url, true);
+
+		xhr.onload = function()
 		{
+			let r = JSON.parse(xhr.responseText);
+
+			if(r.DISPONIBLE == false) // Si el login no esta disponible
+			{
+				html += '<p id="loginIncorrecto">El login no esta disponible</p>';
+			}
+			else
+			{
+				if(r.DISPONIBLE == true)
+				html += '<p id="loginCorrecto">Login disponible</p>';
+			}
+
+		   document.querySelector('.loginCheck').innerHTML=html;
+		};
 
 
-		}
-	};
+		xhr.send();
+	}
+	else
+	{
+		html = '';
 
-
-	xhr.send();
+		document.querySelector('.loginCheck').innerHTML=html;
+	}
 
 }
 
