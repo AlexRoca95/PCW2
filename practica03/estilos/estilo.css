@@ -1,0 +1,67 @@
+*{
+	box-sizing: border-box;
+}
+
+
+/* Pantallas grandes */
+@media screen and (min-width: 981px) {
+
+	.titulo {
+
+			border-right: 1px solid #2E3436FF;
+	}
+
+
+}
+
+/* Pantallas medianas */
+@media screen and (min-width: 481px) and (max-width: 980px) {
+
+	
+	.titulo {
+
+			border-right: 1px solid #2E3436FF;
+	}
+
+
+
+}
+
+
+
+/* Pantallas pequeñas */
+@media screen and (max-width: 480px) {
+
+
+	#descripcion {
+
+		font-size: 1em;
+		color: #2E3436FF;
+		font-family: 'Source Serif Pro', serif;
+	}
+}
+
+
+
+/* Reglas css que se aplicaran a todos los tam de pantalla */
+
+
+body {
+
+	font-family: 'Roboto', sans-serif;
+
+}
+
+	/* Cabecera */
+	body>header{
+
+	  color: #000000;
+	  background-color: #ffffff;
+
+	}
+
+/* TODOS LOS ENLACES DE LA PAGINA*/
+ a {
+ 	cursor: pointer;  						/* Para que cambie el cursor del raton */
+ 	text-decoration: none;  				/* Quitamos el subrayado */
+ }
