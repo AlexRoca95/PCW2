@@ -10,13 +10,13 @@ function ajustarTam() {
 		document.getElementById('zonaJuego').width = 480;
 		document.getElementById('zonaJuego').height = 360;
 
-		document.getElementById('pieza1').width = 480;
+		document.getElementById('pieza1').width = 400;
 		document.getElementById('pieza1').height = 350;
 
-		document.getElementById('pieza2').width = 480;
+		document.getElementById('pieza2').width = 400;
 		document.getElementById('pieza2').height = 350;
 
-		document.getElementById('pieza3').width = 480;
+		document.getElementById('pieza3').width = 400;
 		document.getElementById('pieza3').height = 350;
 
 
@@ -27,12 +27,31 @@ function ajustarTam() {
 		if(window.innerWidth>981)
 		{
 
-			document.getElementById('zonaJuego').width = 880;
-			document.getElementById('zonaJuego').height = 760;
-		}
-		else
-		{
+			document.getElementById('zonaJuego').width = 628;
+			document.getElementById('zonaJuego').height = 550;
 
+			document.getElementById('pieza1').width = 300;
+			document.getElementById('pieza1').height = 150;
+
+			document.getElementById('pieza2').width = 300;
+			document.getElementById('pieza2').height = 150;
+
+			document.getElementById('pieza3').width = 300;
+			document.getElementById('pieza3').height = 150;
+		}
+		else  // Pantallas medianas
+		{
+			document.getElementById('zonaJuego').width = 628;
+			document.getElementById('zonaJuego').height = 400;
+
+			document.getElementById('pieza1').width = 250;
+			document.getElementById('pieza1').height = 150;
+
+			document.getElementById('pieza2').width = 250;
+			document.getElementById('pieza2').height = 150;
+
+			document.getElementById('pieza3').width = 250;
+			document.getElementById('pieza3').height = 150;
 		}
 	}
 
