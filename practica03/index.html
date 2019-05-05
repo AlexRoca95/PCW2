@@ -17,10 +17,22 @@
 		</div>
 	</header>
 
+	<!-- Ventana Modal para mostrar la pantalla con las mejores puntuaciones -->
+	<div id="myModal" class="modal">
+
+		<div class="modal-content">
+		    <h2>Mejores puntuaciones</h2>
+		    <hr>
+		    <div class="tabla"></div>
+		    <span class="jugar" onclick="jugar();">Jugar</span>
+		</div>
+
+	</div>
+
 	<section id="panelJuego">
 		<h2>Panel de juego</h2>
 		<div id="puntuacion">
-			<p><strong>Puntuacion:</strong> O</p>
+			<p><strong>Puntuación:</strong> O</p>
 		</div>
 		<canvas id="zonaJuego"></canvas>
 	</section>
@@ -39,7 +51,9 @@
 
 
 	<script>
-		
+
+		pedirPuntuaciones(); 					// Al cargar la pagina se pide la tabla de puntuaciones
+
 		ajustarTam(); 							// Ajustamos tam zona juego
 		crearZona('zonaJuego', 10); 			// Realizacmos las divisones de las casillas para la zona
 		crearZona('pieza1', 5);

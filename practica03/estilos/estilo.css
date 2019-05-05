@@ -275,6 +275,51 @@ body {
  */
 
 
+/* Ventana modal tabla puntuaciones */
+
+	/* The Modal (background) */
+	.modal {
+
+	  display: none; /* Oculto por defecto hasta que se llame a la funcion */
+	  position: fixed; /* Que no se mueva del sitio */
+	  z-index: 1; /* Sit on top */
+	  padding-top: 100px; /* Localizacion de la caja */
+	  left: 0;
+	  top: 0;
+	  width: 100%; /* Full width */
+	  height: 100%; /* Full height */
+	  overflow: auto; /* Activamos el scroll*/
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.4); /* Negro con opacidad */
+	}
+
+		/* Modal Contenido*/
+		.modal-content {
+		  background-color: #fefefe;
+		  margin: auto;
+		  padding: 20px;
+		  border: 1px solid #888;
+		  width: 80%;
+		  text-align: center;
+		}
+			hr {
+				width: 50%;
+			}
+
+			/* Boton de jugar */
+			.jugar {
+			  color: #aaaaaa;
+			  font-size: 28px;
+			  font-weight: bold;
+			}
+
+			.jugar:hover,
+			.jugar:focus {
+			  color: #07D;
+			  text-decoration: none;
+			  cursor: pointer;
+			}
+
 
 footer {
 
