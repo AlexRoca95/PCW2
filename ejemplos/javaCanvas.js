@@ -126,7 +126,7 @@ function prepararCanvas()
 
 
 
-	cv.   = function(evt){
+	cv.mousemove   = function(evt){
 
 		console.log(evt.offsetX + ',' + evt.offsetY); // Muestra la posicon en pixeles
 

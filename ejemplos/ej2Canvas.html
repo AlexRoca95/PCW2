@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Ejemplo 2 Canvas</title>
+	<link rel="stylesheet" href="estilo2Canvas.css">
+	<script src="java2Canvas.js"></script>
+</head>
+<body>
+	<h1>Ejemplo 2 Canvas</h1>
+	<section>
+		<h2>Canvas 01</h2>
+		<canvas id="cv01"></canvas>
+		<footer>
+			<button onclick="pintarImagen();">Dibujar Imagen</button>
+			<button onclick="document.getElementById('fichero').click();">Cargar Imagen</button>
+			<button onclick="pintarImagen2();">Dibujar Imagen 2</button>
+
+			<input type="file" id="fichero" onchange="cargarFichero(this);">
+		</footer>
+	</section>
+
+	<section>
+		<h2>Canvas 02</h2>
+		<canvas id="cv02"></canvas>
+		<footer>
+			<button onclick="copiarImagen();">Copiar Imagen</button>
+			<button onclick="copiarImagen2();">Copiar Imagen2</button>
+			<button onclick="pintarDivisiones();">Divisiones</button>
+			<button onclick="prepararCV02();">Preparar CV02</button>
+		</footer>
+	</section>
+
+
+	<script>
+		prepararCanvas();
+	</script>
+</body>
+</html>
