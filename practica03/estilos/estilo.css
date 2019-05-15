@@ -82,9 +82,6 @@
 		
 		#zonaPiezas {  /* Zona donde se colocan las piezas */
 
-			float:  left;
-			display: flex;
-			flex-direction: column;
 			margin-top: 5%;
 			margin-left: 2%;
 		}
@@ -97,6 +94,9 @@
 			#zonaPieza1, #zonaPieza2, #zonaPieza3 {  /* Paneles de las piezas */
 
 				margin-bottom: 10%;
+				display: flex;
+			justify-content: space-around;  /* El espacio que sobra se reparte entre todos */
+			align-items: flex-start;
 			}
 
 }

@@ -11,7 +11,7 @@ function prepararZona()
 	if(window.innerWidth<480)
 	{
 
-		tablero = document.getElementById('zonaJuego');
+		tablero = document.getElementById('panelJuego');
 		tablero.width = 480;
 		tablero.height = 360;
 
@@ -34,44 +34,48 @@ function prepararZona()
 		// Pantallas grandes
 		if(window.innerWidth>981)
 		{
-			tablero = document.getElementById('zonaJuego');
-			tablero.width = 630;
-			tablero.height = 550;
+			tablero = document.getElementById('panelJuego');
+			tablero.width = 480;
+			tablero.height = 480;
 
 			pieza1 = document.getElementById('zonaPieza1');
-			pieza1.width = 150;
-			pieza1.height = 150;
+			pieza1.width = 180;
+			pieza1.height = 180;
 
 			pieza2 = document.getElementById('zonaPieza2');
-			pieza2.width = 150;
-			pieza2.height = 150;
+			pieza2.width = 180;
+			pieza2.height = 180;
 
 			pieza3 = document.getElementById('zonaPieza3');
-			pieza3.width = 150;
-			pieza3.height = 150;
+			pieza3.width = 180;
+			pieza3.height = 180;
 
 		}
 		else  // Pantallas medianas
 		{
-			tablero = document.getElementById('zonaJuego');
-			tablero.width = 630;
-			tablero.height = 400;
+			tablero = document.getElementById('panelJuego');
+			tablero.width = 480;
+			tablero.height = 480;
 
 			pieza1 = document.getElementById('zonaPieza1');
-			pieza1.width = 250;
-			pieza1.height = 150;
+			pieza1.width = 180;
+			pieza1.height = 180;
 
 			pieza2 = document.getElementById('zonaPieza2');
-			pieza2.width = 250;
-			pieza2.height = 150;
+			pieza2.width = 180;
+			pieza2.height = 180;
 
 			pieza3 = document.getElementById('zonaPieza3');
-			pieza3.width = 250;
-			pieza3.height = 150;
+			pieza3.width = 180;
+			pieza3.height = 180;
 		}
 	}
 
 
+	crearZona(1); 				// Divisiones para el canvas de la zona de juego
+	crearZona(2); 				// Divisiones para el canvas de la pieza 1
+	crearZona(3);
+	crearZona(4);
 
 }
 
@@ -85,7 +89,7 @@ function crearZona(zona)
 	switch (zona) {  // Seleccion de la zona a crear
 
 		case 1: // Tablero principal (10x10)
-			cv = document.getElementById('zonaJuego'); 
+			cv = document.getElementById('panelJuego'); 
 			divisiones = 10;   								// Numero de divisiones que queremos hacer
 			break;
 		case 2: // Pieza 1 (5x5)
@@ -181,7 +185,7 @@ function jugar()
 	modal.style.display = "none";  					// Dejamos de mostrar la ventana
 
 
-	prepararJuego();
+	inicioJuego();
 }
 
 // Función para seleccionar aleatoriamente 3 de las 9 piezas disponibles
@@ -198,30 +202,33 @@ function seleccionarPiezas()
 		piezaObj8 = new Pieza('columnaP', 'rojo');
 		piezaObj9 = new Pieza('punto', 'azul');
 
+	let pieza1 = new Pieza('nada', 'nada');
+		pieza2 = new Pieza('nada', 'nada');
+		pieza3 = new Pieza('nada', 'nada');
+
 	// Array con todas las piezas disponibles
 	let piezas = [piezaObj1, piezaObj2, piezaObj3, piezaObj4, piezaObj5, piezaObj6, piezaObj7, piezaObj8, piezaObj9];
 
+
 	// Obtenemos las 3 piezas aleatorias a partir del array
-	let pieza1 = piezas.elementoAleatorio();
-		pieza2 = piezas.elementoAleatorio();
-		pieza3 = piezas.elementoAleatorio();
+	Object.assign(pieza1, piezas.elementoAleatorio());
+	Object.assign(pieza2, piezas.elementoAleatorio());
+	Object.assign(pieza3, piezas.elementoAleatorio());
+
 
 	// Asignamos aleatoriamente un angulo de rotacion
-	pieza1 = obtenerAngulo(pieza1);
-	pieza2 = obtenerAngulo(pieza2);
-	pieza3 = obtenerAngulo(pieza3);
+	pieza1['rotacion'] = obtenerAngulo(pieza1);
+	pieza2['rotacion']  = obtenerAngulo(pieza2);
+	pieza3['rotacion']  = obtenerAngulo(pieza3);
 
-	// Asignamos el canvas donde se va a dibujar cada pieza
-	pieza1.canvas = 'zonaPieza1';
-	pieza2.canvas = 'zonaPieza2';
-	pieza3.canvas = 'zonaPieza3';
+
+	//pieza1.canvas = 'zonaPieza1';
 
 	console.log(pieza1);
 	console.log(pieza2);
 	console.log(pieza3);
 
-
-	dibujarPieza(pieza1);
+	//dibujarPieza(pieza1);
 	//dibujarPieza(pieza2Final);
 	//dibujarPieza(pieza3Final);
 
@@ -262,7 +269,7 @@ function obtenerAngulo(pieza)
 
 	pieza.rotacion = angulo;
 
-	return pieza
+	return pieza.rotacion
 }
 
 // Dibujamos la pieza que pasamos por paramatro en su canvas correspondiente
@@ -326,25 +333,38 @@ function dibujarPieza(pieza)
 }
 
 
-// Funcion para preparar todo lo necesario para que el juego empiece a funcionar
-function prepararJuego()
+// Empieza el juego: Se seleccionan las piezas aleatorias a mostrar
+function inicioJuego()
 {
 
-	prepararZona(); 			// Especificamos los tamaños de los canvas en funcion del tam de la pantalla
-
-	crearZona(1); 				// Divisiones para el canvas de la zona de juego
-	crearZona(2); 				// Divisiones para el canvas de la pieza 1
-	crearZona(3);
-	crearZona(4);
-
 	seleccionarPiezas();
+	/*
+	let cv = document.getElementById('zonaPieza1');
+
+	cv.onmousemove = function(evt) {  // Con el movimiento del raton llamamos a la funcion
+
+			if(evt.offsetX <0 || evt.offsetX > cv.width || evt.offsetY<0 || evt.offsetY > cv.height)
+			{
+				return false;
+			}
+			else
+			{
+				let tam= cv.width / 5;
+					fila = Math.trunc(evt.offsetY / tam);  // Fila en la que esta el raton. con trun truncamos el valor
+					columna = Math.trunc(evt.offsetX / tam);
+
+				console.log(fila + ' : ' + columna);
+			}
+	};
+	*/
 
 }
 
-// Funcion para crear el objeto Pieza del juego
+// Objeto Pieza con el tipo, color  y angulo de rotacion del mismo
 function Pieza(nombre, color)
 { 
 	this.nombre = nombre; 		// Tipo de pieza
 	this.color = color; 		// Color en el que se dibujara
 	this.rotacion = 0; 			// Rotacion de la pieza
+	this.canvas = 'ninguno';
 }
