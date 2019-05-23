@@ -192,15 +192,15 @@ function jugar()
 function seleccionarPiezas()
 {	
 	// 1º Creamos las piezas disponibles
-	let piezaObj1 = new Pieza('cuadradoG', 'azulClaro');
-		piezaObj2 = new Pieza('cuadradoP', 'verde');
-		piezaObj3 = new Pieza('L', 'azulOscuro');
-		piezaObj4 = new Pieza('filaG', 'violeta');
-		piezaObj5 = new Pieza('filaP', 'naranja');
-		piezaObj6 = new Pieza('columnaG', 'violeta');
-		piezaObj7 = new Pieza('esquina', 'rosa');
-		piezaObj8 = new Pieza('columnaP', 'rojo');
-		piezaObj9 = new Pieza('punto', 'azul');
+	let piezaObj1 = new Pieza('cuadradoG', '#13F1D4FF');
+		piezaObj2 = new Pieza('cuadradoP', '#4E9A06FF');
+		piezaObj3 = new Pieza('L', '#204A87FF');
+		piezaObj4 = new Pieza('filaG', '#8AE234FF');
+		piezaObj5 = new Pieza('filaP', '#F57900FF');
+		piezaObj6 = new Pieza('columnaG', '#75507BFF');
+		piezaObj7 = new Pieza('esquina', '#F81270FF');
+		piezaObj8 = new Pieza('columnaP', '#EF2929FF');
+		piezaObj9 = new Pieza('punto', '#05EAFFFF');
 
 	let pieza1 = new Pieza('nada', 'nada');
 		pieza2 = new Pieza('nada', 'nada');
@@ -217,20 +217,23 @@ function seleccionarPiezas()
 
 
 	// Asignamos aleatoriamente un angulo de rotacion
-	pieza1['rotacion'] = obtenerAngulo(pieza1);
-	pieza2['rotacion']  = obtenerAngulo(pieza2);
-	pieza3['rotacion']  = obtenerAngulo(pieza3);
+	pieza1.rotacion = obtenerAngulo(pieza1);
+	pieza2.rotacion  = obtenerAngulo(pieza2);
+	pieza3.rotacion  = obtenerAngulo(pieza3);
 
 
-	//pieza1.canvas = 'zonaPieza1';
+	pieza1['canvas'] = 'zonaPieza1';
+	pieza2['canvas'] = 'zonaPieza2';
+	pieza3['canvas'] = 'zonaPieza3';
 
 	console.log(pieza1);
 	console.log(pieza2);
 	console.log(pieza3);
 
-	//dibujarPieza(pieza1);
-	//dibujarPieza(pieza2Final);
-	//dibujarPieza(pieza3Final);
+	// Dibujamos las piezas seleccionadas en sus canvas correspondiente
+	dibujarPieza(pieza1);
+	dibujarPieza(pieza2);
+	dibujarPieza(pieza3);
 
 }
 
@@ -282,50 +285,134 @@ function dibujarPieza(pieza)
 		tam= cv.width / 5; 									// Tamaño de cada cuadrado del canvas
 		fila=0;  											// Fila donde se va a dibujar la pieza
 		columna=0; 											// Column donde se va a dibujar la pieza
-	let	recorrido; 											// Contendra los valores de columna y filasa dibujar en cuestion
+	let	recorrido = []; 									// Contendra los valores de columna y filasa dibujar en cuestion
 
 
 	ctx.beginPath(); 
 
+	ctx.fillStyle = pieza.color; 							// Color del que se va a dibujar la pieza
+
 		// Comprobamos la pieza que se ha seleccionado
 		switch (pieza.nombre) {
 			case 'cuadradoP':
-				imagen.src = 'fotos/green.png';
-				
+				// Sin rotacion
 				recorrido = [1, 1, 2, 1, 1, 2, 2, 2];   // Columna, Fila, Columna, Fila....
 				break;
 
 			case 'cuadradoG':
-				imagen.src = 'fotos/blueClarito.png';
-				
+				// Sin rotacion
 				recorrido = [1, 1, 2, 1, 3, 1, 1, 2, 2, 2, 3, 2, 1, 3, 2, 3, 3, 3];   // Columna, Fila, Columna, Fila....
 				break;
 
-			case 'cuadradoG':
-				imagen.src = 'fotos/blueClarito.png';
-				
-				recorrido = [1, 1, 2, 1, 3, 1, 1, 2, 2, 2, 3, 2, 1, 3, 2, 3, 3, 3];   // Columna, Fila, Columna, Fila....
+			case 'L':
+				if(pieza.rotacion==0)
+				{
+					recorrido = [1, 1, 1, 2, 1, 3, 2, 3, 3, 3];    
+				}
+				else
+				{
+					if(pieza.rotacion==90)
+					{
+						recorrido = [1, 1, 2, 1, 3, 1, 1, 2, 1, 3];  
+					}
+					else
+					{
+						if(pieza.rotacion==180)
+						{
+							recorrido = [1, 1, 2, 1, 3, 1, 3, 2, 3, 3];  
+						}
+						else // 270
+						{
+							recorrido = [3, 1, 3, 2, 3, 3, 2, 3, 1, 3]; 
+						}
+					}
+				}
+				break;
 
+			case 'filaG':
+				if(pieza.rotacion==0)
+				{
+					recorrido = [0, 2, 1, 2, 2, 2, 3, 2, 4, 2];  
+				}
+				else  // 90 grados
+				{
+					recorrido = [2, 0, 2, 1, 2, 2, 2, 3, 2, 4];  
+				}
+				break;
+
+			case 'filaP':
+				if(pieza.rotacion==0)
+				{
+					recorrido = [1, 2, 2, 2, 3, 2];   
+				}
+				else // 90 grados
+				{
+					recorrido = [2, 1, 2, 2, 2, 3];  
+				}
+				break;
+
+			case 'columnaG':
+				if(pieza.rotacion==0)
+				{
+					recorrido = [2, 1, 2, 2, 2, 3, 2, 4];    
+				}
+				else // 90 grados
+				{
+					recorrido = [1, 2, 2, 2, 3, 2, 4, 2];  
+				} 
+				break;
+
+			case 'columnaP':
+				if(pieza.rotacion==0)
+				{
+					recorrido = [2, 1, 2, 2];     
+				}
+				else // 90 grados
+				{
+					recorrido = [2, 2, 3, 2];  
+				} 
+				break;
+
+			case 'esquina':
+				if(pieza.rotacion==0)
+				{
+					recorrido = [1, 1, 2, 1, 1, 2];   
+				}
+				else
+				{
+					if(pieza.rotacion==90)
+					{
+						recorrido = [2, 1, 3, 1, 3, 2];  
+					}
+					else
+					{
+						if(pieza.rotacion==180)
+						{
+							recorrido = [3, 2, 3, 3, 2, 3];  
+						}
+						else // 270
+						{
+							recorrido = [2, 3, 1, 3, 1, 2]; 
+						}
+					}
+				}
+				break;
+
+			case 'punto':
+				// Sin rotacion
+				recorrido = [2, 2];   
 				break;
 		}
 
+		// Bucle para dibujar la pieza 
+		for(let i=0; i<recorrido.length-1; i++)
+		{
+			columna = recorrido[i];
+			fila = recorrido[i+1];
+			i++;
 
-		imagen.onload = function(){
-
-			for(let i=0; i<recorrido.length-1; i++)
-			{
-				columna = recorrido[i];
-				fila = recorrido[i+1];
-
-				// Imagen a dibujar, pos x, pos y, tam y altura
-				ctx.drawImage(imagen, columna*tam, fila*tam, tam, tam);
-			}
-
-		};
-
-		// Imagen a dibujar, pos x, pos y, tam y altura
-		//ctx.drawImage(imagen, 4*tam, 4*tam, tam, tam);  		// Imagen dibujada dentro del cuadrado indicado del canvas
-
+			ctx.fillRect(columna*tam, fila*tam, tam, tam);			// Rellenamos un rectangulo con el color que tengamos
+		}
 
 
 
