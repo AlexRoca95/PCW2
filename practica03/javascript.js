@@ -177,7 +177,8 @@ function pedirPuntuaciones()
 }
 
 
-
+// Funcion que se accede cuando se pulsa el boton de jugar: Se quita la tabla de 
+// puntuaciones y se inicia el juego
 function jugar()
 {
 
@@ -189,7 +190,7 @@ function jugar()
 }
 
 // Función para seleccionar aleatoriamente 3 de las 9 piezas disponibles
-function seleccionarPiezas()
+function cargarPiezas()
 {	
 	// 1º Creamos las piezas disponibles
 	let piezaObj1 = new Pieza('cuadradoG', '#13F1D4FF');
@@ -226,14 +227,16 @@ function seleccionarPiezas()
 	pieza2['canvas'] = 'zonaPieza2';
 	pieza3['canvas'] = 'zonaPieza3';
 
-	console.log(pieza1);
-	console.log(pieza2);
-	console.log(pieza3);
-
 	// Dibujamos las piezas seleccionadas en sus canvas correspondiente
 	dibujarPieza(pieza1);
 	dibujarPieza(pieza2);
 	dibujarPieza(pieza3);
+
+	let piezasFinales = [pieza1, pieza2, pieza3];
+
+
+	return piezasFinales;
+
 
 }
 
@@ -292,7 +295,7 @@ function dibujarPieza(pieza)
 
 	ctx.fillStyle = pieza.color; 							// Color del que se va a dibujar la pieza
 
-		// Comprobamos la pieza que se ha seleccionado
+		// Establecemos el recorrido del dibujado en funcion del tipo de pieza y su rotacion
 		switch (pieza.nombre) {
 			case 'cuadradoP':
 				// Sin rotacion
@@ -321,7 +324,7 @@ function dibujarPieza(pieza)
 						{
 							recorrido = [1, 1, 2, 1, 3, 1, 3, 2, 3, 3];  
 						}
-						else // 270
+						else // 270 grados
 						{
 							recorrido = [3, 1, 3, 2, 3, 3, 2, 3, 1, 3]; 
 						}
@@ -404,14 +407,14 @@ function dibujarPieza(pieza)
 				break;
 		}
 
-		// Bucle para dibujar la pieza 
+		// Bucle para dibujar la pieza en funcion del recorrido asignado
 		for(let i=0; i<recorrido.length-1; i++)
 		{
 			columna = recorrido[i];
 			fila = recorrido[i+1];
 			i++;
 
-			ctx.fillRect(columna*tam, fila*tam, tam, tam);			// Rellenamos un rectangulo con el color que tengamos
+			ctx.fillRect(columna*tam, fila*tam, tam, tam);			// Rellenamos un rectangulo con el color que tengamos (x, y, ancho, alto)
 		}
 
 
@@ -419,31 +422,83 @@ function dibujarPieza(pieza)
 
 }
 
-
-// Empieza el juego: Se seleccionan las piezas aleatorias a mostrar
-function inicioJuego()
+function moverPieza(pieza)
 {
 
-	seleccionarPiezas();
+	console.log('hola');
+}
+
+
+function seleccionPieza(pieza)
+{	
+
+	let canvasPieza = document.getElementById(pieza.id);
+		ctx = canvasPieza.getContext('2d');
+		imgData = ctx.getImageData(0,0, canvasPieza.width, canvasPieza.height);
+
+
+	let canvas2 = document.getElementById('panelJuego');
+		ctx2 = canvas2.getContext('2d');
+
+	ctx2.putImageData(imgData, 0, 0);
+
+	
+
+
 	/*
-	let cv = document.getElementById('zonaPieza1');
+	for(i=0; i<piezas.length;i++)
+	{	
+		let canvasPieza = document.getElementById(piezas[i].canvas);
 
-	cv.onmousemove = function(evt) {  // Con el movimiento del raton llamamos a la funcion
+		canvasPieza.onmousemove = function(evt) {  // Con el movimiento del raton llamamos a la funcion
 
-			if(evt.offsetX <0 || evt.offsetX > cv.width || evt.offsetY<0 || evt.offsetY > cv.height)
+
+			if(evt.offsetX <0 || evt.offsetX > canvasPieza.width || evt.offsetY<0 || evt.offsetY > canvasPieza.height)
 			{
 				return false;
 			}
 			else
 			{
-				let tam= cv.width / 5;
-					fila = Math.trunc(evt.offsetY / tam);  // Fila en la que esta el raton. con trun truncamos el valor
-					columna = Math.trunc(evt.offsetX / tam);
+				let tam= canvasPieza.width / 5;
+				fila = Math.trunc(evt.offsetY / tam);  // Fila en la que esta el raton. con trun truncamos el valor
+				columna = Math.trunc(evt.offsetX / tam);
 
-				console.log(fila + ' : ' + columna);
+				
+				canvasPieza.onclick = function() // Cuando se hace click en el canvas
+				{
+					if(canvasPieza.id=='zonaPieza1')
+					{
+						moverPieza(piezas[0]);
+					}
+					else
+					{
+						if(canvasPieza.id=='zonaPieza2')
+						{
+							moverPieza(piezas[1]);
+						}
+						else
+						{
+							moverPieza(piezas[2]);
+						}
+					}
+				}
+
 			}
-	};
+		};
+		
+	}
 	*/
+
+}
+
+// Empieza el juego: Se seleccionan las piezas aleatorias a mostrar
+function inicioJuego()
+{
+	let piezas = [];
+
+	piezas = cargarPiezas(); 			// Dibujamos las 3 piezas seleccionadas aleatoriamente
+
+	//seleccionPieza(piezas); 			// Seleccion de la pieza a colocar a partir de las 2 disponibles
 
 }
 
