@@ -208,11 +208,11 @@ function cargarPiezas()
 	// PIEZAS DISPONIBLES A CARGAR
 	let piezaObj1 = new Pieza('cuadradoG', '#13F1D4FF');
 		piezaObj2 = new Pieza('cuadradoP', '#4E9A06FF');
-		piezaObj3 = new Pieza('L', '#204A87FF');
+		piezaObj3 = new Pieza('L', '#584db1');
 		piezaObj4 = new Pieza('filaG', '#8AE234FF');
 		piezaObj5 = new Pieza('filaP', '#F57900FF');
 		piezaObj6 = new Pieza('columnaG', '#75507BFF');
-		piezaObj7 = new Pieza('esquina', '#F81270FF');
+		piezaObj7 = new Pieza('esquina', '#f67794');
 		piezaObj8 = new Pieza('columnaP', '#EF2929FF');
 		piezaObj9 = new Pieza('punto', '#05EAFFFF');
 
@@ -446,6 +446,52 @@ function moverPieza()
 				columna = Math.trunc(evt.offsetX / tam);
 
 				//console.log(fila + ' : ' + columna);
+
+
+				let ctx = cv.getContext('2d');
+				img = new Image();
+
+				// Esto es lo mismo que la practica pero habra que pintar mas celdas en funcion del tam de la ficha
+				img.onload = function(){
+
+					cv.width = cv.width;  	// Borramos la imagen dibujada anterioremente
+
+					ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
+
+					pintarDivisiones();
+
+				};
+
+				// En funcion de la pieza elegida se cargara una imagen de un color u otra
+				switch (piezaElegida.nombre) {
+					case 'cuadradoG':
+						img.src = 'fotos/blueClarito.png';
+						break;
+					case 'cuadradoP':
+						img.src = 'fotos/green.png';
+						break;
+					case 'L':
+						img.src = 'fotos/azulOscuro.png';
+						break;
+					case 'filaG':
+						img.src = 'fotos/greenLight.PNG';
+						break;
+					case 'filaP':
+						img.src = 'fotos/orange.png';
+						break;
+					case 'columnaG':
+						img.src = 'fotos/Purple-Box.jpg';
+						break;
+					case 'columnaP':
+						img.src = 'fotos/red.png';
+						break;
+					case 'esquina':
+						img.src = 'fotos/pink.png';
+						break;
+					case 'punto':
+						img.src = 'fotos/blue.jpeg';
+						break;
+				}
 			}
 
 
@@ -479,49 +525,35 @@ function seleccionPieza(pieza)
 
 	moverPieza();
 
-	/*
-	for(i=0; i<piezas.length;i++)
-	{	
-		let canvasPieza = document.getElementById(piezas[i].canvas);
 
-		canvasPieza.onmousemove = function(evt) {  // Con el movimiento del raton llamamos a la funcion
+}
 
+// Pinta las divisiones de la zona de juego de nuevo
+function pintarDivisiones()
+{
+	let cv = document.getElementById('panelJuego');
+		ctx = cv.getContext('2d');
+		tamDiv = cv.width / 10;
 
-			if(evt.offsetX <0 || evt.offsetX > canvasPieza.width || evt.offsetY<0 || evt.offsetY > canvasPieza.height)
-			{
-				return false;
-			}
-			else
-			{
-				let tam= canvasPieza.width / 5;
-				fila = Math.trunc(evt.offsetY / tam);  // Fila en la que esta el raton. con trun truncamos el valor
-				columna = Math.trunc(evt.offsetX / tam);
+	ctx.beginPath(); 
 
-				
-				canvasPieza.onclick = function() // Cuando se hace click en el canvas
-				{
-					if(canvasPieza.id=='zonaPieza1')
-					{
-						moverPieza(piezas[0]);
-					}
-					else
-					{
-						if(canvasPieza.id=='zonaPieza2')
-						{
-							moverPieza(piezas[1]);
-						}
-						else
-						{
-							moverPieza(piezas[2]);
-						}
-					}
-				}
+	ctx.lineWidth = 1;
+	ctx.strokeStyle = '#BABDB6FF';
 
-			}
-		};
-		
+	for(let i=1; i<10;i++)
+	{
+
+		ctx.moveTo(i * tamDiv, 0);
+		ctx.lineTo(i* tamDiv, cv.height);
+
+		// Horizontales
+		ctx.moveTo(0, i*tamDiv);
+		ctx.lineTo(cv.width, i*tamDiv);
+
 	}
-	*/
+
+	ctx.stroke();
+
 
 }
 
