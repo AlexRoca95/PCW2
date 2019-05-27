@@ -456,7 +456,8 @@ function moverPieza()
 
 					cv.width = cv.width;  	// Borramos la imagen dibujada anterioremente
 
-					ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
+					colocarPieza(fila, columna, tam);
+					
 
 					pintarDivisiones();
 
@@ -498,7 +499,137 @@ function moverPieza()
 
 	}
 
+}
 
+// COloca la pieza en el tablero en funcion de la fila y columna donde este el raton del jugador
+function colocarPieza(f, c, tam)
+{
+
+	// Establecemos el recorrido del dibujado en funcion del tipo de pieza y su rotacion
+	switch (piezaElegida.nombre) {
+		case 'cuadradoP':
+			// Sin rotacion
+			recorrido = [c, f, c+1, f, c, f+1, c+1, f+1];   // Columna, Fila, Columna, Fila....
+			break;
+
+		case 'cuadradoG':
+			// Sin rotacion
+			recorrido = [c, f, c+1, f, c+2, f, c, f+1, c+1, f+1, c+2, f+1, c, f+2, c+1, f+2, c+2, f+2];   // Columna, Fila, Columna, Fila....
+			break;
+
+		case 'L':
+			if(piezaElegida.rotacion==0)
+			{
+				recorrido = [c, f, c, f+1, c, f+2, c+1, f+2, c+2, f+2];    
+			}
+			else
+			{
+				if(piezaElegida.rotacion==90)
+				{
+					recorrido = [c, f, c+1, f, c+2, f, c, f+1, c, f+2];  
+				}
+				else
+				{
+					if(piezaElegida.rotacion==180)
+					{
+						recorrido = [c, f, c+1, f, c+2, f, c+2, f+1, c+2, f+2];  
+					}
+					else // 270 grados
+					{
+						recorrido = [c+2, f, c+2, f+1, c+2, f+2, c+1, f+2, c, f+2]; 
+					}
+				}
+			}
+			break;
+
+			case 'filaG':
+				if(piezaElegida.rotacion==0)
+				{
+					recorrido = [c-1, f+1, c, f+1, c+1, f+1, c+2, f+1, c+3, f+1];  
+				}
+				else  // 90 grados
+				{
+					recorrido = [c+1, f-1, c+1, f, c+1, f+1, c+1, f+2, c+1, f+3];  
+				}
+				break;
+
+			case 'filaP':
+				if(piezaElegida.rotacion==0)
+				{
+					recorrido = [c, f+1, c+1, f+1, c+2, f+1];   
+				}
+				else // 90 grados
+				{
+					recorrido = [c+1, f, c+1, f+1, c+1, f+2];  
+				}
+				break;
+
+			case 'columnaG':
+				if(piezaElegida.rotacion==0)
+				{
+					recorrido = [c+1, f, c+1, f+1, c+1, f+2, c+1, f+3];    
+				}
+				else // 90 grados
+				{
+					recorrido = [c, f+1, c+1, f+1, c+2, f+1, c+3, f+1];  
+				} 
+				break;
+
+			case 'columnaP':
+				if(piezaElegida.rotacion==0)
+				{
+					recorrido = [c+1, f, c+1, f+1];     
+				}
+				else // 90 grados
+				{
+					recorrido = [c+1, f+1, c+2, f+1];  
+				} 
+				break;
+
+			case 'esquina':
+				if(piezaElegida.rotacion==0)
+				{
+					recorrido = [c, f, c+1, f, c, f+1];   
+				}
+				else
+				{
+					if(piezaElegida.rotacion==90)
+					{
+						recorrido = [c+1, f, c+2, f, c+2, f+1];  
+					}
+					else
+					{
+						if(piezaElegida.rotacion==180)
+						{
+							recorrido = [c+2, f+1, c+2, f+2, c+1, f+2];  
+						}
+						else // 270
+						{
+							recorrido = [c+1, f+2, c, f+2, c, f+1]; 
+						}
+					}
+				}
+				break;
+
+			case 'punto':
+				// Sin rotacion
+				recorrido = [c+1, f+1];   
+				break;
+		}
+
+
+
+		// Bucle para dibujar la piezaFinal en funcion del recorrido asignado
+		for(let i=0; i<recorrido.length-1; i++)
+		{
+			columna = recorrido[i];
+			fila = recorrido[i+1];
+			i++;
+
+			ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
+
+			//ctx.fillRect(columna*tam, fila*tam, tam, tam);			// Rellenamos un rectangulo con el color que tengamos (x, y, ancho, alto)
+		}
 
 }
 
