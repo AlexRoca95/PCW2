@@ -11,6 +11,9 @@ var piezaElegida = new Pieza('nada', 'nada');
 // Para controlar si la partida ha empezado o no
 var jugando = false;
 
+//Matriz de ocuación para comprobar las posiciones
+var mtOcupacion=[];
+
 // Ajustamos tamaños de la zona de juego y las piezas en funcion del tamaño de la ventana
 function prepararZona() 
 {
@@ -18,6 +21,7 @@ function prepararZona()
 	let	pieza1;
 	let	pieza2;
 	let	pieza3;
+	creaMatrizColision();
 
 	// Pantallas pequeñas
 	if(window.innerWidth<480)
@@ -446,7 +450,9 @@ function moverPieza()
 				columna = Math.trunc(evt.offsetX / tam);
 
 				//console.log(fila + ' : ' + columna);
-
+				testMatrizColision();
+				comprobarPosicion(fila,columna);
+				testMatrizColision();
 
 				let ctx = cv.getContext('2d');
 				img = new Image();
@@ -563,6 +569,51 @@ function pintarDivisiones()
 
 	ctx.stroke();
 
+
+}
+//Crea una matriz de 10x10 toda rellena de ceros
+function creaMatrizColision()
+{
+  for(var i=0;i<9;i++)
+  {
+    mtOcupacion[i]=[];
+  }
+
+  for(var k=0;k<9;k++)
+  {
+    for(var j=0;j<9;j++)
+    {
+      mtOcupacion[k][j]=0;
+    }
+  }
+}
+
+//x e y vienen dados por el raton
+function comprobarPosicion(x, y){
+
+	if(mtOcupacion[x][y]==0)
+	{
+	 mtOcupacion[x][y]=1;
+	}
+	else{
+		soltarPieza();
+	}
+
+}
+
+function testMatrizColision()
+{
+ 
+  for(var k=0;k<9;k++)
+  {
+    for(var j=0;j<9;j++)
+    {
+      console.log(mtOcupacion[k][j]);
+    }
+  }
+}
+
+function soltarPieza(){
 
 }
 

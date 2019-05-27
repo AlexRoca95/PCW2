@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="104" height="104">
-<style type="text/css">
-#fichaRoja{ fill:red; stroke: red; strokewidth:3px;
-}
-</style>
-	<circle id="fichaRoja" cx="195" cy="80" r="20" stroke="red" fill="red" onclick="seleccionarFicha(1);"/>
-</svg>
