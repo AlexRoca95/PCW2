@@ -462,17 +462,26 @@ function seleccionPieza(pieza)
 
 	if(pieza==1)
 	{
+		document.getElementById('zonaPieza2').style.borderColor = "#BABDB6FF";
+		document.getElementById('zonaPieza3').style.borderColor = "#BABDB6FF";
 		piezaElegida = pieza1;
+		document.getElementById('zonaPieza1').style.borderColor = "aquamarine";
 	}
 	else
 	{
 		if(pieza==2)
 		{
+			document.getElementById('zonaPieza1').style.borderColor = "#BABDB6FF";
+			document.getElementById('zonaPieza3').style.borderColor = "#BABDB6FF";
 			piezaElegida = pieza2;
+			document.getElementById('zonaPieza2').style.borderColor = "aquamarine";
 		}
 		else
 		{
+			document.getElementById('zonaPieza1').style.borderColor = "#BABDB6FF";
+			document.getElementById('zonaPieza2').style.borderColor = "#BABDB6FF";
 			piezaElegida = pieza3;
+			document.getElementById('zonaPieza3').style.borderColor = "aquamarine";
 		}
 	}
 
