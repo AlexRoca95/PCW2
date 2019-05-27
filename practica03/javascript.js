@@ -1,4 +1,16 @@
 
+/* VARIABLES GLOBALES */
+// Piezas a mostar 
+var pieza1 = new Pieza('nada', 'nada');
+	pieza2 = new Pieza('nada', 'nada');
+	pieza3 = new Pieza('nada', 'nada');
+
+// Pieza elegida para pintar
+var piezaElegida = new Pieza('nada', 'nada');
+
+// Para controlar si la partida ha empezado o no
+var jugando = false;
+
 // Ajustamos tamaños de la zona de juego y las piezas en funcion del tamaño de la ventana
 function prepararZona() 
 {
@@ -185,6 +197,7 @@ function jugar()
 	var modal = document.getElementById('myModal');  // Obtenemos el elemento
 	modal.style.display = "none";  					// Dejamos de mostrar la ventana
 
+	jugando = true;
 
 	inicioJuego();
 }
@@ -192,7 +205,7 @@ function jugar()
 // Función para seleccionar aleatoriamente 3 de las 9 piezas disponibles
 function cargarPiezas()
 {	
-	// 1º Creamos las piezas disponibles
+	// PIEZAS DISPONIBLES A CARGAR
 	let piezaObj1 = new Pieza('cuadradoG', '#13F1D4FF');
 		piezaObj2 = new Pieza('cuadradoP', '#4E9A06FF');
 		piezaObj3 = new Pieza('L', '#204A87FF');
@@ -202,10 +215,6 @@ function cargarPiezas()
 		piezaObj7 = new Pieza('esquina', '#F81270FF');
 		piezaObj8 = new Pieza('columnaP', '#EF2929FF');
 		piezaObj9 = new Pieza('punto', '#05EAFFFF');
-
-	let pieza1 = new Pieza('nada', 'nada');
-		pieza2 = new Pieza('nada', 'nada');
-		pieza3 = new Pieza('nada', 'nada');
 
 	// Array con todas las piezas disponibles
 	let piezas = [piezaObj1, piezaObj2, piezaObj3, piezaObj4, piezaObj5, piezaObj6, piezaObj7, piezaObj8, piezaObj9];
@@ -231,11 +240,6 @@ function cargarPiezas()
 	dibujarPieza(pieza1);
 	dibujarPieza(pieza2);
 	dibujarPieza(pieza3);
-
-	let piezasFinales = [pieza1, pieza2, pieza3];
-
-
-	return piezasFinales;
 
 
 }
@@ -422,28 +426,58 @@ function dibujarPieza(pieza)
 
 }
 
-function moverPieza(pieza)
+// Movemos la pieza seleccionada
+function moverPieza()
 {
+	let cv = document.getElementById('panelJuego');
 
-	console.log('hola');
+	// Con el movimiento del raton se llama a la funcion
+	cv.onmousemove = function(evt) {
+
+
+			if(evt.offsetX <0 || evt.offsetX > cv.width || evt.offsetY<0 || evt.offsetY > cv.height)
+			{
+				return false;
+			}
+			else
+			{
+				let tam= cv.width / 10;
+				fila = Math.trunc(evt.offsetY / tam);  // Fila en la que esta el raton. con trun truncamos el valor
+				columna = Math.trunc(evt.offsetX / tam);
+
+				//console.log(fila + ' : ' + columna);
+			}
+
+
+
+	}
+
+
+
 }
 
-
+// Seleccion de la pieza a dibujar
 function seleccionPieza(pieza)
 {	
 
-	let canvasPieza = document.getElementById(pieza.id);
-		ctx = canvasPieza.getContext('2d');
-		imgData = ctx.getImageData(0,0, canvasPieza.width, canvasPieza.height);
+	if(pieza==1)
+	{
+		piezaElegida = pieza1;
+	}
+	else
+	{
+		if(pieza==2)
+		{
+			piezaElegida = pieza2;
+		}
+		else
+		{
+			piezaElegida = pieza3;
+		}
+	}
 
 
-	let canvas2 = document.getElementById('panelJuego');
-		ctx2 = canvas2.getContext('2d');
-
-	ctx2.putImageData(imgData, 0, 0);
-
-	
-
+	moverPieza();
 
 	/*
 	for(i=0; i<piezas.length;i++)
@@ -494,11 +528,7 @@ function seleccionPieza(pieza)
 // Empieza el juego: Se seleccionan las piezas aleatorias a mostrar
 function inicioJuego()
 {
-	let piezas = [];
-
-	piezas = cargarPiezas(); 			// Dibujamos las 3 piezas seleccionadas aleatoriamente
-
-	//seleccionPieza(piezas); 			// Seleccion de la pieza a colocar a partir de las 2 disponibles
+	cargarPiezas(); 			// Dibujamos las 3 piezas seleccionadas aleatoriamente
 
 }
 
