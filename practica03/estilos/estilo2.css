@@ -87,7 +87,7 @@ h2 {
 .zonaPieza:active{
 
 	border-color: aquamarine;
-	box-shadow: 7px 10px 79px 5px rgba(48,170,179,1);
+	box-shadow: 5px 5px 20px 10px rgba(48,170,179,0.3);
 	transition:0s;
 }
 
