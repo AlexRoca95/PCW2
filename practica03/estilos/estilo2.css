@@ -65,7 +65,7 @@ body {
 /* Todos los canvas */
 canvas {
 	
-	border: 1px solid #000000FF;
+	border: 2px solid #BABDB6FF;
 }
 
 h2 {
@@ -77,6 +77,18 @@ h2 {
 #zonaJuego {
 
 	text-align: center;
+}
+
+.zonaPieza{
+	transition:0s 0.7s;
+	
+}
+
+.zonaPieza:active{
+
+	border-color: aquamarine;
+	box-shadow: 7px 10px 79px 5px rgba(48,170,179,1);
+	transition:0s;
 }
 
 #panelJuego {
