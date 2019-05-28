@@ -1,15 +1,20 @@
 
 /* VARIABLES GLOBALES */
 // Piezas a mostar 
-var pieza1 = new Pieza('nada', 'nada');
-	pieza2 = new Pieza('nada', 'nada');
-	pieza3 = new Pieza('nada', 'nada');
+var pieza1 = new Pieza('nada', 'nada', 'nada');
+	pieza2 = new Pieza('nada', 'nada', 'nada');
+	pieza3 = new Pieza('nada', 'nada', 'nada');
 
 // Pieza elegida para pintar
-var piezaElegida = new Pieza('nada', 'nada');
+var piezaElegida = new Pieza('nada', 'nada', 'nada');
+var colocada = false;
 
-// Para controlar si la partida ha empezado o no
-var jugando = false;
+
+
+// Array que contiene el recorrido para dibujar la pieza seleccionada en el tablero
+var recorridoFinal= [];
+
+var mouse_fila, mouse_colum;
 
 //Matriz de ocuación para comprobar las posiciones
 var mtOcupacion=[];
@@ -210,15 +215,15 @@ function jugar()
 function cargarPiezas()
 {	
 	// PIEZAS DISPONIBLES A CARGAR
-	let piezaObj1 = new Pieza('cuadradoG', '#13F1D4FF');
-		piezaObj2 = new Pieza('cuadradoP', '#4E9A06FF');
-		piezaObj3 = new Pieza('L', '#584db1');
-		piezaObj4 = new Pieza('filaG', '#8AE234FF');
-		piezaObj5 = new Pieza('filaP', '#F57900FF');
-		piezaObj6 = new Pieza('columnaG', '#75507BFF');
-		piezaObj7 = new Pieza('esquina', '#f67794');
-		piezaObj8 = new Pieza('columnaP', '#EF2929FF');
-		piezaObj9 = new Pieza('punto', '#05EAFFFF');
+	let piezaObj1 = new Pieza('cuadradoG', '#13F1D4FF', 'fotos/blueClarito.png');
+		piezaObj2 = new Pieza('cuadradoP', '#4E9A06FF', 'fotos/green.png');
+		piezaObj3 = new Pieza('L', '#584db1', 'fotos/azulOscuro.png');
+		piezaObj4 = new Pieza('filaG', '#8AE234FF', 'fotos/greenLight.PNG');
+		piezaObj5 = new Pieza('filaP', '#F57900FF', 'fotos/orange.png');
+		piezaObj6 = new Pieza('columnaG', '#75507BFF', 'fotos/Purple-Box.jpg');
+		piezaObj7 = new Pieza('esquina', '#f67794', 'fotos/pink.png');
+		piezaObj8 = new Pieza('columnaP', '#EF2929FF', 'fotos/red.png');
+		piezaObj9 = new Pieza('punto', '#05EAFFFF', 'fotos/blue.jpeg');
 
 	// Array con todas las piezas disponibles
 	let piezas = [piezaObj1, piezaObj2, piezaObj3, piezaObj4, piezaObj5, piezaObj6, piezaObj7, piezaObj8, piezaObj9];
@@ -446,6 +451,10 @@ function moverPieza()
 				fila = Math.trunc(evt.offsetY / tam);  // Fila en la que esta el raton. con trun truncamos el valor
 				columna = Math.trunc(evt.offsetX / tam);
 
+				// Guardamos la fila y columna donde esta el raton para comprobar despues si esta fuera del tablero o no
+				mouse_fila = fila;
+				mouse_colum = columna;
+
 				//console.log(fila + ' : ' + columna);
 				//testMatrizColision();
 				//comprobarPosicion(fila,columna);
@@ -457,54 +466,24 @@ function moverPieza()
 				// Esto es lo mismo que la practica pero habra que pintar mas celdas en funcion del tam de la ficha
 				img.onload = function(){
 
-					cv.width = cv.width;  	// Borramos la imagen dibujada anterioremente
+					cv.width = cv.width;  					// Borramos la imagen dibujada anterioremente
 
-					colocarPieza(fila, columna, tam); 		// Se coloca la pieza en la posicion del raton 
+					colocarPieza(fila, columna, tam); 		// Se coloca la pieza en la posicion del raton (no se queda dibujado en el panel aun)
 					
-
 					pintarDivisiones();
 
 				};
 
-				// En funcion de la pieza elegida se cargara una imagen de un color u otra
-				switch (piezaElegida.nombre) {
-					case 'cuadradoG':
-						img.src = 'fotos/blueClarito.png';
-						break;
-					case 'cuadradoP':
-						img.src = 'fotos/green.png';
-						break;
-					case 'L':
-						img.src = 'fotos/azulOscuro.png';
-						break;
-					case 'filaG':
-						img.src = 'fotos/greenLight.PNG';
-						break;
-					case 'filaP':
-						img.src = 'fotos/orange.png';
-						break;
-					case 'columnaG':
-						img.src = 'fotos/Purple-Box.jpg';
-						break;
-					case 'columnaP':
-						img.src = 'fotos/red.png';
-						break;
-					case 'esquina':
-						img.src = 'fotos/pink.png';
-						break;
-					case 'punto':
-						img.src = 'fotos/blue.jpeg';
-						break;
-				}
+				// La url de la imagen estara en la variable imagen de la pieza elegida
+				img.src = piezaElegida.imagen;
+
+
 			}
-
-
-
 	}
 
 }
 
-// COloca la pieza en el tablero en funcion de la fila y columna donde este el raton del jugador
+// Dibuja la pieza en el tablero en funcion de la fila y columna donde este el raton del jugador (no la deja dibujada aun)
 function colocarPieza(f, c, tam)
 {
 
@@ -630,6 +609,68 @@ function colocarPieza(f, c, tam)
 			ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
 		}
 
+
+
+		recorridoFinal = recorrido;
+
+
+
+}
+
+// Funcion para dibuajar la pieza seleccionada en el tablero una vez que el jugador hace click
+function dibujarPiezaTablero()
+{
+
+	// Se comprueba primero si la imagen se puede dibujar en ese sitio
+	let dibujar = true;
+		columna = 0;
+		fila = 0;
+	for(let i=0; i<recorridoFinal.length-1 && dibujar==true; i++)
+	{
+		columna = recorridoFinal[i];
+		fila = recorridoFinal[i+1];
+
+		if(columna>9 || fila>9)
+		{	// Pieza sale del tablero
+			console.log('No se puede dibujar ahi');
+			dibujar = false;
+		}
+	}
+
+	if(dibujar==true)
+	{	
+		// Pieza a dibujar dentro del tablero
+		//console.log(mouse_fila);
+		//console.log(mouse_colum);
+		let cv = document.getElementById('panelJuego');
+			ctx = cv.getContext('2d');
+			img = new Image();
+			tam= cv.width / 10;
+
+
+		img.onload = function()
+		{	
+			// Bucle para dibujar la pieza en el tablero
+			for(let i=0; i<recorridoFinal.length-1; i++)
+			{	
+					// Pieza dentro del tablero
+					columna = recorridoFinal[i];
+					fila = recorridoFinal[i+1];
+					i++;
+					ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
+			}
+
+			colocada = true;
+
+
+		};
+
+		// La url de la imagen estara en la variable imagen de la pieza elegida
+		img.src = piezaElegida.imagen;
+
+	}
+
+
 }
 
 // Seleccion de la pieza a dibujar
@@ -642,6 +683,8 @@ function seleccionPieza(pieza)
 		document.getElementById('zonaPieza3').style.borderColor = "#BABDB6FF";
 		piezaElegida = pieza1;
 		document.getElementById('zonaPieza1').style.borderColor = "aquamarine";
+
+		colocada = false;
 	}
 	else
 	{
@@ -651,6 +694,8 @@ function seleccionPieza(pieza)
 			document.getElementById('zonaPieza3').style.borderColor = "#BABDB6FF";
 			piezaElegida = pieza2;
 			document.getElementById('zonaPieza2').style.borderColor = "aquamarine";
+
+			colocada = false;
 		}
 		else
 		{
@@ -658,10 +703,13 @@ function seleccionPieza(pieza)
 			document.getElementById('zonaPieza2').style.borderColor = "#BABDB6FF";
 			piezaElegida = pieza3;
 			document.getElementById('zonaPieza3').style.borderColor = "aquamarine";
+
+			colocada = false;
 		}
 	}
 
 	console.log(piezaElegida);
+
 	moverPieza();
 
 
@@ -737,10 +785,11 @@ function inicioJuego()
 }
 
 // Objeto Pieza con el tipo, color  y angulo de rotacion del mismo
-function Pieza(nombre, color)
+function Pieza(nombre, color, img)
 { 
 	this.nombre = nombre; 		// Tipo de pieza
 	this.color = color; 		// Color en el que se dibujara
 	this.rotacion = 0; 			// Rotacion de la pieza
 	this.canvas = 'ninguno';
+	this.imagen = img;
 }
