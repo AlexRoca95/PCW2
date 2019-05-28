@@ -246,6 +246,7 @@ function cargarPiezas()
 	dibujarPieza(pieza3);
 
 
+
 }
 
 // A partir del array que se pasa a la funcion se obtiene un valor aleatorio del mismo
@@ -316,7 +317,7 @@ function dibujarPieza(pieza)
 				break;
 
 			case 'L':
-				if(pieza.rotacion==0)
+				if(pieza.rotacion==0 || pieza.rotacion==270)
 				{
 					recorrido = [1, 1, 1, 2, 1, 3, 2, 3, 3, 3];    
 				}
@@ -330,11 +331,7 @@ function dibujarPieza(pieza)
 					{
 						if(pieza.rotacion==180)
 						{
-							recorrido = [1, 1, 2, 1, 3, 1, 3, 2, 3, 3];  
-						}
-						else // 270 grados
-						{
-							recorrido = [3, 1, 3, 2, 3, 3, 2, 3, 1, 3]; 
+							recorrido = [3, 1, 3, 2, 3, 3, 2, 3, 1, 3];   
 						}
 					}
 				}
@@ -387,23 +384,23 @@ function dibujarPieza(pieza)
 			case 'esquina':
 				if(pieza.rotacion==0)
 				{
-					recorrido = [1, 1, 2, 1, 1, 2];   
+					recorrido = [1, 2, 1, 3, 2, 3];   
 				}
 				else
 				{
 					if(pieza.rotacion==90)
 					{
-						recorrido = [2, 1, 3, 1, 3, 2];  
+						recorrido = [1, 1, 2, 1, 1, 2];  
 					}
 					else
 					{
 						if(pieza.rotacion==180)
 						{
-							recorrido = [3, 2, 3, 3, 2, 3];  
+							recorrido = [3, 1, 2, 1, 3, 2];  
 						}
 						else // 270
 						{
-							recorrido = [2, 3, 1, 3, 1, 2]; 
+							recorrido = [3, 3, 3, 2, 2, 3]; 
 						}
 					}
 				}
@@ -450,9 +447,9 @@ function moverPieza()
 				columna = Math.trunc(evt.offsetX / tam);
 
 				//console.log(fila + ' : ' + columna);
-				testMatrizColision();
-				comprobarPosicion(fila,columna);
-				testMatrizColision();
+				//testMatrizColision();
+				//comprobarPosicion(fila,columna);
+				//testMatrizColision();
 
 				let ctx = cv.getContext('2d');
 				img = new Image();
@@ -462,7 +459,7 @@ function moverPieza()
 
 					cv.width = cv.width;  	// Borramos la imagen dibujada anterioremente
 
-					colocarPieza(fila, columna, tam);
+					colocarPieza(fila, columna, tam); 		// Se coloca la pieza en la posicion del raton 
 					
 
 					pintarDivisiones();
@@ -516,15 +513,17 @@ function colocarPieza(f, c, tam)
 		case 'cuadradoP':
 			// Sin rotacion
 			recorrido = [c, f, c+1, f, c, f+1, c+1, f+1];   // Columna, Fila, Columna, Fila....
+			//recorrido = [1, 1, 2, 1, 1, 2, 2, 2]; 
 			break;
 
 		case 'cuadradoG':
 			// Sin rotacion
 			recorrido = [c, f, c+1, f, c+2, f, c, f+1, c+1, f+1, c+2, f+1, c, f+2, c+1, f+2, c+2, f+2];   // Columna, Fila, Columna, Fila....
+			//recorrido = [1, 1, 2, 1, 3, 1, 1, 2, 2, 2, 3, 2, 1, 3, 2, 3, 3, 3]; 
 			break;
 
 		case 'L':
-			if(piezaElegida.rotacion==0)
+			if(piezaElegida.rotacion==0 || piezaElegida.rotacion==270)
 			{
 				recorrido = [c, f, c, f+1, c, f+2, c+1, f+2, c+2, f+2];    
 			}
@@ -538,11 +537,7 @@ function colocarPieza(f, c, tam)
 				{
 					if(piezaElegida.rotacion==180)
 					{
-						recorrido = [c, f, c+1, f, c+2, f, c+2, f+1, c+2, f+2];  
-					}
-					else // 270 grados
-					{
-						recorrido = [c+2, f, c+2, f+1, c+2, f+2, c+1, f+2, c, f+2]; 
+						recorrido = [c, f, c, f+1, c, f+2, c-1, f+2, c-2, f+2];  
 					}
 				}
 			}
@@ -551,67 +546,67 @@ function colocarPieza(f, c, tam)
 			case 'filaG':
 				if(piezaElegida.rotacion==0)
 				{
-					recorrido = [c-1, f+1, c, f+1, c+1, f+1, c+2, f+1, c+3, f+1];  
+					recorrido = [c, f, c+1, f, c+2, f, c+3, f, c+4, f];  
 				}
 				else  // 90 grados
 				{
-					recorrido = [c+1, f-1, c+1, f, c+1, f+1, c+1, f+2, c+1, f+3];  
+					recorrido = [c, f, c, f+1, c, f+2, c, f+3, c, f+4];  
 				}
 				break;
 
 			case 'filaP':
 				if(piezaElegida.rotacion==0)
 				{
-					recorrido = [c, f+1, c+1, f+1, c+2, f+1];   
+					recorrido = [c, f, c+1, f, c+2, f];   
 				}
 				else // 90 grados
 				{
-					recorrido = [c+1, f, c+1, f+1, c+1, f+2];  
+					recorrido = [c, f, c, f+1, c, f+2];  
 				}
 				break;
 
 			case 'columnaG':
 				if(piezaElegida.rotacion==0)
 				{
-					recorrido = [c+1, f, c+1, f+1, c+1, f+2, c+1, f+3];    
+					recorrido = [c, f, c, f+1, c, f+2, c, f+3];    
 				}
 				else // 90 grados
 				{
-					recorrido = [c, f+1, c+1, f+1, c+2, f+1, c+3, f+1];  
+					recorrido = [c, f, c+1, f, c+2, f, c+3, f];  
 				} 
 				break;
 
 			case 'columnaP':
 				if(piezaElegida.rotacion==0)
 				{
-					recorrido = [c+1, f, c+1, f+1];     
+					recorrido = [c, f, c, f+1];     
 				}
 				else // 90 grados
 				{
-					recorrido = [c+1, f+1, c+2, f+1];  
+					recorrido = [c, f, c+1, f];  
 				} 
 				break;
 
 			case 'esquina':
 				if(piezaElegida.rotacion==0)
 				{
-					recorrido = [c, f, c+1, f, c, f+1];   
+					recorrido = [c, f, c, f+1, c+1, f+1];   
 				}
 				else
 				{
 					if(piezaElegida.rotacion==90)
 					{
-						recorrido = [c+1, f, c+2, f, c+2, f+1];  
+						recorrido = [c, f, c+1, f, c, f+1];  
 					}
 					else
 					{
 						if(piezaElegida.rotacion==180)
 						{
-							recorrido = [c+2, f+1, c+2, f+2, c+1, f+2];  
+							recorrido = [c, f, c+1, f, c+1, f+1];  
 						}
 						else // 270
 						{
-							recorrido = [c+1, f+2, c, f+2, c, f+1]; 
+							recorrido = [c, f, c, f+1, c-1, f+1]; 
 						}
 					}
 				}
@@ -619,7 +614,7 @@ function colocarPieza(f, c, tam)
 
 			case 'punto':
 				// Sin rotacion
-				recorrido = [c+1, f+1];   
+				recorrido = [c, f];   
 				break;
 		}
 
@@ -633,8 +628,6 @@ function colocarPieza(f, c, tam)
 			i++;
 
 			ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
-
-			//ctx.fillRect(columna*tam, fila*tam, tam, tam);			// Rellenamos un rectangulo con el color que tengamos (x, y, ancho, alto)
 		}
 
 }
@@ -668,7 +661,7 @@ function seleccionPieza(pieza)
 		}
 	}
 
-
+	console.log(piezaElegida);
 	moverPieza();
 
 
@@ -730,18 +723,6 @@ function comprobarPosicion(x, y){
 		soltarPieza();
 	}
 
-}
-
-function testMatrizColision()
-{
- 
-  for(var k=0;k<9;k++)
-  {
-    for(var j=0;j<9;j++)
-    {
-      console.log(mtOcupacion[k][j]);
-    }
-  }
 }
 
 function soltarPieza(){
