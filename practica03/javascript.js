@@ -438,9 +438,11 @@ function moverPieza()
 	let cv = document.getElementById('panelJuego');
 
 	// Con el movimiento del raton se llama a la funcion
-	cv.onmousemove = function(evt) {
+	cv.onmousemove = function(evt) 
+	{
 
-
+		if(colocada==false)
+		{
 			if(evt.offsetX <0 || evt.offsetX > cv.width || evt.offsetY<0 || evt.offsetY > cv.height)
 			{
 				return false;
@@ -451,9 +453,10 @@ function moverPieza()
 				fila = Math.trunc(evt.offsetY / tam);  // Fila en la que esta el raton. con trun truncamos el valor
 				columna = Math.trunc(evt.offsetX / tam);
 
+				console.log(tam);
 				// Guardamos la fila y columna donde esta el raton para comprobar despues si esta fuera del tablero o no
-				mouse_fila = fila;
-				mouse_colum = columna;
+				//mouse_fila = fila;
+				//mouse_colum = columna;
 
 				//console.log(fila + ' : ' + columna);
 				//testMatrizColision();
@@ -468,9 +471,11 @@ function moverPieza()
 
 					cv.width = cv.width;  					// Borramos la imagen dibujada anterioremente
 
+					//ctx.clearRect(evt.offsetX-100, evt.offsetY-100, 50, 250);
+					borrarZonaPieza(evt.offsetX, evt.offsetY, ctx);
 					colocarPieza(fila, columna, tam); 		// Se coloca la pieza en la posicion del raton (no se queda dibujado en el panel aun)
 					
-					pintarDivisiones();
+					pintarDivisiones(10, 'panelJuego');
 
 				};
 
@@ -479,8 +484,50 @@ function moverPieza()
 
 
 			}
+		}
 	}
 
+}
+
+function borrarZonaPieza(x, y, context)
+{
+	switch (piezaElegida.nombre) {
+		case 'cuadradoP':
+			//context.clearRect(x, y, 200, 200);
+			break;
+
+		case 'cuadradoG':
+
+			break;
+
+		case 'L':
+			
+			break;
+
+		case 'filaG':
+				
+			break;
+
+		case 'filaP':
+				
+			break;
+
+		case 'columnaG':
+				
+			break;
+
+		case 'columnaP':
+				
+			break;
+
+		case 'esquina':
+				
+			break;
+
+		case 'punto':
+				 
+			break;
+		}
 }
 
 // Dibuja la pieza en el tablero en funcion de la fila y columna donde este el raton del jugador (no la deja dibujada aun)
@@ -617,7 +664,8 @@ function colocarPieza(f, c, tam)
 
 }
 
-// Funcion para dibuajar la pieza seleccionada en el tablero una vez que el jugador hace click
+// Funcion para dibuajar la pieza seleccionada en el tablero una vez que el jugador hace click.
+// Se comprueba que la pieza este dentro de los limites del tablero y que no haya ya una pieza dibujada en ese sitio
 function dibujarPiezaTablero()
 {
 
@@ -661,6 +709,12 @@ function dibujarPiezaTablero()
 			}
 
 			colocada = true;
+
+			// Borrado de la pieza del canvas del cual la obtuvimos
+			let cv2 = document.getElementById(piezaElegida.canvas);
+			cv2.width = cv2.width;
+
+			pintarDivisiones(5, piezaElegida.canvas);
 
 
 		};
@@ -708,26 +762,26 @@ function seleccionPieza(pieza)
 		}
 	}
 
-	console.log(piezaElegida);
+	//console.log(piezaElegida);
 
 	moverPieza();
 
 
 }
 
-// Pinta las divisiones de la zona de juego de nuevo
-function pintarDivisiones()
+// Repinta las divisiones del canvas indicado con el numero de divisiones tambien indicado
+function pintarDivisiones(numDiv, panel)
 {
-	let cv = document.getElementById('panelJuego');
+	let cv = document.getElementById(panel);
 		ctx = cv.getContext('2d');
-		tamDiv = cv.width / 10;
+		tamDiv = cv.width / numDiv;
 
 	ctx.beginPath(); 
 
 	ctx.lineWidth = 1;
 	ctx.strokeStyle = '#BABDB6FF';
 
-	for(let i=1; i<10;i++)
+	for(let i=1; i<tamDiv;i++)
 	{
 
 		ctx.moveTo(i * tamDiv, 0);
