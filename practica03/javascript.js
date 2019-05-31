@@ -10,6 +10,10 @@ var piezaElegida = new Pieza('nada', 'nada', 'nada');
 var colocada = false;
 
 
+var filaAnt = -1;
+var columAnt = -1;
+
+
 
 // Array que contiene el recorrido para dibujar la pieza seleccionada en el tablero
 var recorridoFinal= [];
@@ -429,105 +433,327 @@ function dibujarPieza(pieza)
 
 
 
-
 }
 
 // Movemos la pieza seleccionada
 function moverPieza()
 {
-	let cv = document.getElementById('panelJuego');
-
-	// Con el movimiento del raton se llama a la funcion
-	cv.onmousemove = function(evt) 
+	if(piezaElegida.colocada==false)
 	{
+		let cv = document.getElementById('panelJuego');
 
-		if(colocada==false)
+		// Con el movimiento del raton se llama a la funcion
+		cv.onmousemove = function(evt) 
 		{
-			if(evt.offsetX <0 || evt.offsetX > cv.width || evt.offsetY<0 || evt.offsetY > cv.height)
+
+			if(colocada==false)
 			{
-				return false;
-			}
-			else
-			{
-				let tam= cv.width / 10;
-				fila = Math.trunc(evt.offsetY / tam);  // Fila en la que esta el raton. con trun truncamos el valor
-				columna = Math.trunc(evt.offsetX / tam);
+				if(evt.offsetX <0 || evt.offsetX > cv.width || evt.offsetY<0 || evt.offsetY > cv.height)
+				{
+					return false;
+				}
+				else
+				{
+					let tam= cv.width / 10;
+					fila = Math.trunc(evt.offsetY / tam);  // Fila en la que esta el raton. con trun truncamos el valor
+					columna = Math.trunc(evt.offsetX / tam);
 
-				console.log(tam);
-				// Guardamos la fila y columna donde esta el raton para comprobar despues si esta fuera del tablero o no
-				//mouse_fila = fila;
-				//mouse_colum = columna;
+					// Guardamos la fila y columna donde esta el raton para comprobar despues si esta fuera del tablero o no
+					//mouse_fila = fila;
+					//mouse_colum = columna;
 
-				//console.log(fila + ' : ' + columna);
-				//testMatrizColision();
-				//comprobarPosicion(fila,columna);
-				//testMatrizColision();
+					//console.log(fila + ' : ' + columna);
+					//testMatrizColision();
+					//comprobarPosicion(fila,columna);
+					//testMatrizColision();
 
-				let ctx = cv.getContext('2d');
-				img = new Image();
+					let ctx = cv.getContext('2d');
+					img = new Image();
 
-				// Esto es lo mismo que la practica pero habra que pintar mas celdas en funcion del tam de la ficha
-				img.onload = function(){
+					// Esto es lo mismo que la practica pero habra que pintar mas celdas en funcion del tam de la ficha
+					img.onload = function(){
 
-					cv.width = cv.width;  					// Borramos la imagen dibujada anterioremente
+						//cv.width = cv.width;  					// Borramos la imagen dibujada anterioremente
 
-					//ctx.clearRect(evt.offsetX-100, evt.offsetY-100, 50, 250);
-					borrarZonaPieza(evt.offsetX, evt.offsetY, ctx);
-					colocarPieza(fila, columna, tam); 		// Se coloca la pieza en la posicion del raton (no se queda dibujado en el panel aun)
-					
-					pintarDivisiones(10, 'panelJuego');
+						//ctx.clearRect(evt.offsetX-100, evt.offsetY-100, 50, 250);
 
-				};
+						borrarZonaPieza(fila, columna, ctx, tam);
+						colocarPieza(fila, columna, tam); 		// Se coloca la pieza en la posicion del raton (no se queda dibujado en el panel aun)
+						
+						pintarDivisiones(10, 'panelJuego');
 
-				// La url de la imagen estara en la variable imagen de la pieza elegida
-				img.src = piezaElegida.imagen;
+					};
+
+					// La url de la imagen estara en la variable imagen de la pieza elegida
+					img.src = piezaElegida.imagen;
 
 
+				}
 			}
 		}
 	}
 
 }
 
-function borrarZonaPieza(x, y, context)
+// Funcion para borrar la posicion anterior de la pieza al moverla
+function borrarZonaPieza(f, c, contexto, size)
 {
+	// Establecemos el recorrido del dibujado en funcion del tipo de pieza y su rotacion
 	switch (piezaElegida.nombre) {
 		case 'cuadradoP':
-			//context.clearRect(x, y, 200, 200);
+			if(filaAnt!=-1 && columAnt!=-1)
+			{
+				if(f>filaAnt && c==columAnt)
+				{	
+					// Abajo
+					contexto.clearRect(c*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((c+1)*48, (filaAnt)*48, 48, 48);
+				}
+				else
+				{
+					// Arriba
+					contexto.clearRect(columAnt*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect((columAnt+1)*48, (filaAnt+1)*48, 48, 48);
+
+				}
+
+
+				if(c>columAnt)
+				{
+					// Derecha
+					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
+
+				}
+				else
+				{
+					contexto.clearRect((columAnt-1)*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt-1)*48, (filaAnt+1)*48, 48, 48);
+				}
+			}
+
+
 			break;
 
 		case 'cuadradoG':
+			if(filaAnt!=-1 && columAnt!=-1)
+			{
+				if(f>filaAnt && c==columAnt)
+				{	
+					// Abajo
+					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt+2)*48, (filaAnt)*48, 48, 48);
 
+				}
+				else
+				{
+					// Arriba
+					contexto.clearRect(columAnt*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect((columAnt+1)*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect((columAnt+2)*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect(columAnt*48, (filaAnt+2)*48, 48, 48);
+					contexto.clearRect((columAnt+1)*48, (filaAnt+2)*48, 48, 48);
+					contexto.clearRect((columAnt+2)*48, (filaAnt+2)*48, 48, 48);
+
+				}
+
+
+				if(f==filaAnt && c>columAnt)
+				{
+					// Derecha
+					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+2)*48, 48, 48);
+				}
+				else
+				{
+					contexto.clearRect((columAnt-1)*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt-1)*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect((columAnt-1)*48, (filaAnt+2)*48, 48, 48);
+					contexto.clearRect((columAnt-2)*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt-2)*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect((columAnt-2)*48, (filaAnt+2)*48, 48, 48);
+				}
+			}
 			break;
 
 		case 'L':
-			
+			if(filaAnt!=-1 && columAnt!=-1)
+			{
+				// Arriba Abajo
+				if(f!=filaAnt && c==columAnt)
+				{
+					contexto.clearRect(columAnt*48, (filaAnt+2)*48, 48, 48);
+					contexto.clearRect((columAnt+1)*48, (filaAnt+2)*48, 48, 48);
+					contexto.clearRect((columAnt+2)*48, (filaAnt+2)*48, 48, 48);
+				}
+				else
+				{
+					contexto.clearRect(columAnt*48, (filaAnt-1)*48, 48, 48);
+				}
+
+				// Derecho e izquierda
+				if((f==filaAnt && c>columAnt))
+				{
+					contexto.clearRect((columAnt)*48, filaAnt*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+2)*48, 48, 48);
+				}
+				else
+				{
+					contexto.clearRect((columAnt)*48, filaAnt*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect((columAnt+2)*48, (filaAnt+2)*48, 48, 48);
+				}
+
+			}	 
 			break;
 
 		case 'filaG':
-				
+			if(filaAnt!=-1 && columAnt!=-1)
+			{
+				// Arriba Abajo
+				if(f!=filaAnt && c==columAnt)
+				{
+					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt+2)*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt+3)*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt+4)*48, (filaAnt)*48, 48, 48);
+				}
+
+				// Derecho e izquierda
+				if((f==filaAnt && c>columAnt))
+				{
+					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
+
+				}
+				else
+				{
+					contexto.clearRect((columAnt+4)*48, (filaAnt)*48, 48, 48);
+				}
+
+			}	
 			break;
 
 		case 'filaP':
-				
+			if(filaAnt!=-1 && columAnt!=-1)
+			{
+				// Arriba Abajo
+				if(f!=filaAnt && c==columAnt)
+				{
+					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt+2)*48, (filaAnt)*48, 48, 48);
+				}
+
+				// Derecho e izquierda
+				if((f==filaAnt && c>columAnt))
+				{
+					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
+
+				}
+				else
+				{
+					contexto.clearRect((columAnt+2)*48, (filaAnt)*48, 48, 48);
+				}
+
+			}	 
 			break;
 
 		case 'columnaG':
-				
+			if(filaAnt!=-1 && columAnt!=-1)
+			{
+				// Arriba Abajo
+				if(f!=filaAnt && c==columAnt)
+				{
+					contexto.clearRect(columAnt*48, (filaAnt+3)*48, 48, 48);
+				}
+				else
+				{
+					contexto.clearRect(columAnt*48, (filaAnt-1)*48, 48, 48);
+				}
+
+				// Derecho e izquierda
+				if((f==filaAnt && c!=columAnt))
+				{
+					contexto.clearRect((columAnt)*48, filaAnt*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+2)*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+3)*48, 48, 48);
+				}
+
+			}	 
 			break;
 
 		case 'columnaP':
-				
+			if(filaAnt!=-1 && columAnt!=-1)
+			{
+				// Arriba Abajo
+				if(f!=filaAnt && c==columAnt)
+				{
+					contexto.clearRect(columAnt*48, (filaAnt+1)*48, 48, 48);
+				}
+				else
+				{
+					contexto.clearRect(columAnt*48, (filaAnt-1)*48, 48, 48);
+				}
+
+				// Derecho e izquierda
+				if((f==filaAnt && c!=columAnt))
+				{
+					contexto.clearRect((columAnt)*48, filaAnt*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
+				}
+
+			}
 			break;
 
 		case 'esquina':
-				
+			if(filaAnt!=-1 && columAnt!=-1)
+			{
+				// Arriba Abajo
+				if(f!=filaAnt && c==columAnt)
+				{
+					contexto.clearRect(columAnt*48, (filaAnt+1)*48, 48, 48);
+					contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
+				}
+				else
+				{
+					contexto.clearRect(columAnt*48, (filaAnt-1)*48, 48, 48);
+					contexto.clearRect((columAnt+1)*48, (filaAnt-1)*48, 48, 48);
+				}
+
+				// Derecho e izquierda
+				if(f==filaAnt && c>columAnt)
+				{
+					// Derecha
+					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
+				}
+				else
+				{
+					contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
+					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
+				}
+
+			}
 			break;
 
 		case 'punto':
-				 
+  			
+			if(filaAnt!=-1 && columAnt!=-1)
+			{
+				contexto.clearRect(columAnt*48, filaAnt*48, 48, 48);
+			}
 			break;
 		}
+
+
+		filaAnt = f;
+		columAnt = c;
+	
 }
 
 // Dibuja la pieza en el tablero en funcion de la fila y columna donde este el raton del jugador (no la deja dibujada aun)
@@ -662,66 +888,74 @@ function colocarPieza(f, c, tam)
 
 
 
+
+
 }
 
 // Funcion para dibuajar la pieza seleccionada en el tablero una vez que el jugador hace click.
 // Se comprueba que la pieza este dentro de los limites del tablero y que no haya ya una pieza dibujada en ese sitio
 function dibujarPiezaTablero()
 {
-
-	// Se comprueba primero si la imagen se puede dibujar en ese sitio
-	let dibujar = true;
-		columna = 0;
-		fila = 0;
-	for(let i=0; i<recorridoFinal.length-1 && dibujar==true; i++)
+	if(piezaElegida.colocada!=true)
 	{
-		columna = recorridoFinal[i];
-		fila = recorridoFinal[i+1];
+		// Se comprueba primero si la imagen se puede dibujar en ese sitio
+		let dibujar = true;
+			columna = 0;
+			fila = 0;
+		for(let i=0; i<recorridoFinal.length-1 && dibujar==true; i++)
+		{
+			columna = recorridoFinal[i];
+			fila = recorridoFinal[i+1];
 
-		if(columna>9 || fila>9)
-		{	// Pieza sale del tablero
-			console.log('No se puede dibujar ahi');
-			dibujar = false;
-		}
-	}
-
-	if(dibujar==true)
-	{	
-		// Pieza a dibujar dentro del tablero
-		//console.log(mouse_fila);
-		//console.log(mouse_colum);
-		let cv = document.getElementById('panelJuego');
-			ctx = cv.getContext('2d');
-			img = new Image();
-			tam= cv.width / 10;
-
-
-		img.onload = function()
-		{	
-			// Bucle para dibujar la pieza en el tablero
-			for(let i=0; i<recorridoFinal.length-1; i++)
-			{	
-					// Pieza dentro del tablero
-					columna = recorridoFinal[i];
-					fila = recorridoFinal[i+1];
-					i++;
-					ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
+			if(columna>9 || fila>9)
+			{	// Pieza sale del tablero
+				console.log('No se puede dibujar ahi');
+				dibujar = false;
 			}
+		}
 
-			colocada = true;
+		if(dibujar==true)
+		{	
+			// Pieza a dibujar dentro del tablero
+			//console.log(mouse_fila);
+			//console.log(mouse_colum);
+			let cv = document.getElementById('panelJuego');
+				ctx = cv.getContext('2d');
+				img = new Image();
+				tam= cv.width / 10;
 
-			// Borrado de la pieza del canvas del cual la obtuvimos
-			let cv2 = document.getElementById(piezaElegida.canvas);
-			cv2.width = cv2.width;
 
-			pintarDivisiones(5, piezaElegida.canvas);
+			img.onload = function()
+			{	
+				// Bucle para dibujar la pieza en el tablero
+				for(let i=0; i<recorridoFinal.length-1; i++)
+				{	
+						// Pieza dentro del tablero
+						columna = recorridoFinal[i];
+						fila = recorridoFinal[i+1];
+						i++;
+						ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
+				}
+
+				colocada = true;
+
+				// Borrado de la pieza del canvas del cual la obtuvimos
+				let cv2 = document.getElementById(piezaElegida.canvas);
+				cv2.width = cv2.width;
+
+				pintarDivisiones(5, piezaElegida.canvas);
+
+				filaAnt = -1;
+				columAnt = -1;
+				piezaElegida.colocada = true;
 
 
-		};
+			};
 
-		// La url de la imagen estara en la variable imagen de la pieza elegida
-		img.src = piezaElegida.imagen;
+			// La url de la imagen estara en la variable imagen de la pieza elegida
+			img.src = piezaElegida.imagen;
 
+		}
 	}
 
 
@@ -730,41 +964,45 @@ function dibujarPiezaTablero()
 // Seleccion de la pieza a dibujar
 function seleccionPieza(pieza)
 {	
-
-	if(pieza==1)
-	{
-		document.getElementById('zonaPieza2').style.borderColor = "#BABDB6FF";
-		document.getElementById('zonaPieza3').style.borderColor = "#BABDB6FF";
-		piezaElegida = pieza1;
-		document.getElementById('zonaPieza1').style.borderColor = "aquamarine";
-
-		colocada = false;
-	}
-	else
-	{
-		if(pieza==2)
+		if(pieza==1)
 		{
-			document.getElementById('zonaPieza1').style.borderColor = "#BABDB6FF";
+			document.getElementById('zonaPieza2').style.borderColor = "#BABDB6FF";
 			document.getElementById('zonaPieza3').style.borderColor = "#BABDB6FF";
-			piezaElegida = pieza2;
-			document.getElementById('zonaPieza2').style.borderColor = "aquamarine";
+			piezaElegida = pieza1;
+			document.getElementById('zonaPieza1').style.borderColor = "aquamarine";
 
 			colocada = false;
 		}
 		else
 		{
-			document.getElementById('zonaPieza1').style.borderColor = "#BABDB6FF";
-			document.getElementById('zonaPieza2').style.borderColor = "#BABDB6FF";
-			piezaElegida = pieza3;
-			document.getElementById('zonaPieza3').style.borderColor = "aquamarine";
+			if(pieza==2)
+			{
+				document.getElementById('zonaPieza1').style.borderColor = "#BABDB6FF";
+				document.getElementById('zonaPieza3').style.borderColor = "#BABDB6FF";
+				piezaElegida = pieza2;
+				document.getElementById('zonaPieza2').style.borderColor = "aquamarine";
 
-			colocada = false;
+				colocada = false;
+			}
+			else
+			{
+				document.getElementById('zonaPieza1').style.borderColor = "#BABDB6FF";
+				document.getElementById('zonaPieza2').style.borderColor = "#BABDB6FF";
+				piezaElegida = pieza3;
+				document.getElementById('zonaPieza3').style.borderColor = "aquamarine";
+
+				colocada = false;
+			}
 		}
+
+	if(piezaElegida.colocada==false)
+	{
+
+		//console.log(piezaElegida);
+
+		moverPieza();
+
 	}
-
-	//console.log(piezaElegida);
-
-	moverPieza();
 
 
 }
@@ -846,4 +1084,5 @@ function Pieza(nombre, color, img)
 	this.rotacion = 0; 			// Rotacion de la pieza
 	this.canvas = 'ninguno';
 	this.imagen = img;
+	this.colocada = false;
 }
