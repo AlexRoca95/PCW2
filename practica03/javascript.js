@@ -102,6 +102,7 @@ function prepararZona()
 	crearZona(3);
 	crearZona(4);
 
+
 }
 
 
@@ -212,7 +213,7 @@ function jugar()
 
 	jugando = true;
 
-	inicioJuego();
+	cargarPiezas();
 }
 
 // Función para seleccionar aleatoriamente 3 de las 9 piezas disponibles
@@ -503,32 +504,38 @@ function borrarZonaPieza(f, c, contexto, size)
 		case 'cuadradoP':
 			if(filaAnt!=-1 && columAnt!=-1)
 			{
-				if(f>filaAnt && c==columAnt)
-				{	
-					// Abajo
-					contexto.clearRect(c*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((c+1)*48, (filaAnt)*48, 48, 48);
-				}
-				else
+				if(c==columAnt)
 				{
-					// Arriba
-					contexto.clearRect(columAnt*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect((columAnt+1)*48, (filaAnt+1)*48, 48, 48);
 
+					if(f>filaAnt)
+					{	
+						// Abajo
+						contexto.clearRect(c*48, (filaAnt)*48, 48, 48);
+						contexto.clearRect((c+1)*48, (filaAnt)*48, 48, 48);
+					}
+					else
+					{
+						// Arriba
+						contexto.clearRect(columAnt*48, (filaAnt+1)*48, 48, 48);
+						contexto.clearRect((columAnt+1)*48, (filaAnt+1)*48, 48, 48);
+
+					}
 				}
 
-
-				if(c>columAnt)
+				if(f==filaAnt)
 				{
-					// Derecha
-					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
+					if(c>columAnt)
+					{
+						// Derecha
+						contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
+						contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
 
-				}
-				else
-				{
-					contexto.clearRect((columAnt-1)*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt-1)*48, (filaAnt+1)*48, 48, 48);
+					}
+					else
+					{
+						contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
+						contexto.clearRect((columAnt+1)*48, (filaAnt+1)*48, 48, 48);
+					}
 				}
 			}
 
@@ -538,42 +545,44 @@ function borrarZonaPieza(f, c, contexto, size)
 		case 'cuadradoG':
 			if(filaAnt!=-1 && columAnt!=-1)
 			{
-				if(f>filaAnt && c==columAnt)
-				{	
-					// Abajo
-					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt+2)*48, (filaAnt)*48, 48, 48);
+				if(c==columAnt)
+				{
+
+					if(f>filaAnt)
+					{	
+						// Abajo
+						contexto.clearRect(c*48, (filaAnt)*48, 48, 48);
+						contexto.clearRect((c+1)*48, (filaAnt)*48, 48, 48);
+						contexto.clearRect((c+2)*48, (filaAnt)*48, 48, 48);
+
+					}
+					else
+					{
+						// Arriba
+						contexto.clearRect(c*48, (filaAnt+2)*48, 48, 48);
+						contexto.clearRect((c+1)*48, (filaAnt+2)*48, 48, 48);
+						contexto.clearRect((c+2)*48, (filaAnt+2)*48, 48, 48);
+
+					}
 
 				}
-				else
-				{
-					// Arriba
-					contexto.clearRect(columAnt*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect((columAnt+1)*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect((columAnt+2)*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect(columAnt*48, (filaAnt+2)*48, 48, 48);
-					contexto.clearRect((columAnt+1)*48, (filaAnt+2)*48, 48, 48);
-					contexto.clearRect((columAnt+2)*48, (filaAnt+2)*48, 48, 48);
 
-				}
-
-
-				if(f==filaAnt && c>columAnt)
+				if(f==filaAnt)
 				{
-					// Derecha
-					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+2)*48, 48, 48);
-				}
-				else
-				{
-					contexto.clearRect((columAnt-1)*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt-1)*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect((columAnt-1)*48, (filaAnt+2)*48, 48, 48);
-					contexto.clearRect((columAnt-2)*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt-2)*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect((columAnt-2)*48, (filaAnt+2)*48, 48, 48);
+					if(c>columAnt)
+					{
+						// Derecha
+						contexto.clearRect(columAnt*48, (f)*48, 48, 48);
+						contexto.clearRect((columAnt)*48, (f+1)*48, 48, 48);
+						contexto.clearRect((columAnt)*48, (f+2)*48, 48, 48);
+					}
+					else
+					{
+						contexto.clearRect((columAnt+2)*48, (f)*48, 48, 48);
+						contexto.clearRect((columAnt+2)*48, (f+1)*48, 48, 48);
+						contexto.clearRect((columAnt+2)*48, (f+2)*48, 48, 48);
+					}
+
 				}
 			}
 			break;
@@ -937,6 +946,8 @@ function dibujarPiezaTablero()
 						ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
 				}
 
+
+				rellenarMatrizColision();
 				colocada = true;
 
 				// Borrado de la pieza del canvas del cual la obtuvimos
@@ -948,6 +959,13 @@ function dibujarPiezaTablero()
 				filaAnt = -1;
 				columAnt = -1;
 				piezaElegida.colocada = true;
+
+
+				if(pieza1.colocada==true  && pieza2.colocada==true && pieza3.colocada==true)
+				{
+					// Todas las piezas colocadas. Volvemos a cargar otras 3
+					cargarPiezas();
+				}
 
 
 			};
@@ -1007,6 +1025,28 @@ function seleccionPieza(pieza)
 
 }
 
+
+// Funcion para rellenar de 1 la matriz de colosion en funcion de la pieza colocada en el tablero
+function rellenarMatrizColision()
+{
+
+	for(let i=0; i<recorridoFinal.length-1; i++)
+	{
+		columna = recorridoFinal[i];
+		fila = recorridoFinal[i+1];
+		i++;
+
+		mtOcupacion[fila][columna]=1;
+			
+	}
+
+	console.table(mtOcupacion);
+
+
+
+
+}
+
 // Repinta las divisiones del canvas indicado con el numero de divisiones tambien indicado
 function pintarDivisiones(numDiv, panel)
 {
@@ -1038,14 +1078,14 @@ function pintarDivisiones(numDiv, panel)
 //Crea una matriz de 10x10 toda rellena de ceros
 function creaMatrizColision()
 {
-  for(var i=0;i<9;i++)
+  for(var i=0;i<10;i++)
   {
     mtOcupacion[i]=[];
   }
 
-  for(var k=0;k<9;k++)
+  for(var k=0;k<10;k++)
   {
-    for(var j=0;j<9;j++)
+    for(var j=0;j<10;j++)
     {
       mtOcupacion[k][j]=0;
     }
@@ -1062,17 +1102,6 @@ function comprobarPosicion(x, y){
 	else{
 		soltarPieza();
 	}
-
-}
-
-function soltarPieza(){
-
-}
-
-// Empieza el juego: Se seleccionan las piezas aleatorias a mostrar
-function inicioJuego()
-{
-	cargarPiezas(); 			// Dibujamos las 3 piezas seleccionadas aleatoriamente
 
 }
 
