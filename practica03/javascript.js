@@ -566,7 +566,6 @@ function colocarPieza(f, c, tam)
 			break;
 
 		case 'cuadradoG':
-			// Sin rotacion
 			recorrido = [c, f, c+1, f, c+2, f, c, f+1, c+1, f+1, c+2, f+1, c, f+2, c+1, f+2, c+2, f+2];   // Columna, Fila, Columna, Fila....
 			break;
 
