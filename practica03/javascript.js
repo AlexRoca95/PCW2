@@ -1,18 +1,20 @@
 
 /* VARIABLES GLOBALES */
 // Piezas a mostar 
-var pieza1 = new Pieza('nada', 'nada', 'nada');
-	pieza2 = new Pieza('nada', 'nada', 'nada');
-	pieza3 = new Pieza('nada', 'nada', 'nada');
+var pieza1 = new Pieza('nada', 'nada', 'nada', -1);
+	pieza2 = new Pieza('nada', 'nada', 'nada', -1);
+	pieza3 = new Pieza('nada', 'nada', 'nada', -1);
 
 // Pieza elegida para pintar
-var piezaElegida = new Pieza('nada', 'nada', 'nada');
+var piezaElegida = new Pieza('nada', 'nada', 'nada', -1);
 var colocada = false;
 
 
 var filaAnt = -1;
 var columAnt = -1;
 
+var filaG=0;
+	colG = 0;
 
 
 // Array que contiene el recorrido para dibujar la pieza seleccionada en el tablero
@@ -220,15 +222,15 @@ function jugar()
 function cargarPiezas()
 {	
 	// PIEZAS DISPONIBLES A CARGAR
-	let piezaObj1 = new Pieza('cuadradoG', '#13F1D4FF', 'fotos/blueClarito.png');
-		piezaObj2 = new Pieza('cuadradoP', '#4E9A06FF', 'fotos/green.png');
-		piezaObj3 = new Pieza('L', '#584db1', 'fotos/azulOscuro.png');
-		piezaObj4 = new Pieza('filaG', '#8AE234FF', 'fotos/greenLight.PNG');
-		piezaObj5 = new Pieza('filaP', '#F57900FF', 'fotos/orange.png');
-		piezaObj6 = new Pieza('columnaG', '#75507BFF', 'fotos/Purple-Box.jpg');
-		piezaObj7 = new Pieza('esquina', '#f67794', 'fotos/pink.png');
-		piezaObj8 = new Pieza('columnaP', '#EF2929FF', 'fotos/red.png');
-		piezaObj9 = new Pieza('punto', '#05EAFFFF', 'fotos/blue.jpeg');
+	let piezaObj1 = new Pieza('cuadradoG', '#13F1D4FF', 'fotos/blueClarito.png', 1);
+		piezaObj2 = new Pieza('cuadradoP', '#4E9A06FF', 'fotos/green.png', 2);
+		piezaObj3 = new Pieza('L', '#584db1', 'fotos/azulOscuro.png', 3);
+		piezaObj4 = new Pieza('filaG', '#8AE234FF', 'fotos/greenLight.PNG', 4);
+		piezaObj5 = new Pieza('filaP', '#F57900FF', 'fotos/orange.png', 5);
+		piezaObj6 = new Pieza('columnaG', '#75507BFF', 'fotos/Purple-Box.jpg', 6);
+		piezaObj7 = new Pieza('esquina', '#f67794', 'fotos/pink.png', 7);
+		piezaObj8 = new Pieza('columnaP', '#EF2929FF', 'fotos/red.png', 8);
+		piezaObj9 = new Pieza('punto', '#05EAFFFF', 'fotos/blue.jpeg', 9);
 
 	// Array con todas las piezas disponibles
 	let piezas = [piezaObj1, piezaObj2, piezaObj3, piezaObj4, piezaObj5, piezaObj6, piezaObj7, piezaObj8, piezaObj9];
@@ -478,6 +480,8 @@ function moverPieza()
 
 						//ctx.clearRect(evt.offsetX-100, evt.offsetY-100, 50, 250);
 
+						redibujarTablero(ctx, tam);
+
 						borrarZonaPieza(fila, columna, ctx, tam);
 						colocarPieza(fila, columna, tam); 		// Se coloca la pieza en la posicion del raton (no se queda dibujado en el panel aun)
 						
@@ -496,6 +500,64 @@ function moverPieza()
 
 }
 
+
+function redibujarTablero(ctx, tam)
+{
+	let img = new Image();
+		
+
+	for(var fila=0;fila<10;fila++)
+    {
+   	 	for(var col=0;col<10;col++)
+    	{
+     	 	switch (mtOcupacion[fila][col]) {
+     	 		case 1:
+     	 			img.src = 'fotos/blueClarito.png';
+     	 			break;
+     	 		case 2:
+     	 			img.src = 'fotos/green.png';
+     	 			break;
+     	 		case 3:
+     	 			img.src = 'fotos/azulOscuro.png';
+     	 			break;
+     	 		case 4:
+     	 			img.src = 'fotos/greenLight.PNG';
+     	 			break;
+     	 		case 5:
+     	 			img.src = 'fotos/orange.png';
+     	 			break;
+     	 		case 6:
+     	 			img.src = 'fotos/Purple-Box.jpg';
+     	 			break;
+     	 		case 7:
+     	 			img.src = 'fotos/pink.png';
+     	 			break;
+     	 		case 8:
+     	 			img.src = 'fotos/red.png';
+     	 			break;
+     	 		case 9:
+     	 			img.src ='fotos/blue.jpeg';
+     	 			break;
+     	 	}
+
+
+
+     	 	if(mtOcupacion[fila][col]!=0)
+     	 	{
+     	 		img.myCustomData = {x:col, y:fila};
+
+     	 		console.log(img.myCustomData);
+     	 		console.log(img.myCustomData);
+     	 		img.onload = function(){
+
+					ctx.drawImage(this, this.myCustomData.x*tam, this.myCustomData.y*tam, tam, tam);
+
+				};
+     	 	}
+   	 	}
+ 	}
+}
+
 // Funcion para borrar la posicion anterior de la pieza al moverla
 function borrarZonaPieza(f, c, contexto, size)
 {
@@ -506,7 +568,6 @@ function borrarZonaPieza(f, c, contexto, size)
 			{
 				if(c==columAnt)
 				{
-
 					if(f>filaAnt)
 					{	
 						// Abajo
@@ -911,6 +972,8 @@ function dibujarPiezaTablero()
 		let dibujar = true;
 			columna = 0;
 			fila = 0;
+
+		// Check fuera de zona
 		for(let i=0; i<recorridoFinal.length-1 && dibujar==true; i++)
 		{
 			columna = recorridoFinal[i];
@@ -921,6 +984,21 @@ function dibujarPiezaTablero()
 				console.log('No se puede dibujar ahi');
 				dibujar = false;
 			}
+		}
+
+		// Check pieza colocada en esa zona
+		for(let i=0; i<recorridoFinal.length-1 && dibujar==true; i++)
+		{
+			columna = recorridoFinal[i];
+			fila = recorridoFinal[i+1];
+			i++;
+
+			if(mtOcupacion[fila][columna]!=0)
+			{
+				console.log('No se puede dibujar ahi');
+				dibujar = false;
+			}
+			
 		}
 
 		if(dibujar==true)
@@ -947,7 +1025,8 @@ function dibujarPiezaTablero()
 				}
 
 
-				rellenarMatrizColision();
+				rellenarMatrizColision(); 			// Se rellena de 1s la zona donde se coloca la pieza
+
 				colocada = true;
 
 				// Borrado de la pieza del canvas del cual la obtuvimos
@@ -1036,7 +1115,7 @@ function rellenarMatrizColision()
 		fila = recorridoFinal[i+1];
 		i++;
 
-		mtOcupacion[fila][columna]=1;
+		mtOcupacion[fila][columna]=piezaElegida.colision;
 			
 	}
 
@@ -1092,21 +1171,9 @@ function creaMatrizColision()
   }
 }
 
-//x e y vienen dados por el raton
-function comprobarPosicion(x, y){
-
-	if(mtOcupacion[x][y]==0)
-	{
-	 mtOcupacion[x][y]=1;
-	}
-	else{
-		soltarPieza();
-	}
-
-}
 
 // Objeto Pieza con el tipo, color  y angulo de rotacion del mismo
-function Pieza(nombre, color, img)
+function Pieza(nombre, color, img, col)
 { 
 	this.nombre = nombre; 		// Tipo de pieza
 	this.color = color; 		// Color en el que se dibujara
@@ -1114,4 +1181,5 @@ function Pieza(nombre, color, img)
 	this.canvas = 'ninguno';
 	this.imagen = img;
 	this.colocada = false;
+	this.colision = col; 		// Valor con el que se rellena la matriz de colision de la pieza
 }
