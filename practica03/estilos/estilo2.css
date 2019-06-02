@@ -117,7 +117,7 @@ h2 {
 /* Ventana modal tabla puntuaciones */
 
 	/* The Modal (background) */
-	.modal {
+	.modal, .modal2 {
 
 	  display: none; /* Oculto por defecto hasta que se llame a la funcion */
 	  position: fixed; /* Que no se mueva del sitio */
@@ -158,6 +158,29 @@ h2 {
 			  text-decoration: none;
 			  cursor: pointer;
 			}
+
+		/* Boton de cerrar */
+		.close {
+		  color: #aaaaaa;
+		  float: right;
+		  font-size: 28px;
+		  font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+		  color: #000;
+		  text-decoration: none;
+		  cursor: pointer;
+		}
+
+		/* Mensaje de error */
+		.error{
+  			font-weight: 400;
+		}
+		.error>span{
+  			color: red;
+		}
 
 /* Pie de pagina */
 footer {

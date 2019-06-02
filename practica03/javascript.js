@@ -974,8 +974,10 @@ function dibujarPiezaTablero()
 			fila = recorridoFinal[i+1];
 
 			if(columna>9 || fila>9)
-			{	// Pieza sale del tablero
-				console.log('No se puede dibujar ahi');
+			{	
+				// Pieza sale del tablero
+				var modal = document.getElementById('myModal2'); 
+				modal.style.display = "block"; 
 				dibujar = false;
 			}
 		}
@@ -989,7 +991,8 @@ function dibujarPiezaTablero()
 
 			if(mtOcupacion[fila][columna]!=0)
 			{
-				console.log('No se puede dibujar ahi');
+				var modal = document.getElementById('myModal2'); 
+				modal.style.display = "block"; 
 				dibujar = false;
 			}
 			
@@ -1029,8 +1032,8 @@ function dibujarPiezaTablero()
 				piezaElegida.colocada = true;
 
 
-				// PUNTUACION
-				//checkElimFilaCol();
+				// PUNTUACIONa
+				checkElimFilaCol();
 				contarPuntos(); 		// Sumamos puntos
 
 				if(pieza1.colocada==true  && pieza2.colocada==true && pieza3.colocada==true)
@@ -1212,17 +1215,19 @@ function checkGAMEOVER()
 
 }
 
+
 function checkElimFilaCol()
 {
+
 	let columna = 0;
 		fila = 0;
 	for(let i=0; i<recorridoFinal.length;i++)
 	{
 
 		columna = recorridoFinal[i];
-		fila[i+1];
+		fila = recorridoFinal[i+1];
+		i++;
 
-		if(i%2!=0)
 		checkFila(fila, columna);
 	}
 
@@ -1233,14 +1238,13 @@ function checkElimFilaCol()
 
 function checkFila(f, c)
 {	
-	
 	let finIzq = false;
 		finDech = false;
 		completoIzq = true;
 		completoDech = true;
 
 	// Lado izquierdo
-	while(finIzq==true)
+	while(finIzq==false || completoIzq==true )
 	{
 		f = f-1;
 
@@ -1253,13 +1257,14 @@ function checkFila(f, c)
 			}
 		}
 		else
-		{
+		{	
+			console.log('entro2');
 			finIzq = true;
 		}
 	}
 
 	// Lado derecho
-	while(finDech==true)
+	while(finDech==false || completoDech==true)
 	{
 		f = f+1;
 
@@ -1282,14 +1287,9 @@ function checkFila(f, c)
 		let cv = document.getElementById('panelJuego');
 			ctx = cv.getContext('2d');
 			tam= cv.width / 10;
-
-		ctx.beginPath(); 
-
-		ctx.fillStyle = '#FFFFFFFF';
-
-		for(let pos=f; pos>=0; pos--)
+		for(let i=0; i<10; i++)
 		{
-			ctx.fillRect(c*tam, pos*tam, tam, tam);
+			ctx.fillRect(c*tam, i*tam, tam, tam);
 		}
 	}
 
@@ -1326,6 +1326,12 @@ function contarPuntos()
 	html+=' puntos</p>';
 
 	document.querySelector('.puntuacion').innerHTML=html;
+}
+
+function cerrarVentana()
+{
+	var modal = document.getElementById('myModal2');  // Obtenemos el elemento
+	modal.style.display = "none";  	// Dejamos de mostrar la ventana
 }
 
 
