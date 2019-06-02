@@ -555,274 +555,6 @@ function redibujarTablero(ctx, tam)
  	}
 }
 
-// Funcion para borrar la posicion anterior de la pieza al moverla
-function borrarZonaPieza(f, c, contexto, size)
-{
-	// Establecemos el recorrido del dibujado en funcion del tipo de pieza y su rotacion
-	switch (piezaElegida.nombre) {
-		case 'cuadradoP':
-			if(filaAnt!=-1 && columAnt!=-1)
-			{
-				if(c==columAnt)
-				{
-					if(f>filaAnt)
-					{	
-						// Abajo
-						contexto.clearRect(c*48, (filaAnt)*48, 48, 48);
-						contexto.clearRect((c+1)*48, (filaAnt)*48, 48, 48);
-					}
-					else
-					{
-						// Arriba
-						contexto.clearRect(columAnt*48, (filaAnt+1)*48, 48, 48);
-						contexto.clearRect((columAnt+1)*48, (filaAnt+1)*48, 48, 48);
-
-					}
-				}
-
-				if(f==filaAnt)
-				{
-					if(c>columAnt)
-					{
-						// Derecha
-						contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
-						contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
-
-					}
-					else
-					{
-						contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
-						contexto.clearRect((columAnt+1)*48, (filaAnt+1)*48, 48, 48);
-					}
-				}
-			}
-
-
-			break;
-
-		case 'cuadradoG':
-			if(filaAnt!=-1 && columAnt!=-1)
-			{
-				if(c==columAnt)
-				{
-
-					if(f>filaAnt)
-					{	
-						// Abajo
-						contexto.clearRect(c*48, (filaAnt)*48, 48, 48);
-						contexto.clearRect((c+1)*48, (filaAnt)*48, 48, 48);
-						contexto.clearRect((c+2)*48, (filaAnt)*48, 48, 48);
-
-					}
-					else
-					{
-						// Arriba
-						contexto.clearRect(c*48, (filaAnt+2)*48, 48, 48);
-						contexto.clearRect((c+1)*48, (filaAnt+2)*48, 48, 48);
-						contexto.clearRect((c+2)*48, (filaAnt+2)*48, 48, 48);
-
-					}
-
-				}
-
-				if(f==filaAnt)
-				{
-					if(c>columAnt)
-					{
-						// Derecha
-						contexto.clearRect(columAnt*48, (f)*48, 48, 48);
-						contexto.clearRect((columAnt)*48, (f+1)*48, 48, 48);
-						contexto.clearRect((columAnt)*48, (f+2)*48, 48, 48);
-					}
-					else
-					{
-						contexto.clearRect((columAnt+2)*48, (f)*48, 48, 48);
-						contexto.clearRect((columAnt+2)*48, (f+1)*48, 48, 48);
-						contexto.clearRect((columAnt+2)*48, (f+2)*48, 48, 48);
-					}
-
-				}
-			}
-			break;
-
-		case 'L':
-			if(filaAnt!=-1 && columAnt!=-1)
-			{
-				// Arriba Abajo
-				if(f!=filaAnt && c==columAnt)
-				{
-					contexto.clearRect(columAnt*48, (filaAnt+2)*48, 48, 48);
-					contexto.clearRect((columAnt+1)*48, (filaAnt+2)*48, 48, 48);
-					contexto.clearRect((columAnt+2)*48, (filaAnt+2)*48, 48, 48);
-				}
-				else
-				{
-					contexto.clearRect(columAnt*48, (filaAnt-1)*48, 48, 48);
-				}
-
-				// Derecho e izquierda
-				if((f==filaAnt && c>columAnt))
-				{
-					contexto.clearRect((columAnt)*48, filaAnt*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+2)*48, 48, 48);
-				}
-				else
-				{
-					contexto.clearRect((columAnt)*48, filaAnt*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect((columAnt+2)*48, (filaAnt+2)*48, 48, 48);
-				}
-
-			}	 
-			break;
-
-		case 'filaG':
-			if(filaAnt!=-1 && columAnt!=-1)
-			{
-				// Arriba Abajo
-				if(f!=filaAnt && c==columAnt)
-				{
-					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt+2)*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt+3)*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt+4)*48, (filaAnt)*48, 48, 48);
-				}
-
-				// Derecho e izquierda
-				if((f==filaAnt && c>columAnt))
-				{
-					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
-
-				}
-				else
-				{
-					contexto.clearRect((columAnt+4)*48, (filaAnt)*48, 48, 48);
-				}
-
-			}	
-			break;
-
-		case 'filaP':
-			if(filaAnt!=-1 && columAnt!=-1)
-			{
-				// Arriba Abajo
-				if(f!=filaAnt && c==columAnt)
-				{
-					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt+2)*48, (filaAnt)*48, 48, 48);
-				}
-
-				// Derecho e izquierda
-				if((f==filaAnt && c>columAnt))
-				{
-					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
-
-				}
-				else
-				{
-					contexto.clearRect((columAnt+2)*48, (filaAnt)*48, 48, 48);
-				}
-
-			}	 
-			break;
-
-		case 'columnaG':
-			if(filaAnt!=-1 && columAnt!=-1)
-			{
-				// Arriba Abajo
-				if(f!=filaAnt && c==columAnt)
-				{
-					contexto.clearRect(columAnt*48, (filaAnt+3)*48, 48, 48);
-				}
-				else
-				{
-					contexto.clearRect(columAnt*48, (filaAnt-1)*48, 48, 48);
-				}
-
-				// Derecho e izquierda
-				if((f==filaAnt && c!=columAnt))
-				{
-					contexto.clearRect((columAnt)*48, filaAnt*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+2)*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+3)*48, 48, 48);
-				}
-
-			}	 
-			break;
-
-		case 'columnaP':
-			if(filaAnt!=-1 && columAnt!=-1)
-			{
-				// Arriba Abajo
-				if(f!=filaAnt && c==columAnt)
-				{
-					contexto.clearRect(columAnt*48, (filaAnt+1)*48, 48, 48);
-				}
-				else
-				{
-					contexto.clearRect(columAnt*48, (filaAnt-1)*48, 48, 48);
-				}
-
-				// Derecho e izquierda
-				if((f==filaAnt && c!=columAnt))
-				{
-					contexto.clearRect((columAnt)*48, filaAnt*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
-				}
-
-			}
-			break;
-
-		case 'esquina':
-			if(filaAnt!=-1 && columAnt!=-1)
-			{
-				// Arriba Abajo
-				if(f!=filaAnt && c==columAnt)
-				{
-					contexto.clearRect(columAnt*48, (filaAnt+1)*48, 48, 48);
-					contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
-				}
-				else
-				{
-					contexto.clearRect(columAnt*48, (filaAnt-1)*48, 48, 48);
-					contexto.clearRect((columAnt+1)*48, (filaAnt-1)*48, 48, 48);
-				}
-
-				// Derecho e izquierda
-				if(f==filaAnt && c>columAnt)
-				{
-					// Derecha
-					contexto.clearRect(columAnt*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
-				}
-				else
-				{
-					contexto.clearRect((columAnt+1)*48, (filaAnt)*48, 48, 48);
-					contexto.clearRect((columAnt)*48, (filaAnt+1)*48, 48, 48);
-				}
-
-			}
-			break;
-
-		case 'punto':
-  			
-			if(filaAnt!=-1 && columAnt!=-1)
-			{
-				contexto.clearRect(columAnt*48, filaAnt*48, 48, 48);
-			}
-			break;
-		}
-
-
-		filaAnt = f;
-		columAnt = c;
-	
-}
-
 // Dibuja la pieza en el tablero en funcion de la fila y columna donde este el raton del jugador (no la deja dibujada aun)
 function colocarPieza(f, c, tam)
 {
@@ -1033,7 +765,7 @@ function dibujarPiezaTablero()
 
 
 				// PUNTUACIONa
-				checkElimFilaCol();
+				//checkElimFilaCol();
 				contarPuntos(); 		// Sumamos puntos
 
 				if(pieza1.colocada==true  && pieza2.colocada==true && pieza3.colocada==true)
@@ -1117,7 +849,7 @@ function rellenarMatrizColision()
 			
 	}
 
-	console.table(mtOcupacion);
+	//console.table(mtOcupacion);
 
 
 
@@ -1209,7 +941,7 @@ function checkGAMEOVER()
 
  	if(no_espacios==1)
  	{
- 		console.log('no sitio');
+ 		//console.log('no sitio');
  	}
 
 
@@ -1258,7 +990,7 @@ function checkFila(f, c)
 		}
 		else
 		{	
-			console.log('entro2');
+			//console.log('entro2');
 			finIzq = true;
 		}
 	}
