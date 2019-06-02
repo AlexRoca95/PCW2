@@ -478,11 +478,8 @@ function moverPieza()
 
 						//cv.width = cv.width;  					// Borramos la imagen dibujada anterioremente
 
-						//ctx.clearRect(evt.offsetX-100, evt.offsetY-100, 50, 250);
-
 						redibujarTablero(ctx, tam);
 
-						borrarZonaPieza(fila, columna, ctx, tam);
 						colocarPieza(fila, columna, tam); 		// Se coloca la pieza en la posicion del raton (no se queda dibujado en el panel aun)
 						
 						pintarDivisiones(10, 'panelJuego');
@@ -500,7 +497,7 @@ function moverPieza()
 
 }
 
-
+// Funcion para pintar cada casilla del tablero del color que sea necesario en funcion de los valores de la matriz de colisiones
 function redibujarTablero(ctx, tam)
 {
 	let img = new Image();
@@ -545,14 +542,20 @@ function redibujarTablero(ctx, tam)
      	 	if(mtOcupacion[fila][col]!=0)
      	 	{
      	 		img.myCustomData = {x:col, y:fila};
-
-     	 		console.log(img.myCustomData);
-     	 		console.log(img.myCustomData);
      	 		img.onload = function(){
 
+     	 			console.log('redibujar');
 					ctx.drawImage(this, this.myCustomData.x*tam, this.myCustomData.y*tam, tam, tam);
 
 				};
+     	 	}
+     	 	else
+     	 	{
+     	 		ctx.beginPath(); 
+
+				ctx.fillStyle = '#FFFFFFFF';
+
+				ctx.fillRect(col*tam, fila*tam, tam, tam);
      	 	}
    	 	}
  	}
