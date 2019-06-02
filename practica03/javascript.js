@@ -10,20 +10,19 @@ var piezaElegida = new Pieza('nada', 'nada', 'nada', -1);
 var colocada = false;
 
 
-var filaAnt = -1;
-var columAnt = -1;
-
-var filaG=0;
-	colG = 0;
-
-
 // Array que contiene el recorrido para dibujar la pieza seleccionada en el tablero
 var recorridoFinal= [];
+	recorrido1 =[];
+	recorrido2=[];
+	recorrido3=[];
 
 var mouse_fila, mouse_colum;
 
 //Matriz de ocuación para comprobar las posiciones
 var mtOcupacion=[];
+
+
+var puntos;
 
 // Ajustamos tamaños de la zona de juego y las piezas en funcion del tamaño de la ventana
 function prepararZona() 
@@ -214,6 +213,7 @@ function jugar()
 	modal.style.display = "none";  					// Dejamos de mostrar la ventana
 
 	jugando = true;
+	puntos = 0;
 
 	cargarPiezas();
 }
@@ -434,7 +434,21 @@ function dibujarPieza(pieza)
 			ctx.fillRect(columna*tam, fila*tam, tam, tam);			// Rellenamos un rectangulo con el color que tengamos (x, y, ancho, alto)
 		}
 
-
+		if(pieza.canvas=="zonaPieza1")
+		{
+			recorrido1 = recorrido;
+		}
+		else
+		{
+			if(pieza.canvas=="zonaPieza2")
+			{
+				recorrido2 = recorrido;
+			}
+			else
+			{
+				recorrido3 = recorrido;
+			}
+		}
 
 }
 
@@ -498,7 +512,8 @@ function redibujarTablero(ctx, tam)
 	for(var fila=0;fila<10;fila++)
     {
    	 	for(var col=0;col<10;col++)
-    	{
+    	{	
+    		// Comprobacion del valor en la matriz
      	 	switch (mtOcupacion[fila][col]) {
      	 		case 0:
      	 			ctx.fillStyle = '#FFFFFFFF';
@@ -811,19 +826,16 @@ function borrarZonaPieza(f, c, contexto, size)
 // Dibuja la pieza en el tablero en funcion de la fila y columna donde este el raton del jugador (no la deja dibujada aun)
 function colocarPieza(f, c, tam)
 {
-
 	// Establecemos el recorrido del dibujado en funcion del tipo de pieza y su rotacion
 	switch (piezaElegida.nombre) {
 		case 'cuadradoP':
 			// Sin rotacion
 			recorrido = [c, f, c+1, f, c, f+1, c+1, f+1];   // Columna, Fila, Columna, Fila....
-			//recorrido = [1, 1, 2, 1, 1, 2, 2, 2]; 
 			break;
 
 		case 'cuadradoG':
 			// Sin rotacion
 			recorrido = [c, f, c+1, f, c+2, f, c, f+1, c+1, f+1, c+2, f+1, c, f+2, c+1, f+2, c+2, f+2];   // Columna, Fila, Columna, Fila....
-			//recorrido = [1, 1, 2, 1, 3, 1, 1, 2, 2, 2, 3, 2, 1, 3, 2, 3, 3, 3]; 
 			break;
 
 		case 'L':
@@ -985,7 +997,7 @@ function dibujarPiezaTablero()
 
 		if(dibujar==true)
 		{	
-			// Pieza a dibujar dentro del tablero
+			// Pieza a dibujar dentro del tablero o en una posicion no ocupada
 			let cv = document.getElementById('panelJuego');
 				ctx = cv.getContext('2d');
 				img = new Image();
@@ -997,11 +1009,11 @@ function dibujarPiezaTablero()
 				// Bucle para dibujar la pieza en el tablero
 				for(let i=0; i<recorridoFinal.length-1; i++)
 				{	
-						// Pieza dentro del tablero
-						columna = recorridoFinal[i];
-						fila = recorridoFinal[i+1];
-						i++;
-						ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
+					// Pieza dentro del tablero
+					columna = recorridoFinal[i];
+					fila = recorridoFinal[i+1];
+					i++;
+					ctx.drawImage(img, columna*tam, fila*tam, tam, tam);  // Dibujamos la imagen dentro de la zona dond estemos apuntando con el raton
 				}
 
 
@@ -1012,18 +1024,21 @@ function dibujarPiezaTablero()
 				// Borrado de la pieza del canvas del cual la obtuvimos
 				let cv2 = document.getElementById(piezaElegida.canvas);
 				cv2.width = cv2.width;
-
 				pintarDivisiones(5, piezaElegida.canvas);
 
-				filaAnt = -1;
-				columAnt = -1;
 				piezaElegida.colocada = true;
 
+
+				// PUNTUACION
+				//checkElimFilaCol();
+				contarPuntos(); 		// Sumamos puntos
 
 				if(pieza1.colocada==true  && pieza2.colocada==true && pieza3.colocada==true)
 				{
 					// Todas las piezas colocadas. Volvemos a cargar otras 3
 					cargarPiezas();
+
+					//checkGAMEOVER(); 	// Se comprueba si alguna de las piezas disponibles se puede colocar en el tablero
 				}
 
 
@@ -1149,6 +1164,168 @@ function creaMatrizColision()
       mtOcupacion[k][j]=0;
     }
   }
+}
+
+
+
+function checkGAMEOVER()
+{
+
+	let filaF = 0;
+		colF = 0;
+		no_espacios = 0;
+		sin_espacio = false;
+
+  	for(var fila=0;fila<10 && sin_espacio!=true;fila++)
+  	{
+    	for(var col=0;col<10 && sin_espacio!=true;col++)
+    	{
+    		for(let i=0; i<recorrido1.length && sin_espacio!=true;i++)
+    		{
+    			col2 = recorrido1[i] - 1;
+    			fil2 = recorrido1[i+1] -1;
+    			i++;
+    			filaF = fila + fil2;
+    			colF = col + col2;
+
+    			if(colF>=0 && filaF>=0 && colF<10 && filaF<10)
+    			{
+    				// Dentro de los limites del tablero
+    				if(mtOcupacion[filaF][colF]!=0)
+    				{	
+    					// Una de las celdas ya esta ocupada
+    					sin_espacio = true;
+    					no_espacios ++;
+    				}
+    			}
+
+    		}
+    	}
+ 	}
+
+
+ 	if(no_espacios==1)
+ 	{
+ 		console.log('no sitio');
+ 	}
+
+
+}
+
+function checkElimFilaCol()
+{
+	let columna = 0;
+		fila = 0;
+	for(let i=0; i<recorridoFinal.length;i++)
+	{
+
+		columna = recorridoFinal[i];
+		fila[i+1];
+
+		if(i%2!=0)
+		checkFila(fila, columna);
+	}
+
+
+
+}
+
+
+function checkFila(f, c)
+{	
+	
+	let finIzq = false;
+		finDech = false;
+		completoIzq = true;
+		completoDech = true;
+
+	// Lado izquierdo
+	while(finIzq==true)
+	{
+		f = f-1;
+
+		if(f>=0)
+		{
+			if(mtOcupacion[f][c]==0)
+			{
+				// No hay una fila llena de piezas
+				completoIzq = false;
+			}
+		}
+		else
+		{
+			finIzq = true;
+		}
+	}
+
+	// Lado derecho
+	while(finDech==true)
+	{
+		f = f+1;
+
+		if(f<10)
+		{
+			if(mtOcupacion[f][c]==0)
+			{
+				// No hay una fila llena de piezas
+				completoDech = false;
+			}
+		}
+		else
+		{
+			finDech = true;
+		}
+	}
+
+	if(completoDech==true && completoIzq==true)
+	{	
+		let cv = document.getElementById('panelJuego');
+			ctx = cv.getContext('2d');
+			tam= cv.width / 10;
+
+		ctx.beginPath(); 
+
+		ctx.fillStyle = '#FFFFFFFF';
+
+		for(let pos=f; pos>=0; pos--)
+		{
+			ctx.fillRect(c*tam, pos*tam, tam, tam);
+		}
+	}
+
+
+}
+
+// Funcion para realizar el calculo de la puntuacion del jugador
+function contarPuntos()
+{
+
+	// Calculamos los puntos en funcion del tam del array de dibujado de las piezas
+	if(piezaElegida.canvas=="zonaPieza1")
+	{
+		puntos += recorrido1.length/2;
+	}
+	else
+	{
+		if(piezaElegida.canvas=="zonaPieza2")
+		{
+			puntos += recorrido2.length/2;
+		}
+		else
+		{
+			puntos += recorrido3.length/2;
+		}
+	}
+
+	let html = '';
+
+	html += '<p><strong>Puntuación:</strong> ';
+
+	html+= puntos;
+
+	html+=' puntos</p>';
+
+	document.querySelector('.puntuacion').innerHTML=html;
 }
 
 
