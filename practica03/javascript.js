@@ -501,62 +501,50 @@ function moverPieza()
 function redibujarTablero(ctx, tam)
 {
 	let img = new Image();
-		
+	
+	ctx.beginPath(); 
 
 	for(var fila=0;fila<10;fila++)
     {
    	 	for(var col=0;col<10;col++)
     	{
      	 	switch (mtOcupacion[fila][col]) {
+     	 		case 0:
+     	 			ctx.fillStyle = '#FFFFFFFF';
+     	 			break;
      	 		case 1:
-     	 			img.src = 'fotos/blueClarito.png';
+     	 			ctx.fillStyle = '#13F1D4FF';
+
      	 			break;
      	 		case 2:
-     	 			img.src = 'fotos/green.png';
+     	 			ctx.fillStyle = '#4E9A06FF';
      	 			break;
      	 		case 3:
-     	 			img.src = 'fotos/azulOscuro.png';
+     	 			ctx.fillStyle = '#584db1';
      	 			break;
      	 		case 4:
-     	 			img.src = 'fotos/greenLight.PNG';
+     	 			ctx.fillStyle = '#8AE234FF';
      	 			break;
      	 		case 5:
-     	 			img.src = 'fotos/orange.png';
+     	 			ctx.fillStyle = '#F57900FF';
      	 			break;
      	 		case 6:
-     	 			img.src = 'fotos/Purple-Box.jpg';
+     	 			ctx.fillStyle = '#75507BFF';
      	 			break;
      	 		case 7:
-     	 			img.src = 'fotos/pink.png';
+     	 			ctx.fillStyle = '#f67794';
      	 			break;
      	 		case 8:
-     	 			img.src = 'fotos/red.png';
+     	 			ctx.fillStyle = '#EF2929FF';
      	 			break;
      	 		case 9:
-     	 			img.src ='fotos/blue.jpeg';
+     	 			ctx.fillStyle = '#05EAFFFF';
      	 			break;
      	 	}
+  
 
-
-
-     	 	if(mtOcupacion[fila][col]!=0)
-     	 	{
-     	 		img.myCustomData = {x:col, y:fila};
-     	 		img.onload = function(){
-
-     	 			console.log('redibujar');
-					ctx.drawImage(this, this.myCustomData.x*tam, this.myCustomData.y*tam, tam, tam);
-
-				};
-     	 	}
-     	 	else
-     	 	{
-     	 		ctx.beginPath(); 
-
-				ctx.fillStyle = '#FFFFFFFF';
-
-				ctx.fillRect(col*tam, fila*tam, tam, tam);
-     	 	}
+			ctx.fillRect(col*tam, fila*tam, tam, tam);
+     	 	
    	 	}
  	}
 }
@@ -1007,8 +995,6 @@ function dibujarPiezaTablero()
 		if(dibujar==true)
 		{	
 			// Pieza a dibujar dentro del tablero
-			//console.log(mouse_fila);
-			//console.log(mouse_colum);
 			let cv = document.getElementById('panelJuego');
 				ctx = cv.getContext('2d');
 				img = new Image();
