@@ -222,15 +222,15 @@ function jugar()
 function cargarPiezas()
 {	
 	// PIEZAS DISPONIBLES A CARGAR
-	let piezaObj1 = new Pieza('cuadradoG', '#13F1D4FF', 'fotos/blueClarito.png', 1);
-		piezaObj2 = new Pieza('cuadradoP', '#4E9A06FF', 'fotos/green.png', 2);
-		piezaObj3 = new Pieza('L', '#584db1', 'fotos/azulOscuro.png', 3);
-		piezaObj4 = new Pieza('filaG', '#8AE234FF', 'fotos/greenLight.PNG', 4);
-		piezaObj5 = new Pieza('filaP', '#F57900FF', 'fotos/orange.png', 5);
-		piezaObj6 = new Pieza('columnaG', '#75507BFF', 'fotos/Purple-Box.jpg', 6);
-		piezaObj7 = new Pieza('esquina', '#f67794', 'fotos/pink.png', 7);
-		piezaObj8 = new Pieza('columnaP', '#EF2929FF', 'fotos/red.png', 8);
-		piezaObj9 = new Pieza('punto', '#05EAFFFF', 'fotos/blue.jpeg', 9);
+	let piezaObj1 = new Pieza('cuadradoG', '#0ec9f6', 'fotos/blueClarito.png', 1);
+		piezaObj2 = new Pieza('cuadradoP', '#00cc00', 'fotos/green.png', 2);
+		piezaObj3 = new Pieza('L', '#010f4e', 'fotos/azulOscuro.png', 3);
+		piezaObj4 = new Pieza('filaG', '#00ff00', 'fotos/greenLight.PNG', 4);
+		piezaObj5 = new Pieza('filaP', '#f27522', 'fotos/orange.png', 5);
+		piezaObj6 = new Pieza('columnaG', '#510c76', 'fotos/Purple-Box.jpg', 6);
+		piezaObj7 = new Pieza('esquina', '#ffc0cb', 'fotos/pink.png', 7);
+		piezaObj8 = new Pieza('columnaP', '#FF0000', 'fotos/red.png', 8);
+		piezaObj9 = new Pieza('punto', '#4379e6', 'fotos/blue.jpeg', 9);
 
 	// Array con todas las piezas disponibles
 	let piezas = [piezaObj1, piezaObj2, piezaObj3, piezaObj4, piezaObj5, piezaObj6, piezaObj7, piezaObj8, piezaObj9];
@@ -461,15 +461,6 @@ function moverPieza()
 					fila = Math.trunc(evt.offsetY / tam);  // Fila en la que esta el raton. con trun truncamos el valor
 					columna = Math.trunc(evt.offsetX / tam);
 
-					// Guardamos la fila y columna donde esta el raton para comprobar despues si esta fuera del tablero o no
-					//mouse_fila = fila;
-					//mouse_colum = columna;
-
-					//console.log(fila + ' : ' + columna);
-					//testMatrizColision();
-					//comprobarPosicion(fila,columna);
-					//testMatrizColision();
-
 					let ctx = cv.getContext('2d');
 					img = new Image();
 
@@ -513,36 +504,36 @@ function redibujarTablero(ctx, tam)
      	 			ctx.fillStyle = '#FFFFFFFF';
      	 			break;
      	 		case 1:
-     	 			ctx.fillStyle = '#13F1D4FF';
+     	 			ctx.fillStyle = '#0ec9f6';
 
      	 			break;
      	 		case 2:
-     	 			ctx.fillStyle = '#4E9A06FF';
+     	 			ctx.fillStyle = '#00cc00';
      	 			break;
      	 		case 3:
-     	 			ctx.fillStyle = '#584db1';
+     	 			ctx.fillStyle = '#010f4e';
      	 			break;
      	 		case 4:
-     	 			ctx.fillStyle = '#8AE234FF';
+     	 			ctx.fillStyle = '#00ff00';
      	 			break;
      	 		case 5:
-     	 			ctx.fillStyle = '#F57900FF';
+     	 			ctx.fillStyle = '#f27522';
      	 			break;
      	 		case 6:
-     	 			ctx.fillStyle = '#75507BFF';
+     	 			ctx.fillStyle = '#510c76';
      	 			break;
      	 		case 7:
-     	 			ctx.fillStyle = '#f67794';
+     	 			ctx.fillStyle = '#ffc0cb';
      	 			break;
      	 		case 8:
-     	 			ctx.fillStyle = '#EF2929FF';
+     	 			ctx.fillStyle = '#FF0000';
      	 			break;
      	 		case 9:
-     	 			ctx.fillStyle = '#05EAFFFF';
+     	 			ctx.fillStyle = '#4379e6';
      	 			break;
      	 	}
   
-
+     	 	// Se pintara la celda de un color u otro en funcion del valor de la matriz de colision
 			ctx.fillRect(col*tam, fila*tam, tam, tam);
      	 	
    	 	}
