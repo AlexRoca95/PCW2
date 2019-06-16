@@ -1,0 +1,178 @@
+:root {
+	--1: #cfcfd1;
+	--2: #7d7d80;
+	--3: #38383d;
+	--4: #2a2a2c;
+	--5: #0078d7;
+	--6: #ffffff;
+	--7: #000000;
+  	--8: #fafafa;
+}
+
+/* BODY */
+body {
+  color: var(--7);
+  background-color: var(--8);
+  border-left: solid var(--6); 
+  border-right: solid var(--6);
+  border-bottom: solid var(--6);
+}
+
+/* HEADER */
+body>header{
+  color: var(--7);
+  background-color: var(--6);
+}
+.headerItems>a{
+  color: var(--7);
+}
+.headerItems>a>div:first-of-type{
+  border-right: 1px solid var(--1);
+}
+#burger{
+  background-image: url(../recursos/burger.png);
+}
+.headerItems>div:last-of-type>a:first-of-type{
+  color: var(--7);
+  border-bottom: solid var(--5);
+}
+.headerItems>div:last-of-type>a:last-of-type{
+  color: var(--6);
+  border-bottom: solid var(--5);
+}
+.headerItems>div:last-of-type>a:first-of-type{
+  border-top: solid var(--6);
+}
+.headerItems>div:last-of-type>a:first-of-type:hover{
+  background-color: var(--1);
+  border-top: solid var(--1);
+}
+.headerItems>div:last-of-type>a:last-of-type{
+  background-color: var(--5);
+  border-top: solid var(--5);
+}
+.headerItems>div:last-of-type>a:last-of-type:hover{
+  color: var(--7);
+  background-color: var(--1);
+  border-top: solid var(--1);
+}
+
+/* BARRA DE NAVEGACIÓN */
+nav{
+  background-color: var(--1);
+  border-top: solid 1px var(--1);
+}
+nav>ul>li{
+  border-left: solid 1px var(--8);
+}
+.firstlast{
+  border-left: none;
+}
+nav>ul>li>a {
+  color: var(--7);
+  border-bottom: solid 1px var(--1);
+}
+nav>ul>li>a:hover {
+  border-bottom: solid 1px var(--5);
+}
+
+#brbar{
+  border-bottom: solid 2px var(--3);
+  background-color: var(--1);
+}
+#brbutton{
+  border: solid 2px var(--3);
+  background-color: var(--1);
+}
+#brbutton:hover{
+  background-color: var(--8);
+}
+.preview>article{
+  border: solid 1px var(--6);
+}
+.preview>article:hover{
+  border: solid 1px var(--5);
+}
+
+/* FOTOS EN PREVIEW */
+#detalle>article>figure>img{
+  border: solid 1px var(--6);
+}
+.top-right {
+  background-color: rgba(0, 0, 0, 0.6);;
+  border-left: solid 1px var(--6);
+}
+.imgResume>p:first-of-type{
+  border-bottom: solid 1px var(--5);
+}
+
+/* FOOTER */
+body>footer{
+  background-color: var(--8);
+  color: var(--3);
+}
+body>footer>p{
+  margin: 0;
+}
+body>footer>p>a{
+  color: var(--3);
+}
+body>footer>a{
+  color: var(--3);
+}
+
+/* FORMULARIOS */
+
+.swaplink{
+  color: var(--5);
+  text-decoration: none;
+}
+
+/* ALEX */
+/* Contenido formularios */
+.boxesForm{
+  border-bottom: 2px solid var(--2);
+  background-color: var(--6);
+  color: var(--7);
+}
+.enlaceBoton:hover {
+  background-color: var(--6); 
+  color: var(--7);
+  border: 2px solid var(--7);
+}
+input:focus { 
+    border-color: var(--5);
+}
+
+/*Fecha Nacimiento */
+.mes{
+  border-bottom: 2px solid var(--2);
+  background-color: var(--6);
+  color: var(--7);
+ }
+.diaMes{
+  border-bottom: 2px solid var(--2);
+  background-color: var(--6);
+  color: var(--7);
+}
+
+/* Tabla Info precios */
+table, caption{
+  /*border: 1px solid var(--7);*/
+}
+th, table>caption{
+    background-color: var(--2);
+    border: 1px solid var(--7);
+}
+td{
+    background-color: var(--6);
+    border: 1px solid var(--7);
+}
+
+/* DETALLE FOTO */
+#detalle>article>figure>figcaption>h2{
+  border-bottom: solid 1px var(--5);
+}
+#detalle>article>figure>figcaption>div>p>a{
+  color: var(--5);
+}

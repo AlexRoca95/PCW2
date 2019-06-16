@@ -1,4 +1,3 @@
-
 /* VARIABLES GLOBALES */
 // Piezas a mostar 
 var pieza1 = new Pieza('nada', 'nada', 'nada', -1);
@@ -549,7 +548,7 @@ function redibujarTablero(ctx, tam)
      	 	}
   
      	 	// Se pintara la celda de un color u otro en funcion del valor de la matriz de colision
-			ctx.fillRect(col*tam, fila*tam, tam, tam);
+			ctx.fillRect(col*tam, fila*tam, tam, tam); // X, Y, ancho y alto
      	 	
    	 	}
  	}
@@ -722,6 +721,7 @@ function dibujarPiezaTablero()
 
 			if(mtOcupacion[fila][columna]!=0)
 			{
+				// Ya hay una pieza dibujada ahi
 				var modal = document.getElementById('myModal2'); 
 				modal.style.display = "block"; 
 				dibujar = false;

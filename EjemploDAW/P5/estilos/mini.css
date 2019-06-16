@@ -1,0 +1,206 @@
+
+/* Activamos esta clase para que todo aquello que lo lleve se pueda mostrar */
+.display-mini {
+	display: inherit !important;
+}
+
+/* FORMULARIOS */
+/* Para que las cajas y demas de los Formularios se muestren uno encima de otro y no a los lados */
+.boxesAlbum, .bigBoxes, .direccion, .numCopias, .valorRango, #solicitarAlbum, .boxesForm, .enlaceBoton, label, .boxesBusqueda {
+
+	width: 100%;
+    margin-top: 0;
+}
+.diaMes {
+
+	margin-top: 0;
+	width: 28.5%;
+}
+
+.marcoInicioRegistro{
+
+	width: 80%;
+}
+
+#SolicitudAlbum {
+
+ 	 padding: 0 5% 0 5%;
+ 	 float: center;
+
+}
+
+#marcoSolicitudAlbum, #FotoPerfil {   /* Bloque de foto de Usuario y del album */
+	width: 100%;
+}
+
+.boxesAlbum{   /* Boxes formulario */
+
+      padding: 5px 0 5px 5px;
+   }
+
+.bigBoxes{
+
+    padding: 5px 0 30px 5px;
+   }
+
+.direccion{
+
+    padding: 5px 0 5px 5px;
+   }
+
+.numCopias{
+
+    padding: 5px 0 5px 5px;
+   }
+
+.valorRango{
+
+    padding: 5px 0 5px 5px;
+   }
+
+input[type=radio] {
+	margin-top: 0;
+}
+
+
+/* USUARIO REGISTRADO */
+
+#FotoPerfil{
+    margin-top:5%;
+  }
+#FotoPerfil>img{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+
+}
+
+#NombreUsuario {
+
+	 font-size: 18px;
+	 text-align: center;
+
+}
+
+.marcoUsuario {
+
+	width: 85%;
+	margin-left: auto,
+	margin-right:auto;
+	display: block;
+}
+
+hr {
+	border: 1px solid;
+	width: 80%;
+}
+
+
+#Modificar-Borrar {
+
+ 	width: 100%;
+ }
+
+.enlacesUsuario {
+
+ 	display: block; /* Ocupa todo el bloque de ancho */
+ 	padding: 8px 24px;
+ }
+
+ #cierreSesion{
+   border-radius: 4px;
+   padding: 8px 24px;
+   margin-left: 35%;
+  }
+
+
+/* BUSQUEDA AVANZADA */
+
+#busquedaAvanzada{
+    font-size: 18px;
+
+}
+
+.marcoBusqueda{
+
+    width: 100%;
+	margin-left: auto,
+	margin-right:auto;
+	display: block;
+}
+
+.boxesBusqueda{
+
+    padding: 5px 0 5px 10px;
+}
+
+#buscarFotos{
+      display: block;
+      margin-left: auto;
+      margin-right:auto;
+      margin-top: 5%;
+      width: 100%;
+   }
+
+ /* TABLA TARIFAS */
+    #tablaTarifas{
+      
+      width: 100%;
+      margin: auto;
+      text-align: center;
+      font-size: 16px;
+      display: inline-block;
+      padding: 1% 1% 5% 1%;  /* arriba, derecha, abajo, izqd */
+      
+    }
+
+
+
+/* HEADER */
+.headerItems>a>div:first-of-type{
+	border-right: none;
+}
+.headerItems>div>a{
+	width: 40px;
+}
+.headerItems>div>a>span:last-of-type{
+	display: none;
+}
+
+/* MENU NAVEGACION */
+nav>ul{
+	max-height: 500px;
+}
+nav>ul>li{
+	/*padding: 0 .4em;*/
+	margin: 1.8em 0;
+	display: block;
+	border: none;
+}
+.firstlast{
+	border: none;
+	margin: .8em 0;
+}
+
+#ckburger:checked + nav{
+  max-height: 500px;
+}
+
+/*SECTION FOTOS PREVIEW*/
+.preview>article{
+  width: 100%;
+  margin: 0 .4em;
+  margin-top: 2em;
+} 
+
+/* DETALLE FOTO */
+#detalle>article>figure{
+  flex-direction: column;
+  width: auto;
+  max-width: 600px;
+}
+#detalle>article>figure>figcaption>div{
+  margin-top: 5%;
+}

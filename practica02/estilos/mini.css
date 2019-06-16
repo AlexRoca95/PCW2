@@ -9,7 +9,7 @@
 }
 
 /* HEADER */
-nav { /* Solo en tamaño pequeño queremos que desaparezca */
+nav { /* Solo en tamaño pequeño queremos que desaparezca para mostarlo con el menu hamburguesa */
 
 	/*position: fixed;  /* Tamaño relativo a la ventana del navegador*/
 	max-height: 0;
@@ -51,7 +51,7 @@ nav { /* Solo en tamaño pequeño queremos que desaparezca */
 
         cursor: pointer;
         background-size: 15px 15px;
-        background-image: url(../recursos/burger.png);
+        background-image: url(../recursos/burger.png);  /* Imagen para desplagar/replegar el menu en pantalla pequeña */
     }
 
       /* Boton menu hamburguesa pulsado */

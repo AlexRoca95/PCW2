@@ -1,0 +1,15 @@
+
+
+
+#frm {
+
+	display: flex;
+	flex-direction: column;
+}
+
+
+	.frm-flex {
+
+		display: flex;
+		flex-direction: column;
+	}

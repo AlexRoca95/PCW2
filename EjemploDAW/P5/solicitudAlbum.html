@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" /> <!-- Para que se pueda aplicar un diseño adaptable y la correcta visualizacion en dispo móviles -->
+	<title>PRETI</title>
+	<link rel="stylesheet" type="text/css" href="estilos/estilo1.css">
+	<link rel="stylesheet" type="text/css" href="estilos/base.css" />  
+	<link rel="stylesheet" type="text/css" href="estilos/colors.css" />
+	<link rel="stylesheet" type="text/css" href="recursos/fontello-848afb9a/css/fontello.css">
+	<!-- Estilos Alternativos -->
+	<link rel="alternate stylesheet" type="text/css" title="Accesibilidad" href="estilos/accesibility.css" />
+	<link rel="alternate stylesheet" type="text/css" title="Accesibilidad" href="estilos/colors3.css" />
+	<link rel="alternate stylesheet" type="text/css" title="Modo sin responsive" href="estilos/estilo2.css" />
+	<!-- Para definir las propiedades que queremos que siempre se apliquen independientemente del tam de pantalla-->
+	<!-- Estilos que se aplican en función del tam de la pantalla -->
+	<!-- Indicamos el medio (pantallas) y la anchura mínima requerida para que se active este css --> 
+	<link rel="stylesheet" type="text/css" href="estilos/great.css" media="screen and (min-width: 981px)" />  <!-- Pantallas Grandes -->
+	<link rel="stylesheet" type="text/css" href="estilos/medium.css" media="screen and (min-width: 481px) and (max-width: 980px)" /> <!-- Pantallas Medianas -->
+	<link rel="stylesheet" type="text/css" href="estilos/mini.css" media="screen and (max-width: 480px)" /> <!-- Pantallas Pequeñas (Móviles) -->
+
+	<!-- Estilo para Impresion -->
+	<!--<link rel="alternate stylesheet" type="text/css" href="estilos/print.css" media="screen" title="Estilo para impresión" /> -->
+		<link rel="stylesheet" type="text/css" href="estilos/print.css" media="print" />
+</head>
+<body>
+	<header id="header">
+		<div class="headerItems">
+			<!-- Logotipo -->
+			<a href="index.html">
+				<div><img src="recursos/pretilg.png" alt="Preti Logo" class="imagen"></div>
+				<div class="display-medium display-great"><h1>Preti.</h1></div>
+				<div class="display-great"><h2>Creativity & Beyond</h2></div>
+			</a>
+
+			<!-- Menu -->
+			<span>
+				<label for="ckburger" id="burger"></label>
+			</span>
+
+			<!-- Enlaces a Login/Registro -->
+			<div>
+				<a href="login.html"><span class="icon-user"></span><span>Login</span></a><a href="registro.html"><span class="icon-user-plus"></span><span>Registro</span></a>
+			</div>
+		</div>
+
+		<input type="checkbox" id="ckburger" checked>
+		<nav id="navbar">
+			<ul>
+				<li class="firstlast"><a href="index.html"><span class="icon-home"> Inicio</a></li><li><a href="buscar.html"><span class="icon-search"> Búsqueda Avanzada</a></li><li><a href="usuarioRegistrado.html"><span class="icon-cog"> Perfil de Usuario</a></li><li class="firstlast"><form action="resBuscar.html" method="get">
+						<input type="search" id="brbar" name="buscador" placeholder='Buscar... '><input type="submit" id="brbutton" name="buscador" value="🔍" >
+					</form>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+	<section>
+		<h2>Solicitud de Álbum</h2>
+		<p>Mediante esta opción puedes solicitar la impresión y envío de uno de tus álbumes a color y resolución deseada.</p>
+		<article id="tablaTarifas">
+			<table class="display-great" title="Información con nuestras tarifas de impresión">
+				<caption><b>Tarifas</b></caption>
+				<tr>
+					<th>Concepto</th>
+					<td>&lt; 5 páginas</td>
+					<td>entre 5 y 10 páginas</td>
+					<td>> 11 páginas</td>
+					<td>Blanco y negro</td>
+					<td>Color</td>
+					<td>Resolución > 300 dpi</td>
+				</tr>
+				<tr>
+					<th>Tarifa</th>
+					<td>0.10 € por pág.</td>
+					<td>0.08 € por pág.</td>
+					<td>0.07 € por pág.</td>
+					<td>0 €</td>
+					<td>0.05 € por foto</td>
+					<td>0.02 € por foto</td>
+				</tr>
+			</table>
+			
+			<table class="menu display-medium display-mini" title="Información con nuestras tarifas de impresión">
+				<caption><b>Tarifas</b></caption>
+				<tr>
+					<th>Concepto</th>
+					<th>Tarifa</th>
+				</tr>
+				<tr>
+					<td>&lt; 5 páginas</td>
+					<td>0.10 € por pág.</td>
+				</tr>
+				<tr>
+					<td>entre 5 y 10 páginas</td>
+					<td>0.08 € por pág.</td>
+				</tr>
+				<tr>
+					<td>> 11 páginas</td>
+					<td>0.07 € por pág.</td>
+				</tr>
+				<tr>
+					<td>Blanco y negro</td>
+					<td>0 €</td>
+				</tr>
+				<tr>
+					<td>Color</td>
+					<td>0.05 € por foto</td>
+				</tr>
+				<tr>
+					<td>Resolución > 300 dpi</td>
+					<td>0.02 € por foto</td>
+				</tr>
+			</table>
+		</article>
+		<article id="SolicitudAlbum">
+			<fieldset id="marcoSolicitudAlbum">
+				<h3>Formulario de solicitud</h3>
+				<p>Los parámetros marcados con (*) son obligatorios.</p>
+				<form action="resSolicitud.html">
+					<p><label><b>Nombre (*)</b></label><input class="boxesAlbum" type="text" name="nombre" placeholder="Nombre y Apellidos..." maxlength="200" required></p>
+					<p><label><b>Título (*)</b></label> <input class="boxesAlbum" type="text" name="titulo" placeholder="Título para el álbum..." maxlength="200" required></p>
+					<p><label><b>Texto adicional</b> </label><input class="bigBoxes" type="text" name="descripcion" placeholder="Descripción, dedicatoria..." maxlength="4000"></p>
+					<p><label><b>Correo electrónico (*)</b> </label><input class="boxesAlbum" type="email" name="correo" placeholder="alguien@algo.es" autocomplete="on" maxlength="200" required></p>
+					<p><label><b>Dirección (*)</b> </label><input class="boxesAlbum"type="text" name="calle" placeholder="Calle..." required>
+						<input class="direccion" type="number" name="numero" placeholder="Número" min="1">
+						<input class="direccion" type="number" name="cp" placeholder="Código Postal" required></p>
+						<p><select class="direccion" required>
+							<option disabled selected value> - Localidad - </option>
+							<option value="SanVicentdelRaspeig">San Vicent del Raspeig</option>
+						</select>
+						<select class="direccion" required>
+							<option disabled selected value> - Provincia - </option>
+							<option value="3">Alicante</option>
+						</select>
+						<select class="direccion" required>
+							<option disabled selected value> - País - </option>
+							<option value="Spain">España</option>
+						</select>
+					 </p>
+					<p><label><b>Teléfono de contacto (*)</b></label><input class="boxesAlbum" type="tel" name="telefono" placeholder="### ### ###" required></p>
+					<p><label><b>Color de portada</b> </label><input type="color" name="color"></p>
+					<p><label><b>Número de copias</b> </label><input class="numCopias" type="number" name="copias" value="1" min="1" required></p>
+					<p><label><b>Resolución de impresión</b> </label><input class="valorRango" type="range" id="resslider" name="resolucion" min="150" max="900" step="150" value="150" onchange="document.getElementById('outresolucion').textContent=this.value">
+						<output id="outresolucion">150</output> dpi
+					</p>
+					<p><label><b>Álbum (*)</label></b>
+						<select class="direccion" required>
+							<option disabled selected value> - mis álbumes - </option>
+						  	<option value="paisajes">Paisajes</option>
+						  	<option value="bodajm">Boda Jose María</option>
+						  	<option value="viajeitalia">Viaje Italia</option>
+						</select>
+					 </p>
+					<p><label><b>Fecha de recepción aproximada </label></b><input class="direccion" type="date" name="fechaRecepcion"></p>
+					<p class="menu display-great display-medium"><label><b>¿Impresión a color? (*)</b> </label><br><input type="radio" name="cimpresion" value="color" required>Color <input type="radio" name="cimpresion" value="blancoynegro" required>Blanco y Negro </p>
+
+					<p class="display-mini"><label><b>¿Impresión a color? (*)</b> </label>
+						<select class="direccion" required>
+							<option disabled selected value> - Tipo de Impresión - </option>
+							<option value="blancoynegro">Blanco y Negro</option>
+							<option value="color">Color</option>
+						</select>
+					</p>
+
+					<p><input id="solicitarAlbum" type="submit" value="Solicitar" title="Solicitar impresión"></p>
+				</form>	
+			</fieldset>
+		</article>
+		
+	</section>
+
+	<footer>
+		<!-- Copyright -->
+		<p><a href="about.html"><strong>Alejandro Roca Vande Sype, Víctor Conejero Vicente</strong></a> <time datetime="2018-09">| &copy; Septiembre 2018</time><a href="#header" class="arriba"><span class="icon-up-big"></a></p>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,26 @@
+Paletas de color y Referencias de color
+_______________________________________________
+
+-- Twitter Night Mode:
+
+	#ffffff 	(255,255,255)
+	#c51f5d 	(197,31,93)
+	#243447 	(36,52,71)
+	#141d26 	(20,29,38)
+	#141d26 	(20,29,38)
+
+https://www.color-hex.com/color-palette/55334
+
+
+-- Firefox Night Mode:
+
+	#cfcfd1 	(207,207,209)
+	#7d7d80 	(125,125,128)
+	#38383d
+	#2a2a2c 	(42,42,44)
+	#0078d7 	(0,120,215)
+	#ffffff 	(255,255,255)
+
+https://www.color-hex.com/color-palette/66523
+
+

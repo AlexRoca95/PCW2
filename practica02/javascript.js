@@ -1,6 +1,8 @@
 
 
 // Función para hacer el login del usuario comprobando que el usuario y contraseña son correctos
+// Si el login es correcto almacena la info del login y contraseña en el sessionstorage que se 
+// comprobara en el html al cargar la pagina para redirigir o no
 function loginUsuario(formulario)
 {
 	let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
@@ -20,10 +22,12 @@ function loginUsuario(formulario)
 			if(r.RESULTADO == 'OK')  // Solo si la peticion ha tenido exito
 			{
 
+				// GUARDAMOS LA INFO DEL USUARIO LOGUEADO
 				sessionStorage.setItem("login", formulario.login.value);  // Asiganmos el valor del campo de login del formulario al campo de usuario del sessionStorage
 				sessionStorage.setItem("pwd", formulario.pwd.value);
 
-				sessionStorage['usuario'] = xhr.responseText; // Almacenamos en la variable usuario toda la respuesta
+				// Esto lo uso en el javascript (hacer ambos (este y el de login/pwd))
+				sessionStorage['usuario'] = xhr.responseText; // Almacenamos en la variable usuario toda la respuesta (este me servira para acceder a la info del usuario en las funciones)
 
 
 				// Redireccion cuando se ha hecho el login bien
@@ -68,8 +72,7 @@ function hacerLogout()
 function mostrarMenu()
 {
 
-
-	let menu = document.querySelector('#menu');
+	let menu = document.querySelector('#menu'); 		// Coge el elemento que tiene el id="menu"
 		html = '';
 
 
@@ -88,7 +91,7 @@ function mostrarMenu()
 	}
 	else
 	{
-		// No logeado
+		// No logeado (no existe la variable usuaruo en el sessionstorage)
 		html += '<li><a href="login.html"><span class="icon-user"></span><span class="menu display-mini display-great"> Login</span></a></li>';
 		html += '<li><a href="registro.html"><span class="icon-user-add"></span><span class="menu display-mini display-great"> Registro</span></a></li>';
 
@@ -142,7 +145,7 @@ function fotosMejorValoradas()
 	let xhr = new XMLHttpRequest();
 
 		url = 'api/fotos/megusta';
-		pagActiva = location.search.substr(1);
+		pagActiva = location.search.substr(1); // Pagina de fotos en la que nos encontramos
 
 	xhr.open('GET', url, true);
 
@@ -180,7 +183,7 @@ function fotosMejorValoradas()
 			total = totalFotosServidor;
 		}
 
-
+		// Si no hubiese paginacion solo hay que cambiar la i por 0 y el max de fotos que puedan haber
 		for (let i=inicio; i<total; i++)  // Bucle para recorrer todas las fotos que haya en la pagina que nos encontremos
 		{
 
@@ -218,6 +221,7 @@ function fotosMejorValoradas()
 								// Comprobamos si le ha dado a me gusta a la foto
 								if(usuLike!=0)
 								{
+									// Se muestra el icono de like relleno
 									html += '<p><span class="icon-thumbs-up-alt"></span>';
 								}
 								else
@@ -226,7 +230,7 @@ function fotosMejorValoradas()
 								}
 
 
-								html += r.FILAS[i].nmegusta;
+								html += r.FILAS[i].nmegusta; // Nº de megustas
 
 								// Comprobamos si le ha dado a fav a la foto
 								if(usuFav!=0)
@@ -242,7 +246,7 @@ function fotosMejorValoradas()
 
 							}
 							else
-							{
+							{	// Usuario no logueado
 								html += '<p><span class="icon-thumbs-up"></span>' + r.FILAS[i].nmegusta + ' <span class="icon-heart-empty"></span>' + r.FILAS[i].nfavorita + ' <span class="icon-comment-empty"></span>' + r.FILAS[i].ncomentarios + '</p>';
 							}
 
@@ -272,10 +276,11 @@ function fotosMejorValoradas()
 }
 
 // Funcion para calculara el numero total de paginas de fotos que hay en index
+// Se pasa la respuesta del servidor a la peticion parseada en result
 function calcularTotalPagFotos(result, xhr)
 {
 
-	let numPag = result.FILAS.length/6;  		// Numero de paginas
+	let numPag = result.FILAS.length/6;  		// Numero de paginas (6 fotos max por pagina)
 		decimal = numPag - Math.floor(numPag) 	// Parte decimal (paginas que no estan completas de fotos)
 		i = 0;
 		pagActiva = location.search.substr(1);  // 
@@ -296,6 +301,7 @@ function calcularTotalPagFotos(result, xhr)
 			}
 			else
 			{
+				// Paginas en las que no nos encontramos
 				html2+= '<li><a href="?'+ i +'">'+ i +'</a></li>';
 			}
 
@@ -323,21 +329,22 @@ function calcularTotalPagFotos(result, xhr)
 
 	document.querySelector('.paginacion').innerHTML=html2;
 
-	return numPag;
+	return numPag; // Devuelve el total de paginas que hay
 
 }
 
-
+// FUncion para cambiar de pagina de fotos. Valor indica si queremos ir para atras o hacia adelante en la 
+// paginacion. Paginas indica el total de paginas que hay
 function pasarPagina(valor, paginas)
 {
 	let pagActiva = location.search.substr(1);
 		url = window.location.href; 			// Url actual completa
-		url2 = url.split('/')[5]; 				// cojemos el final de la url despues del ultimo '/'
-		url3 = url2.split('?')[0]; 	 			// Cojemos la primera parte del final de la url antes del '?'			
+		url2 = url.split('/')[5]; 				// cojemos el final de la url despues del ultimo '/' (index.html?1)
+		url3 = url2.split('?')[0]; 	 			// Cojemos la primera parte del final de la url antes del '?'	(index.html)		
 
 	if(valor==1)  // Si valor == 1 quiere decir que queremos ir a la anterior
 	{
-		if(pagActiva!=1)
+		if(pagActiva!=1) // Comprobamos si es la primera pagina o no (si lo es no se puede ir hacia atras)
 		{
 			pagActiva = pagActiva - 1;
 
@@ -346,7 +353,7 @@ function pasarPagina(valor, paginas)
 	}
 	else // Si no es 1, quiere decir que queremos ir a la siguiente pagina
 	{
-		if(pagActiva<paginas)
+		if(pagActiva<paginas) // Si no estamos en la ultima pagina
 		{
 			pagActiva = +pagActiva + +1;
 
@@ -364,9 +371,9 @@ function fotosFavoritas()
 	// Peticion GET
 	let xhr = new XMLHttpRequest();
 		url = 'api/usuarios/'; 
-		pagActiva = location.search.substr(1);
+		pagActiva = location.search.substr(1); // Para la paginacion
 
-	let usu = JSON.parse(sessionStorage['usuario']);  // Parseamos toda la info que hay en la
+	let usu = JSON.parse(sessionStorage['usuario']);  // Parseamos toda la info que hay del usuario logueado (asumimos que esta logueado porque aqui solo se puede entrar logueado)
 
 	// Completamos la url con la info que falta
 	url += usu.login + '/favoritas';  // Favoritas del usuario
@@ -379,7 +386,9 @@ function fotosFavoritas()
 
 		// Si todo ha ido bien
 		if(r.RESULTADO == 'OK')
-		{
+		{	
+
+			// Estructura igual que index
 			totalPag = calcularTotalPagFotos(r, xhr); 		// Calculamos el total de paginas que hay
 
 			//console.log(totalPag);
@@ -668,7 +677,7 @@ function registroUsuario(formulario)
 	{
 
 		let xhr = new XMLHttpRequest();  // Creamos el objeto para poder hacer una petición al servidor.
-			fd = new FormData(formulario);
+			fd = new FormData(formulario); 		// Encapsula todos los campos del formulario
 			url = 'api/usuarios';
 
 		xhr.open('POST', url, true);
@@ -754,6 +763,7 @@ function realizarBusqueda(formulario)
 		url = 'api/fotos?';
 		pagActiva = location.search.substr(1);
 
+	// Se comprueba que campo no esta vacio para añadir datos a la url para la peticion
 	if(formulario.titulo.value!="")
 	{
 		url+= 't=' + formulario.titulo.value;
@@ -1007,6 +1017,7 @@ function checkBusqueda(formulario)
 				valor2 = parametro.split('=')[1];
 				ident = parametro.split('=')[0];
 
+			// Se comprueba el valor que se pasa
 			switch (ident) {
 				case 'l':
 					formulario.autor.value = valor2;
@@ -1038,6 +1049,7 @@ function subirFoto(formulario)
 {	
 	if(formulario.fichero.files[0].size>300000)
 	{
+		// Tam del fichero demasiado grande
 		var modal = document.getElementById('myModal');  // Obtenemos el elemento
 		modal.style.display = "block";  				// Mostramos la ventana con info del error.
 

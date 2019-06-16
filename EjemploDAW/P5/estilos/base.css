@@ -1,0 +1,224 @@
+
+/* Por defecto ocultaremos todo aquello que lleve estas clases */
+.display-great {
+
+	display: none;
+}
+
+.display-medium {
+
+	display: none;
+}
+
+.display-mini{
+
+	display: none;
+}
+
+
+/* FORMULARIOS */
+
+.Inicio-Registro{
+  
+    text-align: center;
+    font-size: 15px;
+    display: block;
+    padding: 5% 0 10% 0;  /* arriba, derecha, abajo, izqd */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.marcoInicioRegistro{
+
+    border-width: 2px;
+    border-color: grey;
+    background-color: white;
+    box-shadow: 2px 2px 5px #999;
+    display: inline-block;
+   
+  }
+
+
+#SolicitudAlbum{
+
+     font-size: 18px;
+     display: block;
+  }
+
+ body>section>article>fieldset>h3{
+      font-size: 30px;
+   }
+
+#marcoSolicitudAlbum{
+
+      border-width: 2px;
+      border-color: grey;
+      background-color: white;
+      box-shadow: 2px 2px 5px #999;
+      display: inline-block; 
+ }
+
+
+.boxesAlbum, .bigBoxes, .direccion, .numCopias{   /* Boxes formulario */
+
+      background-color: white;
+      color: black;
+   }
+
+
+.valorRango{
+    -webkit-appearance: none;
+    height: 15px;
+    border-radius: 5px;   
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+   }
+
+ /* Boton Enviar Formulario */
+#solicitarAlbum{
+
+    font-size: 16px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+
+   }
+
+#solicitarAlbum:hover {
+    background-color: white; /* Green */
+    color: black;
+    border: 2px solid black;
+ }
+
+
+
+/* USUARIO REGISTRADO */
+
+#FotoPerfil>img{
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  }
+
+ #InfoUsuario{
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0 0 0 2%;
+  }
+
+ .marcoUsuario{
+
+    border-width: 2px;
+    border-color: grey;
+    background-color: white;
+    box-shadow: 2px 2px 5px #999;
+    display: block;
+    width:50%;
+    margin-top: 5%; 
+    margin-bottom: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1%;
+    font-size: 18px;
+  }
+
+.enlacesUsuario, #cierreSesion{
+
+   color: white;
+   background-color: grey;
+   text-decoration: none;
+   transition-duration: 0.4s;
+
+   border-radius: 4px;
+   text-align: center;
+  
+  }
+
+.enlacesUsuario:hover, #cierreSesion:hover {
+
+    background-color: white; 
+    color: black;
+    border: 1px solid black;
+   
+  }
+/* Enlaces Info Usuario */
+  #Modificar-Borrar{
+    margin-top: 6%;
+    margin-bottom: 3%;
+    text-align: center;
+  }
+
+
+/* BUSQUEDA AVANZADA */
+
+#busquedaAvanzada{
+
+    text-align: left;
+    font-size: 20px;
+    padding: 5% 10% 10% 10%;  /* arriba, derecha, abajo, izqd */
+
+}
+
+.marcoBusqueda{
+
+    border-width: 2px;
+    border-color: grey;
+    background-color: white;
+    box-shadow: 2px 2px 5px #999;
+    display: inline-block;
+    padding-left: 2%;
+
+}
+
+body>#busquedaAvanzada>.marcoBusqueda>h2,  body>section>#SolicitudAlbum>#marcoSolicitudAlbum>h3 {
+
+ 	text-align: center;
+ }
+
+
+/* Boton Enviar Formulario */
+#buscarFotos{
+
+      font-size: 16px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      transition-duration: 0.4s;
+
+   }
+
+
+#buscarFotos:hover {
+      background-color: white; /* Green */
+      color: black;
+      border: 2px solid black;
+  }
+
+
+/* TABLA TARIFAS */
+table, caption{
+
+      /*border: 1px solid black;*/
+      text-align: center;
+      border-collapse: collapse;  /* Para que los bordes se junten */
+      
+
+    }
+    th, table>caption{
+
+        background-color: grey;
+        border: 1px solid black;
+        padding: 10px;
+
+    }
+    td{
+
+        background-color: white;
+        border: 1px solid black;
+        padding: 10px;
+
+    }

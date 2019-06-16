@@ -1,0 +1,23 @@
+* {
+
+	box-sizing: border-box;
+}
+
+
+body>section {
+
+	display: inline-flex;
+	align-items: flex-start; 	/* Los tamaños no cogen toda la pantalla */
+	flex-direction: column; /* UN elemento debajo de otro */
+}
+
+canvas {
+
+	border: 1px solid #000000FF;
+}
+
+
+#fichero {
+
+	display: none;
+}

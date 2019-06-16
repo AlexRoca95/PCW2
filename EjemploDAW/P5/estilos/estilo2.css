@@ -1,0 +1,658 @@
+/* GLOBAL */
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,700');
+
+*{
+  box-sizing: border-box;
+}
+
+.imagen{
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.imagen2{
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.contenedor{
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.top-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.5);;
+  border-left: solid 1px #FFF;
+  border-top-right-radius:  5px;
+  border-bottom-right-radius:  5px;
+  text-align: right;
+  padding: .2em .8em;
+  display: flex;
+  align-items: center;
+}
+
+.imgResume{
+  flex-direction: column;
+  text-align: right;
+}
+.imgResume>p{
+  margin: 2em 0;
+}
+
+#detalle{
+  padding: 1em 8em 3em 8em;
+}
+  #detalle>article{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+    #detalle>article>figure{
+      margin: 0;
+      margin-top: 2.8em;
+    }
+      #detalle>article>figure>img{
+        border: solid 1px #FFF;
+        border-radius: 5px;
+      }
+    #detalle>article>div{
+      height: 23.2em;
+      color: #FFF;
+      margin: 0;
+      margin-top: 2.8em;
+      padding-left: 4em;
+      padding-right: 2em;
+      background-color: #4B483F;
+    }
+      #detalle>article>div>h2{
+        margin-top: 1.8em; 
+        margin-bottom: 1em;
+        font-size: 22px;
+      }
+      #detalle>article>div>p>a{
+        font-weight: bold;
+        text-decoration: none;
+        color: #FFDB70;
+      }
+      #detalle>article>div>p>a:hover{
+        text-decoration: underline;
+      }
+
+    .info{
+      margin-left: 1.4em;
+      font-size: 12px;
+    }
+
+    .albuminfo{
+      margin-top: 8em;
+    }
+
+/* BODY */
+body {
+  width: 100%;
+  font-size: 14px;
+  color: #434343;
+  background-color: #FFDB70;
+  /*min-width: 320px;
+  max-width: 960px;*/
+  margin: 0 auto ; 
+  border-left: solid #fff; 
+  border-right: solid #fff;
+  border-bottom: solid #fff; 
+  padding: 0; /*.5em .5em .5em;*/
+}
+
+/* HEADER */
+  body>header{
+    display: flex;
+    flex-direction: row;
+    padding: .8em 1.5em;
+    max-height: 60px;
+
+    text-align: center;
+    
+    color: #FFFFFF;
+    background-color: #4B483F;
+  }
+
+    body>header>a{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      
+      overflow: hidden;
+      width: 30%;
+      
+      font-family: 'Source Serif Pro', serif;
+      /*text-shadow: 1px 1px 2px #aaa;*/
+      text-decoration: none;
+      color: #000;
+    }
+      body>header>a>div:first-of-type{
+        max-width: 15%;
+        height: 90%;
+        margin: 0 .8em;
+        border-right: 1px solid #E1E1E1;
+      }
+        body>header>a>div>h1{
+          font-size: 20px;
+          font-weight: 700;
+          margin: 0 .2em; 
+          /* Charmonman */
+        }
+        body>header>a>div>h2{
+          font-size: 20px;
+          font-weight: 400;
+          margin: 0 .2em;
+          /* Slabo 27px 
+          Open Sans Condensed */
+        }
+
+    body>header>div:first-of-type{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      
+      align-self: center;
+      overflow: hidden;
+      width: 40%;
+      
+      font-family: 'Source Serif Pro', serif;
+      /*text-shadow: 1px 1px 2px #aaa;*/
+      text-decoration: none;
+      color: #000;
+    }
+      body>header>div:first-of-type>form{
+        margin-right: .3em;
+      }
+      body>header>div:first-of-type>a{
+        text-decoration: none;
+        color: #E1E1E1;
+      }
+      body>header>div:first-of-type>a:hover{
+        text-decoration: underline;
+      }
+
+    body>header>div:last-of-type{
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+      width: 30%;
+      margin: auto;
+      margin-right: .2em;
+    }
+      body>header>div:last-of-type>a{
+        width: 92px;
+        height: 35px;
+        text-decoration: none;
+        color: #E1E1E1;
+
+        border-bottom: solid #000;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        margin-right: .5em;
+        margin-top: .2em;
+        padding: .5em .8em;
+      }
+      body>header>div:last-of-type>a:first-of-type{
+        border-top: solid #4B483F;
+      }
+      body>header>div:last-of-type>a:first-of-type:hover{
+        background-color: #E1E1E1;
+        border-top: solid #E1E1E1;
+        color: #000;
+      }
+      body>header>div:last-of-type>a:last-of-type{
+        background-color: #000;
+        border-top: solid #000;
+        margin-right: .8em;
+      }
+      body>header>div:last-of-type>a:last-of-type:hover{
+        background-color: #FFDB70;
+        border-top: solid #FFDB70;
+        color: #000;
+      }
+
+/*SECTION FOTOS PREVIEW*/
+  .preview{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 1em 8em 3em 8em;
+  }
+    .preview>article{
+      width: 44%;
+      max-width: 500px;
+      min-width: 476px;
+      height: 300px;
+      /*padding-bottom: 75%;*/
+      margin-top: 2.8em;
+      border: solid 1px #FFF;
+      border-radius: 5px;
+    }
+      .preview>article>figure{
+        max-height: 100%;
+        max-width: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+/* FOOTER */     
+  body>footer{
+    background-color: #434343;
+    color: #E1E1E1;
+    padding: .5em;
+    font-size: 16px;
+    text-align: center;
+  }
+    body>footer>p{
+      margin: 0;
+      align-self: center;
+    }
+      body>footer>p>a{
+        color: #E1E1E1;
+        text-decoration: none;
+      }
+      body>footer>p>a:hover{
+        color: #E1E1E1;
+        text-decoration: underline;
+      }
+    body>footer>a{
+      color: #E1E1E1;
+      text-decoration: none;
+    }
+    body>footer>a:hover{
+      color: #E1E1E1;
+      text-decoration: none;
+    }
+
+body>p{
+  text-align: center;
+}
+
+/* Bloque formulario */
+.Inicio-Registro{
+  
+    text-align: center;
+    font-size: 15px;
+    display: block;
+    padding: 5% 0 10% 0;  /* arriba, derecha, abajo, izqd */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  .marcoInicioRegistro{
+
+    border-width: 2px;
+    border-color: grey;
+    background-color: white;
+    box-shadow: 2px 2px 5px #999;
+    display: inline-block;
+    width:30%;
+   
+  }
+
+/* Contenido formularios */
+
+   .boxesForm{
+
+      width: 80%;
+      margin: 5px 0;
+      padding: 12px 0 12px 5px;
+      border: none;
+      border-bottom: 2px solid grey;
+      background-color: white;
+      color: black;
+   }
+   /* Boton Enviar Formulario */
+   .enlaceBoton{
+
+      font-size: 16px;
+      margin:25px 0;
+      padding: 12px 28px;
+      border-radius: 8px;
+      transition-duration: 0.4s;
+
+   }
+
+   .enlaceBoton:hover {
+      background-color: white; 
+      color: black;
+      border: 2px solid black;
+  }
+
+  /*Fecha Nacimiento */
+  .mes{
+
+      width:40%;
+      margin: 5px 0;
+      padding: 12px 0 12px 5px;
+      border: none;
+      border-bottom: 2px solid grey;
+      background-color: white;
+      color: black;
+
+   }
+
+   .diaMes{
+
+      width:20%;
+      margin: 5px 0;
+      padding: 12px 0 12px 5px;
+      border: none;
+      border-bottom: 2px solid grey;
+      background-color: white;
+      color: black;
+
+   }
+
+/* Bloque foto de Perfil */ 
+
+  #FotoPerfil{
+
+    padding: 5% 0 0 3%;
+    float:left;
+    width:25%;
+    font-size: 15px;
+  }
+
+  #FotoPerfil>img{
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  }
+
+  #NombreUsuario{
+
+     font-size: 20px;
+     padding-left: 4%;
+  }
+
+  /* Bloque info Usuario */
+  .marcoUsuario{
+
+    border-width: 2px;
+    border-color: grey;
+    background-color: white;
+    box-shadow: 2px 2px 5px #999;
+    display: inline-block;
+    width:50%;
+    margin-top: 5%; 
+    margin-bottom: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1%;
+    font-size: 18px;
+  }
+
+  #InfoUsuario{
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0 0 0 2%;
+  }
+
+  /* Enlaces Info Usuario */
+  #Modificar-Borrar{
+
+    display: block;
+    width:40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6%;
+    margin-bottom: 3%;
+  }
+
+  .enlacesUsuario{
+
+   color: white;
+   background-color: grey;
+   text-decoration: none;
+   border-radius: 4px;
+   padding: 8px 24px;
+   margin-left: 3%;
+   transition-duration: 0.4s;
+  }
+
+ .enlacesUsuario:hover{
+
+    background-color: white; 
+    color: black;
+    border: 1px solid black;
+   
+  }
+
+  /* Bloque Busqueda Avanzada */
+
+#busquedaAvanzada{
+
+    text-align: left;
+    font-size: 20px;
+    display: block;
+    padding: 5% 10% 10% 10%;  /* arriba, derecha, abajo, izqd */
+
+}
+
+.marcoBusqueda{
+
+    border-width: 2px;
+    border-color: grey;
+    background-color: white;
+    box-shadow: 2px 2px 5px #999;
+    display: inline-block;
+    width:55%;
+    margin-left: 25%;
+    padding-left: 2%;
+
+}
+
+/* Contenido formularios */
+
+   .boxesBusqueda{
+
+      width: 35%;
+      margin: 5px 5px 0 5px;
+      padding: 5px 0 5px 10px;
+      display: inline-block;
+
+   }
+
+   /* Boton Enviar Formulario */
+   #buscarFotos{
+
+      font-size: 16px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      display: block;
+      margin-left: auto;
+      margin-right:auto;
+      margin-top: 5%;
+      width: 30%;
+      transition-duration: 0.4s;
+
+   }
+
+   #buscarFotos:hover {
+      background-color: white; /* Green */
+      color: black;
+      border: 2px solid black;
+  }
+
+  label{
+
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 110px;
+    text-align: left;
+  }
+
+
+  /**/
+
+  body>section>h2 {
+
+      font-size: 30px;
+      padding-left: 1%;
+
+    }
+
+    body>section>p {
+
+      font-size: 18px;
+      padding-left: 1%;
+
+    }
+
+
+
+    /* Tabla Info precios */
+    #tablaTarifas{
+
+      font-size: 20px;
+      display: block;
+      padding: 2% 0 5% 20%;  /* arriba, derecha, abajo, izqd */
+
+    }
+    table, caption{
+
+      border: 1px solid black;
+      text-align: center;
+      border-collapse: collapse;  /* Para que los bordes se junten */
+      
+
+    }
+    th, table>caption{
+
+        background-color: grey;
+        border: 1px solid black;
+        padding: 10px;
+
+    }
+    td{
+
+        background-color: white;
+        border: 1px solid black;
+        padding: 10px;
+
+    }
+
+    /* Formulario Solicitud Album */
+
+    body>section>article>fieldset>h3{
+      font-size: 30px;
+    }
+
+    label{
+
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 180px;
+    text-align: left;
+  }
+
+
+    #SolicitudAlbum{
+
+      font-size: 18px;
+      display: block;
+      padding: 0 10% 10% 22%;  /* arriba, derecha, abajo, izqd */
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+     #marcoSolicitudAlbum{
+
+      border-width: 2px;
+      border-color: grey;
+      background-color: white;
+      box-shadow: 2px 2px 5px #999;
+      display: inline-block;
+      width:75%;
+      padding-left: 2%;
+     
+     }
+
+    .boxesAlbum{   /* Boxes formulario */
+
+      width: 35%;
+      margin: 5px 0 0 5px;
+      padding: 5px 0 5px 5px;
+      background-color: white;
+    color: black;
+   }
+
+   .bigBoxes{
+
+      width: 40%;
+      margin: 5px 0 0 5px;
+      padding: 5px 0 30px 5px;
+      background-color: white;
+    color: black;
+   }
+
+   .direccion{
+
+      width: 20%;
+      margin: 5px 0 0 5px;
+      padding: 5px 0 5px 5px;
+      background-color: white;
+    color: black;
+   }
+
+   .numCopias{
+
+      width: 7%;
+      margin: 5px 0 0 5px;
+      padding: 5px 0 5px 5px;
+      background-color: white;
+    color: black;
+   }
+
+   .valorRango{
+
+      width: 20%;
+      margin: 5px 10px 0 10px;
+      padding: 5px 0 5px 5px;
+
+      -webkit-appearance: none;
+      height: 15px;
+      border-radius: 5px;   
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+   }
+
+
+   /* Boton Enviar Formulario */
+    #solicitarAlbum{
+
+      font-size: 16px;
+      margin:5% 0 0 42%;
+      padding: 12px 28px;
+      border-radius: 8px;
+      transition-duration: 0.4s;
+
+   }
+
+   #solicitarAlbum:hover {
+      background-color: white; /* Green */
+      color: black;
+      border: 2px solid black;
+  }

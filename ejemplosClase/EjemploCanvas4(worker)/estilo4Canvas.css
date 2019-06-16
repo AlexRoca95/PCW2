@@ -1,0 +1,30 @@
+* {
+	box-sizing: border-box;
+}
+
+img {
+	
+	/* Evitamos que se salgan las imagenes del tam de la pantalla */
+	max-width: 100%;
+	max-height: 100%;
+}
+
+canvas {
+	
+	border: 1px solid #000000FF;
+}
+
+#imgs {
+
+	display: flex;
+	justify-content: space-around;  /* El espacio que sobra se reparte entre todos */
+	align-items: flex-start;
+}
+
+
+	#imgs>img {
+		
+		width: 32%;
+		border: 1px solid #000;
+
+	}

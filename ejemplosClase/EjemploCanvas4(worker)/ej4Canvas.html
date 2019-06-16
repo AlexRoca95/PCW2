@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="estilo4Canvas.css">
+	<script src="java4Canvas.js"></script>
+</head>
+<body>
+	<h1>Ejemplo de Drag &amp; Drop</h1>
+	<section>
+		<h2> Canvas 01</h2>
+		<canvas id="cv01"></canvas>
+		<footer>
+			<button onclick="mostrarColor('red');">Rojo</button>
+			<button onclick="mostrarColor('green');">Verde</button>
+			<button onclick="mostrarColor('blue');">Azul</button>
+		</footer>
+	</section>
+	<section>
+		<h2>Imágenes</h2>
+		<div id="imgs">
+			<img src="fotos/29.jpg" alt="img01">
+			<img src="fotos/30.jpg" alt="img02">
+			<img src="fotos/31.jpg" alt="img03">
+		</div>
+	</section>
+	<script>
+		prepararCanvas();
+		prepararDrD();
+	</script>
+</body>
+</html>

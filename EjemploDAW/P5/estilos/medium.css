@@ -1,0 +1,190 @@
+
+/* Activamos esta clase para que todo aquello que lo lleve se pueda mostrar */
+.display-medium {
+	display: inherit !important;
+}
+/* FORMULARIOS */
+.boxesAlbum, .bigBoxes, .numCopias, .valorRango, label {
+
+	width: 50%;
+}
+
+/* Para que se muestren los labels al lado de los inputs */
+label {
+
+	  padding: 12px 12px 12px 0;
+	  display: inline-block;
+	  width: 100%;
+}
+
+.marcoInicioRegistro {
+
+	width:30%;
+}
+
+#marcoSolicitudAlbum {
+
+	width:80%;
+}
+
+.boxesAlbum{   /* Boxes formulario */
+
+      width: 55%;
+   }
+
+.bigBoxes{
+
+    width: 60%;
+    margin: 3px 0 0 5px;
+    padding: 5px 0 30px 5px;
+   }
+
+.direccion{
+
+    width: 45%;
+   }
+
+.numCopias{
+
+    width: 15%;
+   }
+
+.valorRango{
+
+    width: 35%;
+   }
+
+.boxesAlbum, .direccion, .numCopias, .valorRango {
+
+	margin: 6px 0 0 5px;
+    padding: 5px 0 5px 5px;
+}
+
+
+#SolicitudAlbum{
+
+	padding: 0 0 10% 15%;  /* arriba, derecha, abajo, izqd */
+}
+
+#solicitarAlbum{
+
+    margin-left: 30%;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 40%;
+
+   }
+
+
+
+/* USUARIO REGISTRADO */
+
+#FotoPerfil{
+
+	width:50%;
+    font-size: 15px;
+    margin-top:5%;
+  }
+
+
+#FotoPerfil>img{
+
+     width: 80%;
+    height: auto;
+    display: block;
+    margin-left: 52%;
+    margin-right: auto;
+}
+
+#NombreUsuario{
+
+     text-align: center;
+     margin-left: 70%;
+     font-size: 20px;
+  }
+
+.marcoUsuario {
+
+	width: 85%;
+	margin-left: auto;
+	margin-right:auto;
+	display: block;
+}
+
+ .enlacesUsuario{
+
+	   padding: 8px 7px;
+  
+  }
+
+
+#cierreSesion{
+
+   border-radius: 4px;
+   padding: 8px 24px;
+   margin-left: 35%;
+  }
+
+/* BUSQUEDA AVANZADA */
+.marcoBusqueda{
+
+   width:85%;
+   margin-left: 5%;
+
+}
+
+.boxesBusqueda{
+
+    width: 60%;
+    margin: 0 5px 0 5px;
+    padding: 5px 0 5px 10px;
+    display: block;
+
+}
+
+#buscarFotos{
+
+    margin-left: 25%;
+    margin-right:auto;
+    margin-top: 5%;
+    width: 50%;
+
+}
+
+/* TABLA TARIFAS */
+    #tablaTarifas{
+      
+      width: 100%;
+      margin: auto;
+      text-align: center;
+      font-size: 18px;
+      display: inline-block;
+      padding: 1% 1% 5% 1%;  /* arriba, derecha, abajo, izqd */
+      
+    }
+
+
+/*HEADER*/
+.headerItems>div>a>span:first-of-type{
+	display: none;
+}
+
+/*SECTION FOTOS PREVIEW*/
+.preview>article{
+  width: 100%;
+  max-width: 476px;
+} 
+
+/* DETALLE FOTO */
+#detalle>article>figure{
+  flex-direction: column;
+  width: auto;
+  max-width: 600px;
+}
+#detalle>article>figure>figcaption>div{
+  margin-top: 5%;
+}
+
+/*body{
+	background-color: cyan;
+} */

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" /> <!-- Para que se pueda aplicar un diseño adaptable y la correcta visualizacion en dispo móviles -->
+	<title>PRETI</title>
+	<link rel="stylesheet" type="text/css" href="estilos/estilo1.css">
+	<link rel="stylesheet" type="text/css" href="estilos/base.css" />  
+	<link rel="stylesheet" type="text/css" href="estilos/colors.css" />
+	<link rel="stylesheet" type="text/css" href="recursos/fontello-848afb9a/css/fontello.css">
+	<!-- Estilos Alternativos -->
+	<link rel="alternate stylesheet" type="text/css" title="Accesibilidad" href="estilos/accesibility.css" />
+	<link rel="alternate stylesheet" type="text/css" title="Accesibilidad" href="estilos/colors3.css" />
+	<link rel="alternate stylesheet" type="text/css" title="Modo sin responsive" href="estilos/estilo2.css" />
+	<!-- Para definir las propiedades que queremos que siempre se apliquen independientemente del tam de pantalla-->
+	<!-- Estilos que se aplican en función del tam de la pantalla -->
+	<!-- Indicamos el medio (pantallas) y la anchura mínima requerida para que se active este css --> 
+	<link rel="stylesheet" type="text/css" href="estilos/great.css" media="screen and (min-width: 981px)" />  <!-- Pantallas Grandes -->
+	<link rel="stylesheet" type="text/css" href="estilos/medium.css" media="screen and (min-width: 481px) and (max-width: 980px)" /> <!-- Pantallas Medianas -->
+	<link rel="stylesheet" type="text/css" href="estilos/mini.css" media="screen and (max-width: 480px)" /> <!-- Pantallas Pequeñas (Móviles) -->
+
+	<!-- Estilo para Impresion -->
+	<!--<link rel="alternate stylesheet" type="text/css" href="estilos/print.css" media="screen" title="Estilo para impresión" /> -->
+		<link rel="stylesheet" type="text/css" href="estilos/print.css" media="print" />
+
+</head>
+<body>
+	<header id="header">
+		<div class="headerItems">
+			<!-- Logotipo -->
+			<a href="index.html">
+				<div><img src="recursos/pretilg.png" alt="Preti Logo" class="imagen"></div>
+				<div class="display-medium display-great"><h1>Preti.</h1></div>
+				<div class="display-great"><h2>Creativity & Beyond</h2></div>
+			</a>
+		</div>
+
+		<input type="checkbox" id="ckburger">
+		<nav id="navbar">
+		</nav>
+	</header>
+
+	<section class="Inicio-Registro"> <!--Formulario de Inicio de Sesión -->
+		<fieldset class="marcoInicioRegistro">
+			<form action="usuarioRegistrado.html" method="post">
+				<h2>Inicio de Sesión</h2>
+				<p><input class="boxesForm" type="email" name="correo" placeholder="Introduce tu correo" autocomplete="on" required></p>
+				<p><input class="boxesForm" type="password" name="contraseña" placeholder="Introduce tu contraseña" required></p>
+				<input class="enlaceBoton" type="submit" value="Iniciar Sesión">
+			</form>
+			<br>
+			<p>¿No tienes ninguna cuenta? <a href="registro.html" class="swaplink">Regístrate</a> 
+		</fieldset>
+	</section>
+
+	<footer>
+		<!-- Copyright -->
+		<p><a href="about.html"><strong>Alejandro Roca Vande Sype, Víctor Conejero Vicente</strong></a> <time datetime="2018-09">| &copy; Septiembre 2018</time></p>
+	</footer>
+</body>
+</html>

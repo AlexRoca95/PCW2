@@ -1,0 +1,49 @@
+<!-- aJAX tecnologia para hacer peticiones a la base de datos -->
+<!-- Ejemplos de pedir favoritas de un usuario logueado, pedir las fotos de la base de datos, hacer un login y mostrar las etiquetas disponibles -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="estilo1.css">
+	<script src="java1.js"></script>  <!-- El type solo es necesario si el fichero es distinto a javasript -->
+
+	<script>
+		
+		if(!sessionStorage['usuario'])  // Si no existe en el sessionStorage la variable usuario
+		{
+			//location.href = 'http://localhost/pcw/practica02/index.html'; // Redirigimos a otra pagina.
+		}
+
+	</script>
+</head>
+<body>
+
+	<h1>Ejemplo AJAX</h1>
+
+	<button onclick="botonPulsado();">Pulsar</button>  <!-- Hacemos la llamada a la funcion que se encarga de gestionarlo -->
+	<span class="btn" onclick="pedirFotos();">Pedir Fotos</span>
+	
+	<section id="fotos">
+		<h2>Listado de fotos</h2>
+
+		<div></div>
+
+		<form onsubmit="return hacerLogin(this);">  <!-- Pasamos el formulario como entrada de la funcion -->
+			<div><label>Login</label><input type="text" name="login" onblur="mostrarValor(this);"></div>  <!-- Cuando dejamos de hacer focus al campo se llama a la funcion -->
+			<div><label>PWD</label><input type="password" name="pwd"></div>
+			<div><label>Etiquetas</label><input type="text" list="etiquetas" onfocus="pedirEtiquetas();"></div>
+			<datalist id="etiquetas"></datalist>
+			<div><input type="submit" value="enviar"><input type="reset" value="restaurar"></div>
+		</form>
+	</section>
+
+	<section id="ff">
+		<h2>Fotos favoritas</h2>
+		<div></div>
+		<footer>
+			<button onclick="pedirFavoritas();">Pedir favoritas</button>
+		</footer>
+	</section>
+</body>
+</html>

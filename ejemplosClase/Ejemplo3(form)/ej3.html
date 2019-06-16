@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="estilo3.css">
+	<script type="text/javascript" href="codigo4.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Ejemplo practica</h1>
+	</header>
+
+
+	<section>
+		
+		<h2>Cargar Imagen</h2>
+		<label>
+			
+
+		</label>
+		<footer>
+			
+			<form id="frm" onsubmit="return subirFoto(this);">
+				<input type="file" name="fichero" id="fichero" onchange="cargaImagen(this)">
+				<input type="text" name="titulo" placeholder="Titulo" onkeyup="teclaPulsada(event);">  <!-- Con onkeyup se lanza cuando dejamos de pulsar la tecla -->
+				<textarea placeholder="Descripcion" name="descripcion"></textarea>
+			</form>
+
+			<div>
+					<button onclick="document.getElementById('fichero').click(); return false">Seleccionar fichero</button>
+					<input form="frm" type="submit" value="Enviar">  <!-- Con el atributo form enlazamos el boton submit al formulario -->
+			</div>
+		</footer>
+	</section>
+
+	<section> <!-- Esto para cargar el formulario de comentarios si el usuario esta logeado o no, en foto -->
+		
+		<h2>Formulario Comentarios:</h2>
+		<button onclick="cargarFormComentario();">Cargar Formulario</button>
+		<div id="frmComent"></div>  <!-- EL formulario de html no se encuentra aqui si no en otro fichero -->
+	</section>
+</body>
+</html>

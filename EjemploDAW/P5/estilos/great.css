@@ -1,0 +1,161 @@
+
+/* Activamos esta clase para que todo aquello que lo lleve se pueda mostrar */
+.display-great {
+	display: inherit !important;
+}
+
+/* FORMULARIOS */
+/* Para que se muestren los labels al lado de los inputs */
+label {
+
+	  padding: 12px 12px 12px 0;
+	  display: inline-block;
+	  width: 100%;
+}
+
+.boxesAlbum {
+
+	width: 30%;
+	display: block;
+}
+
+.marcoInicioRegistro {
+
+	width:35%;
+}
+
+#marcoSolicitudAlbum {
+
+	width:80%;
+    padding-left: 2%;
+}
+option {
+
+	text-align: center;
+}
+
+.boxesAlbum{   /* Boxes formulario */
+
+      width: 40%;
+   }
+
+.bigBoxes{
+
+    width: 45%;
+    margin: 6px 0 0 5px;
+    padding: 5px 0 30px 5px;
+   }
+
+.direccion{
+
+    width: 30%;
+   }
+
+.numCopias{
+
+    width: 10%;
+   }
+
+.valorRango{
+
+    width: 35%;
+   }
+
+.boxesAlbum, .direccion, .numCopias, .valorRango {
+
+	margin: 6px 0 0 5px;
+    padding: 5px 0 5px 5px;
+}
+
+#SolicitudAlbum{
+
+	padding: 0 10% 10% 22%;  /* arriba, derecha, abajo, izqd */
+}
+
+#solicitarAlbum{
+
+    margin-left: 35%;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 30%;
+
+   }
+
+/* USUARIO REGISTRADO */
+#FotoPerfil{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    padding: 5% 0 0 3%;
+    float:left;
+    font-size: 20px;
+  }
+
+
+#NombreUsuario{
+
+     font-size: 20px;
+     padding-left: 4%;
+  }
+
+.enlacesUsuario{
+
+	   padding: 8px 21px;
+  }
+
+
+/* BUSQUEDA AVANZADA */
+.marcoBusqueda{
+
+   width:70%;
+   margin-left: 15%;
+
+}
+
+#buscarFotos{
+
+    margin-left: auto;
+    margin-right:auto;
+    margin-top: 5%;
+    width: 50%;
+    margin-left: 25%;
+
+   }
+
+.boxesBusqueda{
+
+    width: 45%;
+    margin: 0 5px 0 5px;
+    padding: 5px 0 5px 5px;
+    display: inline-block;
+
+ }
+
+
+ /* TABLA TARIFAS */
+    #tablaTarifas{
+      width: 100%;
+      margin: auto;
+      font-size: 18px;
+      display: inline-block; 
+      text-align: center;
+      padding: 1% 1% 5% 1%;  /* arriba, derecha, abajo, izqd */
+
+    }
+
+
+
+/*HEADER*/
+.headerItems>div>a>span:first-of-type{
+  display: none;
+}
+
+/* DETALLE FOTO */
+#detalle>article>figure>div{
+  max-width: 600px;
+}
+#detalle>article>figure>img{
+  max-width: 600px;
+}

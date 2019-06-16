@@ -1,0 +1,94 @@
+
+
+/* Version para la impresión de la pagina web */
+.display-great {
+	display: inherit !important;
+}
+
+
+
+header{
+  display: none;
+}
+
+body {
+  background-image: none;
+  font-style: serif;
+  font-size: 12pt;
+  background-color: white;
+}
+
+
+ 
+.preview { 
+	width: auto; 
+	border: 0; 
+	margin: 0 5%; 
+	padding: 0; 
+	float: none !important; 
+}
+
+
+/* Muestra la url de todos los enlaces que hayan en la pagina. After --> para añadir contenido estético a un elemento */
+a:link:after, a:visited:after {
+	content:" <" attr(href) ">";
+	font-size: 90%;
+}
+
+a:link, a:visited { 
+
+	color: #520; 
+	background: transparent; 
+	font-weight: bold; 
+	text-decoration: underline; 
+}
+
+/* Evitar Saltos de pagina */
+ .prov, ul, img, table {
+
+	page-break-inside: avoid;
+}
+
+
+/* FOTOS PREVIEW */
+.preview>article{
+  width: 60%;
+}
+.preview>article>a{
+  text-decoration: none;
+}
+.preview>article>a>figure{
+  position: static;
+  padding-bottom: .4em;
+}
+.prov{
+  position: static;
+  margin: auto auto;
+  width: 100%;
+  height: auto;
+}
+      .top-right {
+        position: static;
+      }
+      .imgResume{
+        text-align: left;
+      }
+      .imgResume>p{
+        padding: 0;
+        margin: 0;
+        margin-top: .3em;
+        text-decoration: none;
+      }
+      .imgResume>p:first-of-type{
+        padding-bottom: .5em;
+        margin-top: .5em;
+        font-weight: 500;
+      }
+      .imgResume>p:last-of-type{
+        margin-top: .3em;
+        margin-bottom: .3em;
+      }
+
+input[type=submit] {
+	display: none;
+}
