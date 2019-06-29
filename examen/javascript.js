@@ -3,9 +3,11 @@ var contCartas; 	// Para contar el numero de cartas mostradas y comprobar pareja
 var	carta1;
 var	carta2;
 var jugadas;
+var parejas; 		// Para saber cuantas parejas hay completas
 
 var cartas = [];  	// Array con el orden en el que se muestran las cartas
 
+// Se inicia el juego
 function iniciarJuego()
 {
 
@@ -13,6 +15,7 @@ function iniciarJuego()
 
 	contCartas = 0;
 	jugadas = 0;
+	parejas = 0;
 
 	checkJugadas();
 }
@@ -116,6 +119,9 @@ function comprobarParejas(img1, img2)
 
 		cont1.style.backgroundColor = '#8AE234FF';
 		cont2.style.backgroundColor = '#8AE234FF';
+
+		// Son parejas
+		parejas ++;
 	}
 	else
 	{
@@ -127,6 +133,9 @@ function comprobarParejas(img1, img2)
 	jugadas ++;  // Realizada una jugada
 
 	checkJugadas();
+
+
+	checkFinJuego();
 }
 
 
@@ -158,4 +167,38 @@ function checkJugadas()
 
 	document.querySelector('#jugadas').innerHTML = html;
 
+}
+
+
+function checkFinJuego()
+{
+
+	if(parejas==6)
+	{
+		// Se han completado todas las parejas
+
+		// Fin del juego
+		var modal = document.getElementById('myModal');  
+
+		modal.style.display = 'block';  	
+
+		let html = '<p>Enhorabuena! Has conseguido todas las parejas en <strong>'+ jugadas +'</strong> jugadas. </p>';
+			html +=  '<span class="jugar" onclick="volverJugar();">Volver a jugar</span>';
+
+		document.querySelector('.modal-content').innerHTML = html;
+
+	}
+}
+
+
+function volverJugar()
+{
+
+	var modal = document.getElementById('myModal');  
+
+		modal.style.display = 'none';  	
+
+	ocultarCartas();
+
+	iniciarJuego();
 }
