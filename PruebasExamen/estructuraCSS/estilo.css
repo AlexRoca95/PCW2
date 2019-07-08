@@ -1,0 +1,226 @@
+/* Pantallas grandes */
+@media screen and (min-width: 981px) {
+
+	#cabecera {
+
+		display: flex;
+		flex-direction: row;
+
+		/* Alto de la cabecera */
+	    height: 55px;
+	    max-height: 60px;
+
+	    padding: .8em 0;  /* Se ajustan en el centro */
+
+
+	}
+
+	/* Ajustamos los titulos para que se vean en la misma fila */
+	div>h1 {
+		  
+		  /*border-right: 1px solid #2E3436FF; 	/* Linea vertical a la derecha */
+		  margin: 0 .2em;
+	}
+
+	div>h2 {
+
+		margin: 0 .2em;
+	}
+
+	nav>ul {
+
+		    max-height: 100px;
+			
+		}
+
+			nav>ul>li {
+				/* Para que se ajuste cada elem de la barra de nav en una fila */
+				padding: 0 .4em;
+			    margin: .8em 0;
+			    display: inline-block;
+			}
+
+
+}
+
+/* Pantallas medianas */
+@media screen and (min-width: 481px) and (max-width: 980px) {
+
+	#cabecera {
+
+	display: flex;
+	flex-direction: row;
+
+	/* Alto de la cabecera */
+    height: 55px;
+    max-height: 60px;
+
+    padding: .8em 0;  /* Se ajustan en el centro */
+
+
+	}
+
+	/* Ajustamos los titulos para que se vean en la misma fila */
+	div>h1 {
+		  
+		  /* border-right: 1px solid #2E3436FF; 	/* Linea vertical a la derecha */
+		  margin: 0 .2em;
+	}
+
+	div>h2 {
+
+		margin: 0 .2em;
+	}
+	
+
+	nav>ul {
+
+		    max-height: 100px;
+			
+		}
+
+			nav>ul>li {
+				/* Para que se ajuste cada elem de la barra de nav en una fila */
+				padding: 0 .4em;
+			    margin: .8em 0;
+			    display: inline-block;
+			}
+	
+}
+
+
+/* Pantallas pequeñas */
+@media screen and (max-width: 480px) {
+
+	nav {
+		
+
+	}
+
+		nav>ul{  
+
+  				max-height: 500px; /* Altura maxima de la lista de elementos de navegacion */
+  			}
+
+   			 	nav>ul>li{
+      				/* Barra de navegacion en Modo columna */
+      				margin: 1.8em 0;
+      				display: block;
+      				border: none;
+
+    			}
+
+
+    #preview>article {
+
+    	width: 100%;  /* El espacio de la foto ocupe todo el ancho de la pantalla */
+    	margin-top: 2em; /* Margen superior entre los articulos de las fotos */
+    }
+
+
+}
+
+
+/* ESTILOS QUE SE APLICAN A TODOS LOS TAMAÑOS */
+
+* {
+
+	box-sizing: border-box;
+}
+
+#cabecera {
+
+	text-align: center;
+	
+	max-width: 1040px;  /* Maximo de la cabecera */
+    margin: 0 auto;
+   }
+
+
+   div>h1 {
+		  
+		  font-size: 21px;
+	      font-weight: 700;
+	}
+
+	div>h2 {
+
+		font-size: 21px;
+	    font-weight: 700;
+	}
+
+	nav {
+
+		background-color: #888A85FF;
+	}
+		
+		nav>ul {
+pre
+			max-width: 1040px;
+			
+			text-align: center; 
+		      
+		    list-style: none; /*Sin estilos */
+		    overflow: hidden;
+
+		    margin: 0 auto;
+		    padding: 0;
+		}
+
+	
+	/* Todos los enlaces */
+	a {
+
+		text-decoration: none;
+		cursor: pointer;
+		color: #000000;
+	}
+
+		a:hover {
+
+			color: #729FCFFF;
+
+		}
+	
+
+
+/* Zona principal de la pagina (preview) */
+
+#preview {
+
+
+	display: flex; 						/* Sin añadir mas datos que esto, las imagenes se ven en una fila */
+	flex-direction: row;  				/* Todos los items se despliegan sobre una fila (viene por defecto) */
+	justify-content: space-around; 		/* Todos los items de la linea son distribuidos con el mismo espacio entre ellos */
+
+
+	max-width: 1040px; 					/* Ancho maximo para todos los elementos (no pueden sobrepasarlo) */
+	margin: 0 auto;
+
+	flex-wrap: wrap;     				/* Todos los elementos flex son colocados en varias lineas, ajustandose al espacio que disponen en cada fila */
+}
+	
+	#preview>article {
+		
+		/* Espacio que tiene cada uno de las fotos */
+		overflow: hidden;  	/* No se dibujan las barras de desplazamiento y se recorta el contenido */
+		width: 40%;  		/* Con este valor es con el que hay que jugar para que se muestren varios elem en una linea (20% esta bien) */
+		
+		margin: 0 1.4em;
+		margin-top:  2.8em;
+
+	}
+
+		.contenedor {
+
+			 position: relative; 
+
+		}
+
+
+			img {
+
+					/* Con estos dos valores la img se ajusta al espacio del contenedor */
+					max-width: 100%;
+					max-height: 100%;
+			}
