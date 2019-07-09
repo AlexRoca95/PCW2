@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Para que se pueda aplicar un diseño adaptable y la correcta visualizacion en dispo móviles -->
+	<script src="javascript.js"></script>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<title>Pruebas Canvas Examen</title>
+</head>
+<body>
+	<header>
+		<div id="cabecera">
+			<div><h1>Progamación</h1></div>
+			<div><h2>Pruebas Canvas para el examen</h2></div>
+		</div>
+	</header>
+
+	<h2>Zona de canvas</h2>
+	
+	<section id="preview">
+		
+		<article>
+		<canvas id="canvas01"  class="canvas" ></canvas>
+		<footer>
+			<button onclick="dibujarImagen();">Dibujar Imagen</button>
+		</footer>
+		</article>
+		<article>
+		<canvas id="canvas02"  class="canvas" ></canvas>
+		<footer>
+			<button onclick="copiarImagen();">Copiar Imagen</button>
+		</footer>
+		</article>
+		<article>
+		<canvas id="canvas03"  class="canvas" ></canvas>
+		<footer>
+			<button onclick="dividirImagen();">Dividir Imagen</button>
+			<button onclick="moverImagen();">Mover Imagen</button>
+		</footer>
+		</article>
+		<article>
+		<canvas id="canvas04"  class="canvas" ></canvas>
+		</article>
+		<article>
+		<canvas id="canvas05"  class="canvas" ></canvas>
+		</article>
+
+	</div>
+
+
+	<script >
+		
+		prepararCanvas();
+
+	</script>
+</body>
+</html>
