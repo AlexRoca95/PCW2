@@ -1,6 +1,14 @@
 
 const TAM = 350
+const DIVISIONES = 5; 					// Numero de DIVISIONES que queremos
 
+//Matriz de ocuación para comprobar las posiciones
+var mtOcupacion=[];
+
+var fila = 0;
+var colum = 0;
+
+var foto = 'fotos/fig1.svg'; 			// Foto a dibujar en la celda
 
 // Funcion para preparar los canvas (definir tamaños etc)
 function prepararCanvas()
@@ -30,7 +38,7 @@ function prepararCanvas()
 
 
 	// Metodo selección todos los canvas de una
-	canvas = document.querySelectorAll('canvas'); 	
+	let canvas = document.querySelectorAll('canvas'); 	
 	
 	canvas.forEach(function(cv){  // Asignamos el mismo tamaño a todos
 
@@ -39,6 +47,8 @@ function prepararCanvas()
 
 	});
 
+
+	crearMatrizOcupacion();
 
 
 }
@@ -57,7 +67,7 @@ function dibujarImagen()
 
 		ctx.drawImage(imagen, 0, 0, cv.width, cv.height); // Imagen a dibujar, pos x, pos y de la imagen a dibujar, tam y altura de la imagen
 
-	}
+	};
 
 	imagen.src = 'fotos/31.jpg';
 
@@ -81,8 +91,7 @@ function dividirImagen()
 {
 	let cv = document.getElementById('canvas03');
 		ctx = cv.getContext('2d');
-		divisiones = 5; 					// Numero de divisiones que queremos
-		tamDiv = cv.width/divisiones  		// Tam de cada una de esas divisiones
+		tamDiv = cv.width/DIVISIONES  		// Tam de cada una de esas DIVISIONES
 
 		ctx.beginPath();					// Nuevo dibujo (para que no siga con uno anterior en caso de que hubiese)
 
@@ -90,8 +99,8 @@ function dividirImagen()
 		ctx.strokeStyle = '#000'; 			// Colo de cada linea
 
 
-		// Realizacion de las divisiones
-		for(let i=1; i<divisiones; i++)
+		// Realizacion de las DIVISIONES
+		for(let i=1; i<DIVISIONES; i++)
 		{
 			// Lineas verticales
 			ctx.moveTo(i*tamDiv, 0); 			// Mueve el pincel a la pos X,Y
@@ -105,6 +114,7 @@ function dividirImagen()
 
 
 		ctx.stroke(); 							// Se realiza el dibujo
+
 }
 
 
@@ -119,12 +129,12 @@ function moverImagen()
 	{
 		// Con el movimiento del raton llamamos a esta funcion
 
-		let tam = cv.width/5;
-			fila = Math.trunc(evt.offsetY / tam);  		// Fila en la que esta el raton. con trun truncamos el valor
-			columna = Math.trunc(evt.offsetX / tam);
+			let tam = cv.width/DIVISIONES;
+				fila = Math.trunc(evt.offsetY / tam);  		// Fila en la que esta el raton. con trun truncamos el valor
+				colum = Math.trunc(evt.offsetX / tam);
 
 
-		console.log(fila + ' : ' + columna);
+		//console.log(fila + ' : ' + colum);
 
 
 
@@ -134,20 +144,126 @@ function moverImagen()
 		imagen.onload = function()
 		{
 			// Borrado de canvas
-			cv.width = cv.width; 						// Se borra todo el canvas cada vez que se mueve el raton
+			//cv.width = cv.width; 						// Se borra todo el canvas cada vez que se mueve el raton
 
 			// La 2º forma de borrado sería con la matriz de ocupacion
-			
-			ctx.drawImage(imagen, columna*tam, fila*tam, tam, tam);
+			redibujadoCanvas();
+
+			ctx.drawImage(imagen, colum*tam, fila*tam, tam, tam);
 
 
 			dividirImagen(); 							// Se vuelve a pintar las diviones porque se borraron
 
+		};
 
+
+		imagen.src = foto;
+	}
+
+}
+
+// Matriz para controlar las celdas que estan ocupadas o no en el canvas
+function crearMatrizOcupacion()
+{
+	
+	for(let i=0; i<DIVISIONES; i++)
+	{
+		mtOcupacion[i] = [];
+	}
+
+
+	for(let j=0; j<DIVISIONES; j++)
+	{
+		for(let k=0; k<DIVISIONES; k++)
+		{
+
+			mtOcupacion[j][k]=0; 		// Inicialmente todas las celdas estan vacias
+		}
+	}
+
+
+	//console.table(mtOcupacion); 		// Mostramos por consola en forma de tabla
+}
+
+
+// Funcion para dibujar la imagen en la pos del raton
+function dibujarImagenCelda()
+{
+	//console.log(fila + ' : ' + colum);
+
+	// Comprobamos si esta ocupada la celda ya o no
+	if(mtOcupacion[fila][colum]!=0)
+	{
+		// Deberia salir una alerta
+
+	}
+	else
+	{
+		// Celda libre
+		let cv = document.getElementById('canvas03');
+			ctx = cv.getContext('2d');
+			img = new Image();
+			tam = cv.width/DIVISIONES;
+
+		img.onload = function()
+		{
+
+			ctx.drawImage(img, colum*tam, fila*tam, tam, tam);
+
+			mtOcupacion[fila][colum] = 1; 	// Celda ocupada
+
+			//console.table(mtOcupacion);
+
+		};
+
+
+
+		img.src = foto;
+	}
+
+}
+
+
+// Funcion para redibujar el canvas en función del valor de la matriz de ocupacion
+function redibujadoCanvas()
+{
+
+	let cv = document.getElementById('canvas03');
+		ctx = cv.getContext('2d');
+		img = new Image();
+		tam = cv.width/DIVISIONES;
+
+
+	img.onload = function()
+	{
+		ctx.beginPath();
+
+		ctx.fillStyle = '#FFFFFFFF';
+
+		for(let i=0; i<DIVISIONES; i++)
+		{
+			for(let j=0; j<DIVISIONES; j++)
+			{
+					if(mtOcupacion[i][j]==0)
+					{
+						// Celda vacia
+						ctx.fillRect(j*tam, i*tam, tam, tam); // X, Y, ancho y alto ( Se rellena la celda del color indicado anteriormente en fillStyle)
+
+					}
+					else
+					{
+						// Imagen en la celda
+						ctx.drawImage(img, j*tam, i*tam, tam, tam);
+
+					}
+
+			}
 		}
 
+	};
 
-		imagen.src = 'fotos/fig2.svg';
-	}
+
+	img.src = foto;
+
 
 }
