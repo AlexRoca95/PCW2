@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" /> <!-- Para que se pueda aplicar un diseño adaptable y la correcta visualizacion en dispo móviles -->
+	<title>Pruebas para Examen (Cabecera, menu..)</title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<script src="javascript.js"></script>
+</head>
+<body>
+	<header>
+
+		<div id="cabecera">
+			<div><h1>Progamación</h1></div>
+			<div><h2>Pruebas para el examen</h2></div>
+		</div>
+
+		<nav>
+			<ul id="menu">
+				<li><a href="">Inicio</a></li>
+				<li><form action="" method="post">  <!-- Buscador -->
+						<input type="search" id="brbar" name="buscador" placeholder='Buscar... '>
+						<input type="submit" id="brbutton" name="buscador" value="🔍" >
+					</form>
+				</li>
+				<li><a href="login.html">Login</a></li>
+				<li><a href="">Registro</a></li>
+			</ul>
+		</nav>
+
+	</header>
+	<!-- Ventana Modal para mostrar el mensaje de error de login o login correcto-->
+	<div id="myModal" class="modal">
+
+		<div class="modal-content">
+		    <span class="close" onclick="cerrarVentana(1);">&times;</span>
+		    <p class="error" >¡<span>ERROR</span>! Login o contraseña incorrectos.</p>
+		</div>
+
+	</div>
+	
+	<div id="formulario">
+		
+		<fieldset class="bordeForm">
+			
+			<form method="post" onsubmit="return loginUsuario(this);">
+				<h2>Formulario de login</h2>
+
+				<p><input class="boxesForm" id="campoLogin" type="text" name="login" placeholder="Introduce tu login" required autofocus> </p> 
+				<p><input class="boxesForm" type="password" name="pwd" placeholder="Introduce tu contraseña" required> </p>
+				<input class="botonForm" type="submit" value="Iniciar Sesión">
+				
+			</form>
+
+		</fieldset>
+
+	</div>
+
+
+	<script>
+		
+		mostrarMenu();
+
+	</script>
+
+	<footer>
+		
+
+	</footer>
+</body>
+</html>

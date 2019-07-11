@@ -1,0 +1,13 @@
+/* Activamos esta clase para que todo aquello que lo lleve se pueda mostrar */
+.display-medium {
+	display: inherit !important;
+}
+
+
+/* Fotos mejor valoradas de la pagina principal */
+.preview>article{
+
+  width: 100%;
+  max-width: 476px;
+
+} 

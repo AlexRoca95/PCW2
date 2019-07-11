@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" /> <!-- Para que se pueda aplicar un diseño adaptable y la correcta visualizacion en dispo móviles -->
+	<title>Pruebas para Examen (Cabecera, menu..)</title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<script src="javascript.js"></script>
+</head>
+<body>
+
+	<script>
+		
+		if(!sessionStorage.getItem("usuario"))
+		{	
+			// No se esta logueado
+			window.location.replace("login.html");
+		}
+
+
+	</script>
+	<header>
+
+		<div id="cabecera">
+			<div><h1>Progamación</h1></div>
+			<div><h2>Pruebas para el examen</h2></div>
+		</div>
+
+		<nav>
+			<ul id="menu">
+				<li><a href="">Inicio</a></li>
+				<li><form action="" method="post">  <!-- Buscador -->
+						<input type="search" id="brbar" name="buscador" placeholder='Buscar... '>
+						<input type="submit" id="brbutton" name="buscador" value="🔍" >
+					</form>
+				</li>
+				<li><a href="login.html">Login</a></li>
+				<li><a href="">Registro</a></li>
+			</ul>
+		</nav>
+
+	</header>
+	
+	
+	<div id="formulario">
+		
+		<fieldset class="bordeForm">
+			
+			<form method="POST"  onsubmit="enviarFormulario();">
+				<h2>Formulario de prueba</h2>
+
+				<p><label>Login </label><input class="boxesForm" type="text" name="login" onblur="checkLogin(this);" pattern="[a-zA-Z0-9]{4,20}" required autofocus></p>
+				<div class="loginCheck"></div>
+				<p><label>Etiquetas </label><input class="boxesForm" type="text" name="etiquetas" placeholder=" 2019, paellas..." list="etiquetas" onfocus="obtenerEtiquetas();"></p>
+				<datalist id="etiquetas"></datalist>
+				<input class="botonForm" type="submit" value="Enviar">
+				
+			</form>
+
+		</fieldset>
+
+	</div>
+
+	<footer>
+		
+
+	</footer>
+</body>
+</html>

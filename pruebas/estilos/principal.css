@@ -1,0 +1,234 @@
+/* Estilo de fuente */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/* Por defecto ocultaremos todo aquello que lleve estas clases */
+.display-great {
+
+	display: none;
+}
+
+.display-medium {
+
+	display: none;
+}
+
+.display-mini{
+
+	display: none;
+}
+
+*{
+
+	box-sizing: border-box;
+}
+
+
+/* Cuerpo principal de la pagina */
+body {
+	
+	color: #000000;
+	background-color: #fafafa;
+	border-left: solid #ffffff; 
+  	border-right: solid #ffffff;
+  	border-bottom: solid #ffffff; 
+
+	width: 100%;
+  	font-size: 14px; /* Con esto se colocan en 2 por fila */
+  	margin: 0 auto ; /* Margen arriba/abajo 0 y decho/izqd auto */
+  	padding: 0; 
+  	font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+
+}
+
+
+/* HEADER */
+#headerItems{
+      max-width: 1040px;
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: row;
+      padding: .8em 0;
+      height: 55px;
+      max-height: 60px;
+
+      text-align: center;
+    }
+
+    #headerItems>a{      
+      flex: 1 9999 0%;
+      margin-left: 2%;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      
+      font-family: 'Source Serif Pro', serif;
+      text-decoration: none;
+    }
+
+	    #headerItems>a>div>h1 {
+
+	    	font-size: 21px;
+	          font-weight: 700;
+	          margin: 0 .2em;
+
+	    }
+
+	    #headerItems>a>div>h2 {
+
+	    	font-size: 21px;
+          font-weight: 400;
+          margin: 0 .2em;
+
+	    }
+	#ckburger{  /* Ocultamos el icono de checkbox ya que solo se debe mostrar en pantallas pequeñas */
+            display: none;
+          }
+
+.titulo {
+
+	border-right: 1px solid #2E3436FF;
+}
+
+
+/* BARRA DE NAVEGACION */
+body>header{
+
+  color: #000000;
+  background-color: #ffffff;
+
+}
+
+	nav {
+		background-color: #cfcfd1;
+  		border-top: solid 1px #ffffff;
+	}
+
+		nav>ul {
+			max-width: 1040px;
+		    max-height: 100px;
+		    margin: 0 auto;
+		    padding: 0;
+
+		    text-align: center; 
+		      
+		    list-style: none; /*Sin estilos */
+		    overflow: hidden;
+
+		    background-color: #cfcfd1;
+		}
+
+			nav>ul>li{
+
+			    padding: 0 .4em;
+			    margin: .8em 0;
+			    display: inline-block;
+			    border-left: solid 1px #fafafa;   /* Bordes a la izquierda de cada enlace */
+			}
+
+				nav>ul>li>a {
+
+				    text-decoration: none;
+				    padding: .2em .5em;
+				    margin: 0;
+					color: #000000;
+ 					border-bottom: solid 1px #cfcfd1;
+				}
+				nav>ul>li>a:hover { /* Efecto al pasar el raton por los elem de la barra de nav */
+
+  					border-bottom: solid 1px  #0078d7;
+				}
+		#brbar{
+	      padding: 3px 3px 3px 8px;
+	      border: none;
+	      font-family: 'Roboto', sans-serif;
+	    }
+	    #brbutton{
+	      cursor: pointer;
+	      padding-bottom: 3px;
+	      padding-left: 5px;
+	      border-radius: 5px;
+	      border-bottom-left-radius: 0;
+	    }
+
+
+/* INDEX */
+/* Fotos mejor valoradas de la pagina principal/Fotos favoritas */
+.preview {
+
+	max-width: 1040px;  /* Ancho maximo para todos los elementos (no pueden sobrepasarlo) */
+	margin: 0 auto;
+
+	display: flex; 	/* Diseño flexible para todos los elementos dentro de la seccion que se adaptan al tam disponible */
+	justify-content: space-around; /* Todos los items de la linea son distribuidos con el mismo espacio entre ellos */
+
+    flex-direction: row;  /* Todos los items se despliegan sobre una fila */
+    flex-wrap: wrap;     /* Todos los elementos flex son colocados en varias lineas */
+}
+
+.contenedor { /* Contenedor de las imagenes */
+
+	position: relative;
+}
+
+	.preview>article {
+	  width: 45.9%;	
+	  display: flex;
+	  flex-direction: column;
+      overflow: hidden;  	/* No se dibujan las barras de desplazamiento y se recorta el contenido */
+      margin: 0 1.4em;      /* Margen superior e inferior 0, izqd y derecho 1.4 */
+      margin-top: 2.8em;
+	}
+
+	.preview>article:hover {  /* Efecto al pasar el ratón por encima de las fotos */
+			 
+		border: solid 0.5px #0078d7;
+	}
+
+		.preview>article>figure { /* Figura donde se encuentra la imagen */
+
+			flex: 1; 	/* Hacemos la imagen flexible */
+			width: 100%;
+			margin: 0;
+			height: auto;  /* La altura es proporcional al ancho */
+			position: relative;  /* Position --> Para posicionar un elemento dentro de la pagina. Relative --> Lo posicionamos respecto a la pos por defecto (static) */
+			/* padding-bottom: 70%; /* Espacio entre la imagen y el borde */
+
+		}
+
+		.preview>article>div { /* Figura donde se encuentra la imagen */
+
+			flex: 1; 	/* Hacemos la imagen flexible */
+			width: 100%;
+			margin: 0;
+			height: auto;  /* La altura es proporcional al ancho */
+			position: relative;  /* Position --> Para posicionar un elemento dentro de la pagina. Relative --> Lo posicionamos respecto a la pos por defecto (static) */
+			/* padding-bottom: 70%; /* Espacio entre la imagen y el borde */
+
+		}
+
+		.autorBox {
+			padding-left: 10px;
+			bottom: 0;
+			border: 1px solid  #000000;
+
+		}
+
+			.imagIndex {  /* Fotos de la pagina principal */
+
+				width: 100%; /* Ancho maximo de la pagina */
+				margin: auto auto;  /* Margen superior e inferior auto, izqd y derecho auto. El margen es calculado por el navegador automaticamente*/
+				/*position: absolute; /* Toma como referencia la ventana del navegador o un elemento que tenga position que sea ! static */
+			}
+
+			.textoImg {  /* Texto asociado a la imagen colocado dentro */
+
+				  position: absolute;  /* Se posicionara respecto a la imagen que es relativa */
+				  bottom: 3px;
+				  color: #f1f1f1; /* Color gris */
+				  width: 100%; /* Que ocupe toda la imagen */
+				  padding: 0px 10px 0px 10px; /* Espacio entre el texto y el borde */
+				  background-color: rgba(0, 0, 0, 0.6); /* Fondo transparente */
+			}

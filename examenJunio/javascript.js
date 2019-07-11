@@ -117,6 +117,7 @@ function comprobarParejas(img1, img2)
 		let cont1 = document.querySelector('.img'+img1);
 			cont2 = document.querySelector('.img'+img2);
 
+		// Muestra fondo verde para ambas cartas iguales
 		cont1.style.backgroundColor = '#8AE234FF';
 		cont2.style.backgroundColor = '#8AE234FF';
 
@@ -145,12 +146,14 @@ function ocultarCartas()
 	let valor1 = pareja1 +1;
 		valor2 = pareja2 +1;
 
+	// Oculta carta 1
 	let elemP1 = document.querySelector('.img'+valor1+'>p'); 	// Elemento P seleccionado
 		imagen1 = document.querySelector('.img'+valor1+'>img'); 	// Imagen seleccionada
 
 	elemP1.style.display = 'inline-block';
 	imagen1.style.display = 'none';  // Inline-block para que se pueda ajustar al centro la imagen con text-align
 
+	// Oculta carta 2
 	let elemP2 = document.querySelector('.img'+valor2+'>p'); 	// Elemento P seleccionado
 		imagen2 = document.querySelector('.img'+valor2+'>img'); 	// Imagen seleccionada
 
@@ -198,7 +201,5 @@ function volverJugar()
 
 		modal.style.display = 'none';  	
 
-	ocultarCartas();
-
-	iniciarJuego();
+	iniciarJuego(); 		// Volvemos a empezar (se sustituye todo otra vez asi que no hay que hacer nada mas)
 }

@@ -898,6 +898,9 @@ function creaMatrizColision()
       mtOcupacion[k][j]=0;
     }
   }
+
+
+  conso
 }
 
 

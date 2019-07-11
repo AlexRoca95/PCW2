@@ -183,7 +183,7 @@ function fotosMejorValoradas()
 			total = totalFotosServidor;
 		}
 
-		// Si no hubiese paginacion solo hay que cambiar la i por 0 y el max de fotos que puedan haber
+		// Si no hubiese paginacion el bucle se recorre desde 0 hasta el numero de filas totales devueltas de la peticion
 		for (let i=inicio; i<total; i++)  // Bucle para recorrer todas las fotos que haya en la pagina que nos encontremos
 		{
 

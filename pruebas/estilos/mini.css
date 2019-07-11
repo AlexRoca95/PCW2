@@ -1,0 +1,66 @@
+/* Activamos esta clase para que todo aquello que lo lleve se pueda mostrar */
+.display-mini {
+	display: inherit !important;
+}
+
+
+/* HEADER */
+nav { /* Solo en tamaño pequeño queremos que desaparezca para mostarlo con el menu hamburguesa */
+
+	/*position: fixed;  /* Tamaño relativo a la ventana del navegador*/
+	max-height: 0;
+    overflow: hidden;
+	/*overflow-y: auto; /* si el menu es alto se puede hacer scroll para ver todos los enlaces */
+	/*padding: 90px 30px 30px; */
+	transition: all 0.75s ease; /* Tiempo de la transicion */
+}
+
+  nav>ul{  
+
+  max-height: 500px; /* Altura maxima de la lista de elementos de navegacion */
+  }
+    nav>ul>li{
+      /* Modo columna */
+      margin: 1.8em 0;
+      display: block;
+      border: none;
+    }
+
+#headerItems>span{  /* Colocación del icono de hamburguesa */
+      flex: 0 1 auto;
+      width: 5em;
+      min-width: 20px;
+      margin: 0;
+      padding: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+ #burger{ /*Icono menu hamburguesa: tam, foto ....*/
+
+        margin: auto;
+        padding: 0;
+        height: 15px;
+        width: 15px;
+
+        cursor: pointer;
+        background-size: 15px 15px;
+        background-image: url(../recursos/burger.png);  /* Imagen para desplagar/replegar el menu en pantalla pequeña */
+    }
+
+      /* Boton menu hamburguesa pulsado */
+      #ckburger:checked + nav{
+          max-height: 500px;  /* altura a mostrar al pulsar */
+
+       }
+
+
+.preview > article {
+
+		width: 100%;
+	  	margin-top: 2em; /* Margen superior entre los articulos de las fotos */
+
+	}
