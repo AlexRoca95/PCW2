@@ -1,0 +1,155 @@
+*{
+
+	box-sizing: border-box;
+}
+
+/* Pantallas grandes */
+@media screen and (min-width: 981px) {
+
+	
+	
+
+
+}
+
+/* Pantallas medianas */
+@media screen and (min-width: 481px) and (max-width: 980px) {
+
+	
+
+	
+}
+
+
+/* Pantallas pequeñas */
+@media screen and (max-width: 480px) {
+
+	
+}
+
+
+/* Todos los tamaños */
+
+body {
+
+
+
+}
+
+
+a {
+
+	cursor: pointer;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+
+  display: none; /* Oculto por defecto hasta que se llame a la funcion */
+  position: fixed; /* Que no se mueva del sitio */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Localizacion de la caja */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Activamos el scroll*/
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Negro con opacidad */
+}
+
+	/* Modal Contenido*/
+	.modal-content {
+	  background-color: #fefefe;
+	  margin: auto;
+	  padding: 20px;
+	  border: 1px solid #888;
+	  width: 80%;
+	  text-align: center;
+	}
+
+
+		/* Boton de volver a jugar */
+		.jugar {
+			color: #aaaaaa;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.jugar:hover,
+		.jugar:focus {
+			  color: #07D;
+			  text-decoration: none;
+			  cursor: pointer;
+		}
+
+header {
+
+	text-align: center;
+	background-color: green;
+}
+
+#principal>h3,  #principal>p{
+
+	text-align: center;
+}
+
+
+/* Index */
+#principal {
+
+	max-width: 1040px;
+	margin: 0 auto;
+	
+	text-align: center;  /* Elementos centrados en el centro */
+	display: flex;
+	justify-content: space-around;
+
+	flex-direction: row;
+	flex-wrap: wrap;  /* Coloca los elementos en varias lineas */
+}
+
+
+	#contenedor {
+
+		position: relative;
+		border: solid 2px black; 		/* Borde alrededod del contenido del div */
+		background-color: #FCE94FFF;
+		
+		height: 100px;
+	}
+	
+	img { 
+
+		display: none;  	/* Inicialmente las imagenes se ocultan */
+		
+		/* Con estos dos valores la img se ajusta al espacio del contenedor */
+		max-width: 100%;
+		max-height: 100%;
+	}
+
+		#principal>article {
+		
+			width: 20%;  /* Ancho de cada elemento (es el espacio que ocupa cada elemento no el tam de la imagen) */
+			/* Con lo que viene ahora se colocan los elementos de la zona "pincipal" ajustandose al ancho (grande 3 filas 4 colum, pequeño 3 colum 4 filas) */
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;  			/* No se dibujan las barras de desplazamiento y se recorta el contenido */
+			margin: 0 1.4em;
+			margin-top:  2.8em;
+
+		}
+
+#jugadas {
+	
+	margin-top: 2%;
+	text-align: center;
+}
+footer {
+
+	text-align: center;
+	background-color: orange;
+
+}
